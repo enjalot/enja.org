@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<title>code | enj - Part 2</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/themes/twentyten-child/style.css" />
+<link rel="pingback" href="../../../../xmlrpc.php" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Feed" href="../../../../enjaorg" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+				
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.2.3 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-16564388-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	//]]></script>
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; code Category Feed" href="../../../../enjaorg" />
+<link rel='stylesheet' id='tfg_style-css'  href='../../../../wp-content/plugins/twitter-facebook-google-plusone-share/tfg_style.css%3Fver=3.3.2.css' type='text/css' media='all' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc.php%3Frsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://enja.org/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 3.3.2" />
+
+<!-- All in One SEO Pack 1.6.14.2 by Michael Torbert of Semper Fi Web Design[82,108] -->
+<meta name="robots" content="noindex,follow" />
+<link rel="canonical" href="index.html" />
+<!-- /all in one seo pack -->
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+</head>
+
+<body class="archive paged category category-code category-3 paged-2 category-paged-2">
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="../../../../index.html" title="enj" rel="home">enj</a>
+					</span>
+				</div>
+				<div id="site-description">casin&#039; the joint since &#039;85</div>
+
+										<img src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/cropped-turtle_nom1.jpg" width="940" height="198" alt="" />
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="index.html#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu-header"><ul id="menu-navigation" class="menu"><li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../index.html" >Home</a></li>
+<li id="menu-item-318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../about/index.html" >About</a></li>
+<li id="menu-item-694" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../d3/index.html" >d3</a></li>
+<li id="menu-item-316" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../blender/index.html" >Blender</a></li>
+<li id="menu-item-315" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../opencl/index.html" >OpenCL</a></li>
+<li id="menu-item-317" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div>			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+				<h1 class="page-title">Category Archives: <span>code</span></h1>
+				
+	<div id="nav-above" class="navigation">
+		<div class="nav-previous"><a href="../3/index.html" ><span class="meta-nav">&larr;</span> Older posts</a></div>
+		<div class="nav-next"><a href="../../index.html" >Newer posts <span class="meta-nav">&rarr;</span></a></div>
+	</div><!-- #nav-above -->
+
+
+
+
+			<div id="post-521" class="post-521 post type-post status-publish format-standard hentry category-advcl category-code category-python category-tutorial">
+			<h2 class="entry-title"><a href="../../../../2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/index.html" title="Permalink to Adventures in OpenCL Part 3: Constant Memory Structs" rel="bookmark">Adventures in OpenCL Part 3: Constant Memory Structs</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../../../2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/index.html" title="4:46 pm" rel="bookmark"><span class="entry-date">March 30, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-summary">
+				<p>Today we make a brief stop on our journey to examine a technique which has proven useful but not straightforward; passing in a structure as a parameter to an OpenCL kernel as __constant memory. Why would you want to do &hellip; <a href="../../../../2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/index.html" >Continue reading <span class="meta-nav">&rarr;</span></a></p>
+			</div><!-- .entry-summary -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../../tutorial/advcl/index.html" title="View all posts in advcl" rel="category tag">advcl</a>, <a href="../../index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../python/index.html" title="View all posts in python" rel="category tag">python</a>, <a href="../../../tutorial/index.html" title="View all posts in tutorial" rel="category tag">tutorial</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../../../2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/index.html#comments" title="Comment on Adventures in OpenCL Part 3: Constant Memory Structs">7 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-493" class="post-493 post type-post status-publish format-standard hentry category-advcl category-code category-opencl category-python category-tutorial">
+			<h2 class="entry-title"><a href="../../../../2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/index.html" title="Permalink to Adventures in PyOpenCL: Part 2, Particles with PyOpenGL" rel="bookmark">Adventures in PyOpenCL: Part 2, Particles with PyOpenGL</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../../../2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/index.html" title="5:23 pm" rel="bookmark"><span class="entry-date">March 22, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-summary">
+				<p>Today we journey as pythonauts into the world of particle systems and fast 3D graphics, manipulating thousands upon thousands of little dots in mere milliseconds! We accomplish this with two Python modules, PyOpenCL and PyOpenGL. This is a port of &hellip; <a href="../../../../2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/index.html" >Continue reading <span class="meta-nav">&rarr;</span></a></p>
+			</div><!-- .entry-summary -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../../tutorial/advcl/index.html" title="View all posts in advcl" rel="category tag">advcl</a>, <a href="../../index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>, <a href="../../../python/index.html" title="View all posts in python" rel="category tag">python</a>, <a href="../../../tutorial/index.html" title="View all posts in tutorial" rel="category tag">tutorial</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../../../2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/index.html#comments" title="Comment on Adventures in PyOpenCL: Part 2, Particles with PyOpenGL">21 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-482" class="post-482 post type-post status-publish format-standard hentry category-code category-community category-python category-travel">
+			<h2 class="entry-title"><a href="../../../../2011/03/14/pycon-2011/index.html" title="Permalink to pycon 2011" rel="bookmark">pycon 2011</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../../../2011/03/14/pycon-2011/index.html" title="2:04 am" rel="bookmark"><span class="entry-date">March 14, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-summary">
+				<p>Andrew, Nathan and I just got back from Atlanta for Pycon 2011 and it was a blast. It was a great mix of learning, hacking, networking and free swag. I have never been picky about free t-shirts before, but there &hellip; <a href="../../../../2011/03/14/pycon-2011/index.html" >Continue reading <span class="meta-nav">&rarr;</span></a></p>
+			</div><!-- .entry-summary -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../community/index.html" title="View all posts in community" rel="category tag">community</a>, <a href="../../../python/index.html" title="View all posts in python" rel="category tag">python</a>, <a href="../../../travel/index.html" title="View all posts in travel" rel="category tag">travel</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><span>Comments Off</span></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-473" class="post-473 post type-post status-publish format-standard hentry category-code category-python">
+			<h2 class="entry-title"><a href="../../../../2011/03/09/a-python-function-timing-decorator/index.html" title="Permalink to A Python Function Timing Decorator" rel="bookmark">A Python Function Timing Decorator</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../../../2011/03/09/a-python-function-timing-decorator/index.html" title="2:17 pm" rel="bookmark"><span class="entry-date">March 9, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-summary">
+				<p>I recently went up to North Carolina to visit a good friend of mine, and we got to talking Python as we are wont to do. He told me about a PEP for enhancing generator syntax and creating cofunctions. To &hellip; <a href="../../../../2011/03/09/a-python-function-timing-decorator/index.html" >Continue reading <span class="meta-nav">&rarr;</span></a></p>
+			</div><!-- .entry-summary -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../python/index.html" title="View all posts in python" rel="category tag">python</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../../../2011/03/09/a-python-function-timing-decorator/index.html#comments" title="Comment on A Python Function Timing Decorator">2 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-441" class="post-441 post type-post status-publish format-standard hentry category-blender category-code">
+			<h2 class="entry-title"><a href="../../../../2011/03/01/hijacking-the-bge-for-fun-and-particles/index.html" title="Permalink to Hijacking the BGE for Fun and Particles" rel="bookmark">Hijacking the BGE for Fun and Particles</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../../../2011/03/01/hijacking-the-bge-for-fun-and-particles/index.html" title="6:24 pm" rel="bookmark"><span class="entry-date">March 1, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-summary">
+				<p>Hello world! Care to take a journey into the annals of my twisted mind? Join me on a ride through a small part of the Blender Game Engine on a rickety roller coaster of code and commentary. For those interested &hellip; <a href="../../../../2011/03/01/hijacking-the-bge-for-fun-and-particles/index.html" >Continue reading <span class="meta-nav">&rarr;</span></a></p>
+			</div><!-- .entry-summary -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../../blender/index.html" title="View all posts in blender" rel="category tag">blender</a>, <a href="../../index.html" title="View all posts in code" rel="category tag">code</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../../../2011/03/01/hijacking-the-bge-for-fun-and-particles/index.html#comments" title="Comment on Hijacking the BGE for Fun and Particles">2 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-401" class="post-401 post type-post status-publish format-standard hentry category-blender category-code category-opencl">
+			<h2 class="entry-title"><a href="../../../../2011/02/10/particles-in-bge-fluid-surface-and-collision-in-the-works/index.html" title="Permalink to Particles in BGE: Fluid Surface and Collision in the works" rel="bookmark">Particles in BGE: Fluid Surface and Collision in the works</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../../../2011/02/10/particles-in-bge-fluid-surface-and-collision-in-the-works/index.html" title="2:01 pm" rel="bookmark"><span class="entry-date">February 10, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-summary">
+				<p>Hello, World! Just keeping you guys up to date with what we are doing. I&#8217;d like to introduce someone who&#8217;s joining me in development of RTPS, Andrew Young. He&#8217;s a student at DSC interested in GPU computing and his current &hellip; <a href="../../../../2011/02/10/particles-in-bge-fluid-surface-and-collision-in-the-works/index.html" >Continue reading <span class="meta-nav">&rarr;</span></a></p>
+			</div><!-- .entry-summary -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../../blender/index.html" title="View all posts in blender" rel="category tag">blender</a>, <a href="../../index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../../../2011/02/10/particles-in-bge-fluid-surface-and-collision-in-the-works/index.html#comments" title="Comment on Particles in BGE: Fluid Surface and Collision in the works">6 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-383" class="post-383 post type-post status-publish format-standard hentry category-android category-code">
+			<h2 class="entry-title"><a href="../../../../2011/01/03/rtps-on-my-android/index.html" title="Permalink to RTPS on my Android" rel="bookmark">RTPS on my Android</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../../../2011/01/03/rtps-on-my-android/index.html" title="1:06 pm" rel="bookmark"><span class="entry-date">January 3, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-summary">
+				<p>A while back I posted about using the Android NDK to put particles on my android. Since then I&#8217;ve learned a good bit, made more progress on my primary project and I have a little something to show: [RTPS] Android &hellip; <a href="../../../../2011/01/03/rtps-on-my-android/index.html" >Continue reading <span class="meta-nav">&rarr;</span></a></p>
+			</div><!-- .entry-summary -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../../android/index.html" title="View all posts in android" rel="category tag">android</a>, <a href="../../index.html" title="View all posts in code" rel="category tag">code</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../../../2011/01/03/rtps-on-my-android/index.html#comments" title="Comment on RTPS on my Android">1 Comment</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-278" class="post-278 post type-post status-publish format-standard hentry category-advcl category-code category-opencl category-tutorial">
+			<h2 class="entry-title"><a href="../../../../2010/08/27/adventures-in-opencl-part-2-particles-with-opengl/index.html" title="Permalink to Adventures in OpenCL Part 2: Particles with OpenGL" rel="bookmark">Adventures in OpenCL Part 2: Particles with OpenGL</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../../../2010/08/27/adventures-in-opencl-part-2-particles-with-opengl/index.html" title="10:04 pm" rel="bookmark"><span class="entry-date">August 27, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-summary">
+				<p>This tutorial series is aimed at developers trying to learn OpenCL from the bottom up, with a focus on practicality. This installment introduces OpenCL context sharing with OpenGL. We make a simple particle system to demonstrate this feature. One of &hellip; <a href="../../../../2010/08/27/adventures-in-opencl-part-2-particles-with-opengl/index.html" >Continue reading <span class="meta-nav">&rarr;</span></a></p>
+			</div><!-- .entry-summary -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../../tutorial/advcl/index.html" title="View all posts in advcl" rel="category tag">advcl</a>, <a href="../../index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>, <a href="../../../tutorial/index.html" title="View all posts in tutorial" rel="category tag">tutorial</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../../../2010/08/27/adventures-in-opencl-part-2-particles-with-opengl/index.html#comments" title="Comment on Adventures in OpenCL Part 2: Particles with OpenGL">12 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-262" class="post-262 post type-post status-publish format-standard hentry category-blender category-code category-opencl">
+			<h2 class="entry-title"><a href="../../../../2010/07/22/particles-in-bge-update-glsl-more-options/index.html" title="Permalink to Particles in BGE Update: GLSL, more options" rel="bookmark">Particles in BGE Update: GLSL, more options</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../../../2010/07/22/particles-in-bge-update-glsl-more-options/index.html" title="11:29 am" rel="bookmark"><span class="entry-date">July 22, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-summary">
+				<p>So I&#8217;ve been making some headway with my OpenCL Particle Systems in the Blender Game Engine. I now have the option to render the particles with GLSL (Hi moguri, I&#8217;m going to need more help!), and I have improved my &hellip; <a href="../../../../2010/07/22/particles-in-bge-update-glsl-more-options/index.html" >Continue reading <span class="meta-nav">&rarr;</span></a></p>
+			</div><!-- .entry-summary -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../../blender/index.html" title="View all posts in blender" rel="category tag">blender</a>, <a href="../../index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../../../2010/07/22/particles-in-bge-update-glsl-more-options/index.html#comments" title="Comment on Particles in BGE Update: GLSL, more options">15 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-248" class="post-248 post type-post status-publish format-standard hentry category-advcl category-code category-opencl category-tutorial">
+			<h2 class="entry-title"><a href="../../../../2010/07/20/adventures-in-opencl-part-1-5-cpp-bindings/index.html" title="Permalink to Adventures in OpenCL: Part 1.5, C++ Bindings" rel="bookmark">Adventures in OpenCL: Part 1.5, C++ Bindings</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../../../2010/07/20/adventures-in-opencl-part-1-5-cpp-bindings/index.html" title="12:02 am" rel="bookmark"><span class="entry-date">July 20, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-summary">
+				<p>This tutorial series is aimed at developers trying to learn OpenCL from the bottom up, with a focus on practicality. This part is a reworking of my first tutorial using the OpenCL C++ Bindings. Learning by example works best for &hellip; <a href="../../../../2010/07/20/adventures-in-opencl-part-1-5-cpp-bindings/index.html" >Continue reading <span class="meta-nav">&rarr;</span></a></p>
+			</div><!-- .entry-summary -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../../tutorial/advcl/index.html" title="View all posts in advcl" rel="category tag">advcl</a>, <a href="../../index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>, <a href="../../../tutorial/index.html" title="View all posts in tutorial" rel="category tag">tutorial</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../../../2010/07/20/adventures-in-opencl-part-1-5-cpp-bindings/index.html#comments" title="Comment on Adventures in OpenCL: Part 1.5, C++ Bindings">11 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="../3/index.html" ><span class="meta-nav">&larr;</span> Older posts</a></div>
+					<div class="nav-next"><a href="../../index.html" >Newer posts <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-below -->
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-3" class="widget-container widget_search"><form role="search" method="get" id="searchform" action="../../../../index.html" >
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" value="" name="s" id="s" />
+	<input type="submit" id="searchsubmit" value="Search" />
+	</div>
+	</form></li><li id="nav_menu-3" class="widget-container widget_nav_menu"><div class="menu-navigation-container"><ul id="menu-navigation-1" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../index.html" >Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../about/index.html" >About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../d3/index.html" >d3</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../blender/index.html" >Blender</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../opencl/index.html" >OpenCL</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div></li><li id="text-4" class="widget-container widget_text">			<div class="textwidget"><a href="https://twitter.com/#!/enjalot" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=twitter.com"> @enjalot</a>
+<br/>
+<a href="https://plus.google.com/112153365286725889851/posts" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://plus.google.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=plus.google.com"> +Ian Johnson</a></div>
+		</li><li id="categories-414549122" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-25"><a href="../../../tutorial/advcl/index.html" title="Adventures in OpenCL">advcl</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="../../../tutorial/advd3-tutorial/index.html" title="View all posts filed under advd3">advd3</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="../../../android/index.html" title="View all posts filed under android">android</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="../../../blender/index.html" title="View all posts filed under blender">blender</a>
+</li>
+	<li class="cat-item cat-item-3 current-cat"><a href="../../index.html" title="View all posts filed under code">code</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="../../../community/index.html" title="View all posts filed under community">community</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="../../../culture/index.html" title="View all posts filed under culture">culture</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="../../../d3/index.html" title="View all posts filed under d3">d3</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="../../../life/index.html" title="View all posts filed under life">life</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="../../../math/index.html" title="View all posts filed under math">math</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="../../../misc/index.html" title="View all posts filed under misc">misc</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="../../../music/index.html" title="View all posts filed under music">music</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="../../../news/index.html" title="View all posts filed under news">news</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="../../../opencl/index.html" title="View all posts filed under opencl">opencl</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="../../../processingjs/index.html" title="View all posts filed under processingjs">processingjs</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="../../../python/index.html" title="View all posts filed under python">python</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="../../../race/index.html" title="View all posts filed under race">race</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="../../../school/index.html" title="View all posts filed under school">school</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="../../../tech/index.html" title="View all posts filed under tech">tech</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="../../../travel/index.html" title="View all posts filed under travel">travel</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="../../../tutorial/index.html" title="View all posts filed under tutorial">tutorial</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="../../../uncategorized/index.html" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="../../../wtf/index.html" title="View all posts filed under wtf">wtf</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="../../../中�%2596%2587/index.html" title="View all posts filed under 中文">中文</a>
+</li>
+		</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="../../../../index.html" title="enj" rel="home">
+					enj				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+<script type='text/javascript' src='http://d3a9pqeyre6pa0.cloudfront.net/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?aa&#038;ver=3.3.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/plugins/jetpack/modules/wpgroho.js%3Fver=3.3.2'></script>
+	<div style="display:none">
+	</div>
+<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://apis.google.com/js/plusone.js?ver=3.3.2'></script>
+
+	<script src="http://stats.wordpress.com/e-201219.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:1.3',blog:'4037422',post:'0'});
+	var load_cmc = function(){linktracker_init(4037422,0,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script></body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 2637/2854 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:45:51 -->

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<title>20 million particles in OpenCL on the GTX480 | enj</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/themes/twentyten-child/style.css" />
+<link rel="pingback" href="../../../../xmlrpc.php" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Feed" href="../../../../enjaorg" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+				
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.2.3 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-16564388-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	//]]></script>
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; 20 million particles in OpenCL on the GTX480 Comments Feed" href="feed/index.html" />
+<link rel='stylesheet' id='tfg_style-css'  href='../../../../wp-content/plugins/twitter-facebook-google-plusone-share/tfg_style.css%3Fver=3.3.2.css' type='text/css' media='all' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc.php%3Frsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://enja.org/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Blender Game Engine: Particles in the Mix' href='../../../06/30/blender-game-engine-particles-in-the-mix/index.html' />
+<link rel='next' title='Adventures in OpenCL: Part 1, Getting Started' href='../../13/adventures-in-opencl-part-1-getting-started/index.html' />
+<meta name="generator" content="WordPress 3.3.2" />
+<link rel='shortlink' href='http://wp.me/pgWjI-3m' />
+
+<!-- All in One SEO Pack 1.6.14.2 by Michael Torbert of Semper Fi Web Design[82,139] -->
+<meta name="description" content="I'm trying to push the limits of interactive scientific visualization, so I gotta start somewhere! Ok, so 20 million particles running at ~40fps is not a bad" />
+<meta name="keywords" content="blender,code,opencl" />
+<link rel="canonical" href="index.html" />
+<!-- /all in one seo pack -->
+
+
+<!-- Facebook Like Thumbnail -->
+<link rel="image_src" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/1mill_lorentz-1024x622.png" />
+<!-- End Facebook Like Thumbnail -->
+
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+</head>
+
+<body class="single single-post postid-208 single-format-standard">
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="../../../../index.html" title="enj" rel="home">enj</a>
+					</span>
+				</div>
+				<div id="site-description">casin&#039; the joint since &#039;85</div>
+
+										<img src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/cropped-turtle_nom1.jpg" width="940" height="198" alt="" />
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="index.html#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu-header"><ul id="menu-navigation" class="menu"><li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../index.html" >Home</a></li>
+<li id="menu-item-318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../about/index.html" >About</a></li>
+<li id="menu-item-694" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../d3/index.html" >d3</a></li>
+<li id="menu-item-316" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../blender/index.html" >Blender</a></li>
+<li id="menu-item-315" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../opencl/index.html" >OpenCL</a></li>
+<li id="menu-item-317" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div>			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="../../../06/30/blender-game-engine-particles-in-the-mix/index.html" rel="prev"><span class="meta-nav">&larr;</span> Blender Game Engine: Particles in the Mix</a></div>
+					<div class="nav-next"><a href="../../13/adventures-in-opencl-part-1-getting-started/index.html" rel="next">Adventures in OpenCL: Part 1, Getting Started <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-208" class="post-208 post type-post status-publish format-standard hentry category-blender category-code category-opencl">
+					<h1 class="entry-title">20 million particles in OpenCL on the GTX480</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="index.html" title="2:11 am" rel="bookmark"><span class="entry-date">July 9, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<p>I&#8217;m trying to push the limits of interactive <a href="http://sc.fsu.edu/vislab" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://sc.fsu.edu']);">scientific visualization</a>, so I gotta start somewhere! Ok, so 20 million particles running at ~40fps is not a bad start, but this is also using the simplest rendering possible (GL_POINTS of size 1, with no alpha blending or lighting).</p>
+<p>I&#8217;m running <a href="http://github.com/enjalot/EnjaParticles" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">my code</a> on Ubuntu 10.04 on a Dell Precision T7500 with a <a href="http://www.nvidia.com/object/product_geforce_gtx_480_us.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.nvidia.com']);">NVIDIA GTX480</a> (1.5GB GDDR5). The machine has 12GB of ram and 8 cores of CPU which don&#8217;t get used at all by this (besides to initialize the system and run the main loop of course). Check out <a href="http://www.youtube.com/watch?v=FnrC3_8bhQ0" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.youtube.com']);">the video</a> to see some pretty patterns and a large amount of particles!</p>
+<p><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="640" height="385" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/FnrC3_8bhQ0&amp;hl=en_US&amp;fs=1" /><param name="allowfullscreen" value="true" /><embed type="application/x-shockwave-flash" width="640" height="385" src="http://www.youtube.com/v/FnrC3_8bhQ0&amp;hl=en_US&amp;fs=1" allowscriptaccess="always" allowfullscreen="true"></embed></object></p>
+<p>A quick note for those waiting for these in Blender, currently I have it working but only with about 100k particles if I use a Mesh as the emitter (any more and Blender starts choking before I get in the game engine). I&#8217;m going to start looking at the existing particle interface (as well as the <a href="http://wiki.blender.org/index.php/User:Phonybone/Particle_systems_thoughts" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://wiki.blender.org']);">redesign</a>) to start integrating tighter into Blender now that I&#8217;m getting comfortable with OpenCL/OpenGL.</p>
+<p>Let&#8217;s talk some math and look at some numbers, if that doesn&#8217;t sound fun it&#8217;s ok to stop reading now ;)</p>
+<p>So first let me admit that this OpenCL kernel is not doing that much work. I&#8217;m solving the <a href="http://en.wikipedia.org/wiki/Lorenz_attractor" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://en.wikipedia.org']);">Lorenz Attractor</a> ODEs with the <a href="http://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://en.wikipedia.org']);">RK4</a> method for each particle. It&#8217;s all embarrassingly parallel and there is no interaction between them. Second, I tuned down the rendering so it&#8217;s doing as little as possible. This lets us get to the memory limit of the GTX480 at 20 million particles with my setup. Lets see why:</p>
+<p>I use float4 arrays (OpenCL variables of 4 32bit floats in a row) for vertices, colors, generators and velocities. I use one float array to keep track of the life of each particle.</p>
+<p>4 (arrays) x 20,000,000 (particles) x 4 (floats) x 4 (bytes) = 1,280,000,000 bytes</p>
+<p>1 (array) x 20,000,000 (particles) x 1 (float) x 4 (bytes) = 80,000,000 bytes</p>
+<p>So thats 1,360,000,000 bytes / 1024E3 = 1.267GB of memory on the graphics card!</p>
+<p>Luckily I&#8217;m using OpenGL interop, so the vertices and color array are actually <a href="http://www.songho.ca/opengl/gl_vbo.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.songho.ca']);">VBOs</a> in OpenGL&#8217;s context and are modified in place. Since that&#8217;s the case we don&#8217;t transfer any of that memory back to the CPU, which would be a serious problem. It&#8217;s possible my kernel could be optimized more, but right now memory and rendering are the limiting factors. When I start implementing more interesting physics like collision detection and fluid dynamics this will be a bigger issue. I&#8217;m also planning to implement depth sorting using an index array VBO so I can render cool effects with proper alpha blending. This of course will also limit the number of particles possible, with my guess being that rendering will be the biggest culprit (not memory).</p>
+<div id="attachment_212" class="wp-caption aligncenter" style="width: 650px"><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/1mill_lorentz.png" ><img class="size-large wp-image-212" title="1 million particles" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/1mill_lorentz-1024x622.png" alt="1 million particles" width="640" height="388" /></a><p class="wp-caption-text">1 million particles with alpha blending and pointsize=10</p></div>
+<div class="bottomcontainerBox" style="background-color:#FFFFFF;">
+			<div style="float:left; width:85px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fenja.org%2F2010%2F07%2F09%2F20-million-particles-in-opencl-on-the-gtx480%2F&amp;layout=button_count&amp;show_faces=false&amp;width=85&amp;action=like&amp;font=verdana&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:85px; height:21px;"></iframe></div>
+			<div style="float:left; width:80px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<g:plusone size="medium" href="http://enja.org/2010/07/09/20-million-particles-in-opencl-on-the-gtx480/"></g:plusone>
+			</div>
+			<div style="float:left; width:95px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<a href="http://twitter.com/share" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);" class="twitter-share-button" data-url="http://enja.org/2010/07/09/20-million-particles-in-opencl-on-the-gtx480/"  data-text="20 million particles in OpenCL on the GTX480" data-count="horizontal" data-via="enjalot"></a>
+			</div>			
+			</div><div style="clear:both"></div><div style="padding-bottom:4px;"></div>											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+						This entry was posted in <a href="../../../../category/blender/index.html" title="View all posts in blender" rel="category tag">blender</a>, <a href="../../../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../../category/opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>. Bookmark the <a href="index.html" title="Permalink to 20 million particles in OpenCL on the GTX480" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="../../../06/30/blender-game-engine-particles-in-the-mix/index.html" rel="prev"><span class="meta-nav">&larr;</span> Blender Game Engine: Particles in the Mix</a></div>
+					<div class="nav-next"><a href="../../13/adventures-in-opencl-part-1-getting-started/index.html" rel="next">Adventures in OpenCL: Part 1, Getting Started <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">5 Responses to <em>20 million particles in OpenCL on the GTX480</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-137">
+		<div id="comment-137">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/f509f2ab127d35e2b94473463dde6134?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">blenderificus</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-137">
+			July 9, 2010 at 2:38 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>WOW! just WOW!</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-139">
+		<div id="comment-139">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/4ab9ff6da51e4ba73a7a981eb0309563?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Lamoot</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-139">
+			July 9, 2010 at 4:38 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Cool stuff :) A particle engine for BGE is welcome indeed. I wish you good luck with your project.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-176">
+		<div id="comment-176">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/9878b486335acf770c354e1c9d8e5ff2?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Jonathan Hernandez</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-176">
+			July 16, 2010 at 1:50 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi, awesome test. Have you considered the Nvidia Tesla C1060 card? What do you think about GPUs, which one has better performance between GTX480 and Tesla C1060 model? I&#8217;m working in swarm-based algorithms implemented with CUDA, but for the time being i have so a Geforce4900 for test.<br />
+Best regards!</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-185">
+		<div id="comment-185">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/8774df2c5f130da86d48d4d05cfdb46e?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Geo Miller</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-185">
+			July 20, 2010 at 11:28 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>The effect at 3:20 of the video is especially cool.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-206">
+		<div id="comment-206">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/af13f6f607b59bf8f4ad3f8776c3ed52?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="http://whimsycoll.com" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://whimsycoll.com']);"  rel='external nofollow' class='url'>Whimsy Collective</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-206">
+			July 31, 2010 at 11:10 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>@Enj so your convert C++ to OpenCL.  I&#8217;ve looking for if it already existing to convery C++ to CUDA or OpenCL.  But there is the opposite, GPUocelot, Ocelot currently allows CUDA programs to be executed on NVIDIA GPUs and x86-CPUs at full speed without recompilation. <a href="http://code.google.com/p/gpuocelot/" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','http://code.google.com']);" rel="nofollow">http://code.google.com/p/gpuocelot/</a>  Not sure if that would be of use to you.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+			</ol>
+
+
+
+								
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-3" class="widget-container widget_search"><form role="search" method="get" id="searchform" action="../../../../index.html" >
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" value="" name="s" id="s" />
+	<input type="submit" id="searchsubmit" value="Search" />
+	</div>
+	</form></li><li id="nav_menu-3" class="widget-container widget_nav_menu"><div class="menu-navigation-container"><ul id="menu-navigation-1" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../index.html" >Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../about/index.html" >About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../d3/index.html" >d3</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../blender/index.html" >Blender</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../opencl/index.html" >OpenCL</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div></li><li id="text-4" class="widget-container widget_text">			<div class="textwidget"><a href="https://twitter.com/#!/enjalot" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=twitter.com"> @enjalot</a>
+<br/>
+<a href="https://plus.google.com/112153365286725889851/posts" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://plus.google.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=plus.google.com"> +Ian Johnson</a></div>
+		</li><li id="categories-414549122" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-25"><a href="../../../../category/tutorial/advcl/index.html" title="Adventures in OpenCL">advcl</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="../../../../category/tutorial/advd3-tutorial/index.html" title="View all posts filed under advd3">advd3</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="../../../../category/android/index.html" title="View all posts filed under android">android</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="../../../../category/blender/index.html" title="View all posts filed under blender">blender</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="../../../../category/code/index.html" title="View all posts filed under code">code</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="../../../../category/community/index.html" title="View all posts filed under community">community</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="../../../../category/culture/index.html" title="View all posts filed under culture">culture</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="../../../../category/d3/index.html" title="View all posts filed under d3">d3</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="../../../../category/life/index.html" title="View all posts filed under life">life</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="../../../../category/math/index.html" title="View all posts filed under math">math</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="../../../../category/misc/index.html" title="View all posts filed under misc">misc</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="../../../../category/music/index.html" title="View all posts filed under music">music</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="../../../../category/news/index.html" title="View all posts filed under news">news</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="../../../../category/opencl/index.html" title="View all posts filed under opencl">opencl</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="../../../../category/processingjs/index.html" title="View all posts filed under processingjs">processingjs</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="../../../../category/python/index.html" title="View all posts filed under python">python</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="../../../../category/race/index.html" title="View all posts filed under race">race</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="../../../../category/school/index.html" title="View all posts filed under school">school</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="../../../../category/tech/index.html" title="View all posts filed under tech">tech</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="../../../../category/travel/index.html" title="View all posts filed under travel">travel</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="../../../../category/tutorial/index.html" title="View all posts filed under tutorial">tutorial</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="../../../../category/uncategorized/index.html" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="../../../../category/wtf/index.html" title="View all posts filed under wtf">wtf</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="../../../../category/中�%2596%2587/index.html" title="View all posts filed under 中文">中文</a>
+</li>
+		</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="../../../../index.html" title="enj" rel="home">
+					enj				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+<script type='text/javascript' src='http://d3a9pqeyre6pa0.cloudfront.net/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?aa&#038;ver=3.3.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/plugins/jetpack/modules/wpgroho.js%3Fver=3.3.2'></script>
+	<div style="display:none">
+	<div class="grofile-hash-map-f509f2ab127d35e2b94473463dde6134">
+	</div>
+	<div class="grofile-hash-map-4ab9ff6da51e4ba73a7a981eb0309563">
+	</div>
+	<div class="grofile-hash-map-9878b486335acf770c354e1c9d8e5ff2">
+	</div>
+	<div class="grofile-hash-map-8774df2c5f130da86d48d4d05cfdb46e">
+	</div>
+	<div class="grofile-hash-map-af13f6f607b59bf8f4ad3f8776c3ed52">
+	</div>
+	</div>
+<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://apis.google.com/js/plusone.js?ver=3.3.2'></script>
+
+	<script src="http://stats.wordpress.com/e-201219.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:1.3',blog:'4037422',post:'208'});
+	var load_cmc = function(){linktracker_init(4037422,208,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script></body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 1170/1280 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:45:58 -->

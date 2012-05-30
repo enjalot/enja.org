@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<title>Adventures in PyOpenCL: Part 1 Getting Started with Python | enj</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/themes/twentyten-child/style.css" />
+<link rel="pingback" href="../../../../../xmlrpc.php" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Feed" href="../../../../../enjaorg" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Comments Feed" href="../../../../../comments/feed/index.html" />
+				
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.2.3 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-16564388-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	//]]></script>
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Adventures in PyOpenCL: Part 1 Getting Started with Python Comments Feed" href="../feed/index.html" />
+<link rel='stylesheet' id='tfg_style-css'  href='../../../../../wp-content/plugins/twitter-facebook-google-plusone-share/tfg_style.css%3Fver=3.3.2.css' type='text/css' media='all' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../../xmlrpc.php%3Frsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://enja.org/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='class useless(xkcd):' href='../../../14/class-uselessxkcd/index.html' />
+<link rel='next' title='Hijacking the BGE for Fun and Particles' href='../../../../03/01/hijacking-the-bge-for-fun-and-particles/index.html' />
+<meta name="generator" content="WordPress 3.3.2" />
+<link rel='shortlink' href='http://wp.me/pgWjI-6Q' />
+
+<!-- All in One SEO Pack 1.6.14.2 by Michael Torbert of Semper Fi Web Design[82,153] -->
+<meta name="description" content="Hello, World! I'm a big fan of Python (and excited to be attending PyCon!), and I've recently started playing with a great module called PyOpenCL. I've ported" />
+<meta name="keywords" content="advcl,opencl,tutorial" />
+<link rel="canonical" href="../index.html" />
+<!-- /all in one seo pack -->
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+</head>
+
+<body class="single single-post postid-424 single-format-standard">
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="../../../../../index.html" title="enj" rel="home">enj</a>
+					</span>
+				</div>
+				<div id="site-description">casin&#039; the joint since &#039;85</div>
+
+										<img src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/cropped-turtle_nom1.jpg" width="940" height="198" alt="" />
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="index.html#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu-header"><ul id="menu-navigation" class="menu"><li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../../index.html" >Home</a></li>
+<li id="menu-item-318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../../about/index.html" >About</a></li>
+<li id="menu-item-694" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../../d3/index.html" >d3</a></li>
+<li id="menu-item-316" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../../blender/index.html" >Blender</a></li>
+<li id="menu-item-315" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../../opencl/index.html" >OpenCL</a></li>
+<li id="menu-item-317" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div>			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="../../../14/class-uselessxkcd/index.html" rel="prev"><span class="meta-nav">&larr;</span> class useless(xkcd):</a></div>
+					<div class="nav-next"><a href="../../../../03/01/hijacking-the-bge-for-fun-and-particles/index.html" rel="next">Hijacking the BGE for Fun and Particles <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-424" class="post-424 post type-post status-publish format-standard hentry category-advcl category-opencl category-tutorial">
+					<h1 class="entry-title">Adventures in PyOpenCL: Part 1 Getting Started with Python</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="../index.html" title="10:08 pm" rel="bookmark"><span class="entry-date">February 22, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<p>Hello, World! I&#8217;m a big fan of Python (and excited to be attending <a href="http://us.pycon.org/2011/home/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://us.pycon.org']);">PyCon</a>!), and I&#8217;ve recently started playing with a great module called <a href="http://mathema.tician.de/software/pyopencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mathema.tician.de']);">PyOpenCL</a>. I&#8217;ve ported my <a href="../../../../../2010/07/13/adventures-in-opencl-part-1-getting-started/index.html" >Part 1</a> (and <a href="../../../../../2010/07/20/adventures-in-opencl-part-1-5-cpp-bindings/index.html" >Part 1.5</a>) tutorials from C (and C++) to Python using PyOpenCL and things are way simpler as you will see shortly :)</p>
+<p>This code runs on my Macbook Pro with a NVIDIA 9600GT as well as on our Dell systems running Ubuntu, one with an ATI FirePro v7800 and one with an NVIDIA GTX480. We are working on getting a Windows machine running a decent GPU in our lab, but any feedback from Windows users would be appreciated!</p>
+<h3>Let&#8217;s Get Started!</h3>
+<p>You will need to have:</p>
+<ul>
+<li><a href="http://numpy.scipy.org/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://numpy.scipy.org']);">numpy</a> (<a href="http://matplotlib.sourceforge.net/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://matplotlib.sourceforge.net']);">matplotlib</a> and <a href="http://www.scipy.org/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.scipy.org']);">scipy</a> aren&#8217;t a bad idea either). For <a href="http://stronginference.com/scipy-superpack/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://stronginference.com']);">Mac users</a>.</li>
+<li><a href="http://wiki.tiker.net/PyOpenCL/Installation" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://wiki.tiker.net']);">PyOpenCL</a>, <a href="http://documen.tician.de/pyopencl/index.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://documen.tician.de']);">Documentation</a></li>
+<li>if you want GL interop: <a href="http://pyopengl.sourceforge.net/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://pyopengl.sourceforge.net']);">PyOpenGL</a> (used in the Part 2 tutorial coming soon)
+<ul>
+<li>Mac users will need to <a href="http://wiki.tiker.net/PyOpenCL/Installation/Mac#Optional:_OpenGL_Interop" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://wiki.tiker.net']);">build PyOpenCL from source</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/enjalot/adventures_in_opencl/tree/master/python/part1" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">The code!</a></li>
+<li>The OpenCL specifcation and other resources from the <a href="http://www.khronos.org/registry/cl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">Khronos registry</a></li>
+</ul>
+<p>For this tutorial we only have two files! If you look in your advcl folder</p>
+<pre>python/part1</pre>
+<p>you will see only two files: <a href="https://github.com/enjalot/adventures_in_opencl/blob/master/python/part1/main.py" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">main.py</a> and <a href="https://github.com/enjalot/adventures_in_opencl/blob/master/python/part1/part1.cl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">part1.cl</a>, already lookin&#8217; a lot better than C/C++</p>
+<p>So let&#8217;s give it a shot, just run</p>
+<pre>python main.py</pre>
+<p>and you should see</p>
+<pre>a [ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9.]
+b [ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9.]
+c [  0.   2.   4.   6.   8.  10.  12.  14.  16.  18.]</pre>
+<p>Yay we&#8217;ve just added two tiny arrays with PyOpenCL, let&#8217;s see how.<br />
+First we will look at the OpenCL kernel: <a href="https://github.com/enjalot/adventures_in_opencl/blob/master/python/part1/part1.cl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">part1.cl</a> (exactly the same code as <a href="https://github.com/enjalot/adventures_in_opencl/tree/master/part1" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">Part 1</a> and<a href="https://github.com/enjalot/adventures_in_opencl/tree/master/part1.5" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);"> Part 1.5</a>)</p>
+<pre class="brush: cpp; title: ; notranslate" title="">
+__kernel void part1(__global float* a, __global float* b, __global float* c)
+{
+    unsigned int i = get_global_id(0);
+    c[i] = a[i] + b[i];
+}</pre>
+<p>The kernel is the work that is done by each of the workers in OpenCL. In a GPU these workers are called threads, they are executed in batches called workgroups. So we want to make what would normally be a for loop parallel, so we need to split it up into little pieces of work that can be done at the same time. In this case it is pretty straight forward, we simply make each element of the arrays one piece of data, and make one worker for each of the elements in the output array. OpenCL will then do this bit of work (adding two numbers) with each worker. The way we get it to access and store the right pieces of data is by using the index of the worker (<span class="simple_code">get_global_id</span>) as the index for the data in the arrays.</p>
+<p>In order for OpenCL to do the work, we need to give it the data and tell it to execute. Lets take a look at how we do that in <a href="https://github.com/enjalot/adventures_in_opencl/blob/master/python/part1/main.py" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">main.py</a></p>
+<p>You can see we&#8217;ve defined a class, CL which will hold all of our OpenCL related variables. I split the setup and execution into four functions like in my last tutorial:</p>
+<pre class="brush: python; title: ; notranslate" title="">
+example = CL()
+example.loadProgram(&quot;part1.cl&quot;)
+example.popCorn()
+example.execute()
+</pre>
+<p>First we construct the class, which sets up our OpenCL <a href="http://documen.tician.de/pyopencl/runtime.html#platforms-devices-and-contexts" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://documen.tician.de']);">context</a> as well as the <a href="http://documen.tician.de/pyopencl/runtime.html#command-queues-and-events" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://documen.tician.de']);">command queue</a>.</p>
+<pre class="brush: python; title: ; notranslate" title="">self.ctx = cl.create_some_context()
+self.queue = cl.CommandQueue(self.ctx)</pre>
+<p>Right now we are using convenient PyOpenCL abstractions which will work well for getting started. In my next tutorial I will go over what to do here for OpenGL context sharing, and in the future we can talk about using multiple devices.</p>
+<p>Next we load our program in from a file, with all the ease and grace of Python</p>
+<pre class="brush: python; title: ; notranslate" title="">f = open(filename, 'r')
+fstr = &quot;&quot;.join(f.readlines())
+self.program = cl.Program(self.ctx, fstr).build()</pre>
+<p>Notice how we call the <span class="simple_code">build()</span> function on the program object and then store it as a variable. This is what we will use to execute our kernel</p>
+<p>But first we need to prepare the data we want to work on, so we turn to the trusty NumPy module</p>
+<pre class="brush: python; title: ; notranslate" title="">self.a = numpy.array(range(10), dtype=numpy.float32)
+self.b = numpy.array(range(10), dtype=numpy.float32)</pre>
+<p>We&#8217;ve just initialized two numpy arrays with values from 0 to 9, of course you are going to want to setup your arrays with real data, just make sure that you convert it to numpy arrays with the correct data type before you are ready for OpenCL.</p>
+<pre class="brush: python; title: ; notranslate" title="">mf = cl.mem_flags
+self.a_buf = cl.Buffer(self.ctx, mf.READ_ONLY | mf.COPY_HOST_PTR, hostbuf=self.a)
+self.b_buf = cl.Buffer(self.ctx, mf.READ_ONLY | mf.COPY_HOST_PTR, hostbuf=self.b)
+self.dest_buf = cl.Buffer(self.ctx, mf.WRITE_ONLY, self.b.nbytes)</pre>
+<p>Here we create two OpenCL Buffers where we pass in data to be copied to the device right away. We also create a &#8220;destination&#8221; buffer which we will use to store the results of our computation. For more information on mem_flags see this <a href="http://www.khronos.org/message_boards/viewtopic.php?f=28&amp;t=3025" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">forum post</a>.</p>
+<p>These buffers are now ready to be used by the kernel, so lets see how we execute it:</p>
+<pre class="brush: python; title: ; notranslate" title="">self.program.part1(self.queue, self.a.shape, None, self.a_buf, self.b_buf, self.dest_buf)</pre>
+<p>This is one of the sweet things about python, a method has been added to our program instance with the name of our kernel! So now we call it just like any other function, passing in our command queue, the global and local worksizes (in this case our global size is the size of our arrays, and we don&#8217;t specify a local worksize, leaving it up to the implementation). We then pass in the three parameters to our kernel, the three OpenCL Buffers we created.</p>
+<p>Finally we want to look at the results of our computation so we need to read back the data from <span class="simple_code">dest_buf</span> and print it out:</p>
+<pre class="brush: python; title: ; notranslate" title="">c = numpy.empty_like(self.a)
+cl.enqueue_read_buffer(self.queue, self.dest_buf, c).wait()
+print &quot;a&quot;, self.a
+print &quot;b&quot;, self.b
+print &quot;c&quot;, c</pre>
+<p>We read data from the destination buffer into our c array which is an empy numpy array of the correct size and type. Notice the <span class="simple_code">wait()</span> on the end of <span class="simple_code">enqueue_read_buffer</span>, we could have also put <span class="simple_code">self.queue.finish()</span> on the next line instead, to make sure OpenCL was done copying the data before we tried to print it out.</p>
+<p>So there we go! As you can see the code is much simpler than in C/C++ and if you are doing most of your work on the GPU, there won&#8217;t be a significant difference in performance between Python and the other languages. The ease of writing in Python has me very excited about prototyping other OpenCL programs with PyOpenCL, and I hope others enjoy it as well!</p>
+<div class="bottomcontainerBox" style="background-color:#FFFFFF;">
+			<div style="float:left; width:85px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fenja.org%2F2011%2F02%2F22%2Fadventures-in-pyopencl-part-1-getting-started-with-python%2F&amp;layout=button_count&amp;show_faces=false&amp;width=85&amp;action=like&amp;font=verdana&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:85px; height:21px;"></iframe></div>
+			<div style="float:left; width:80px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<g:plusone size="medium" href="http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/"></g:plusone>
+			</div>
+			<div style="float:left; width:95px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<a href="http://twitter.com/share" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);" class="twitter-share-button" data-url="http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/"  data-text="Adventures in PyOpenCL: Part 1 Getting Started with Python" data-count="horizontal" data-via="enjalot"></a>
+			</div>			
+			</div><div style="clear:both"></div><div style="padding-bottom:4px;"></div>											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+						This entry was posted in <a href="../../../../../category/tutorial/advcl/index.html" title="View all posts in advcl" rel="category tag">advcl</a>, <a href="../../../../../category/opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>, <a href="../../../../../category/tutorial/index.html" title="View all posts in tutorial" rel="category tag">tutorial</a>. Bookmark the <a href="../index.html" title="Permalink to Adventures in PyOpenCL: Part 1 Getting Started with Python" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="../../../14/class-uselessxkcd/index.html" rel="prev"><span class="meta-nav">&larr;</span> class useless(xkcd):</a></div>
+					<div class="nav-next"><a href="../../../../03/01/hijacking-the-bge-for-fun-and-particles/index.html" rel="next">Hijacking the BGE for Fun and Particles <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">14 Responses to <em>Adventures in PyOpenCL: Part 1 Getting Started with Python</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-649">
+		<div id="comment-649">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/a2f31aa80a0e5fdf02de29d2e048aad4?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="http://iklsr.wordpress.com" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://iklsr.wordpress.com']);"  rel='external nofollow' class='url'>iKlsR</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-649">
+			February 22, 2011 at 11:25 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>this was great. i easily followed it. waiting for more!</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://topsy.com/enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/?utm_source=pingback&#038;utm_campaign=L2" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://topsy.com']);"  rel='external nofollow' class='url'>Tweets that mention Adventures in PyOpenCL: Part 1 Getting Started with Python | enj -- Topsy.com</a></p>
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-651">
+		<div id="comment-651">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/fe9f1b6a7868b989d2ad24d9bdc7c2c7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">T.E</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-651">
+			February 23, 2011 at 5:51 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Great!  This is exactly what I&#8217;ve been looking for! Please continue with this tutorial with more implementations suited for PyOpenCL, I&#8217;m sure a lot of people will find it useful, as there currently is a missing stepping stone in learning OpenCL through Python and PyOpenCL.<br />
+Thank you!</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-654">
+		<div id="comment-654">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/1810f5a87de06a151e9e63e01c1c4c9d?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="http://www.siplab.fct.ualg.pt/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.siplab.fct.ualg.pt']);"  rel='external nofollow' class='url'>Emanuel</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-654">
+			February 24, 2011 at 7:50 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Woah, that was really simple -I was looking for an easy way to get started with OpenCL, and this is it! thanks!</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-686">
+		<div id="comment-686">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/e8b4cfa42119f20b3dafe5d3bfe7a355?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">georgebastille</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-686">
+			March 6, 2011 at 6:43 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Brilliant tutorial, please put up more, I am really excited about using OpenCL with Python, seems like the perfect combination and your tutorial is really helpful, please please continue with part 1.5 (and the rest!)</p>
+<p>Thank you</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-710">
+		<div id="comment-710">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/decf949f7f370b8e53a56a8507cb6c5a?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Al</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-710">
+			March 16, 2011 at 1:46 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Great` tutorial!<br />
+easy_install works fine on mac for pyopencl</p>
+<p>The enthought python distro is an easy way to install a stack of packages (numpy, mathplot etc etc) no opencl in there yet.</p>
+<p>Would love to get this working on gumstix overo and pandaboard.</p>
+<p>Its a shame no python on iOS.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-713">
+		<div id="comment-713">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/ffb51663cf1d42bd125b463e055055e5?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-713">
+			March 19, 2011 at 4:15 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi:</p>
+<p>Thanks for the great tutorial. This is a great toolkit and very easy to use. The only problem I have is that using pyopencl is *slower* than numpy! I&#8217;ve been struggling for the last few hours to find  a combination of data size/kernel that would show the power of OpenCL. So far no luck..</p>
+<p>Any thoughts? (Btw I&#8217;m using pyopencl on a MacBook Pro 2.2GHz, running python2.6, and the latest version of pyopencl).</p>
+<p>Thanks,</p>
+<p>David.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-714">
+		<div id="comment-714">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/ffb51663cf1d42bd125b463e055055e5?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-714">
+			March 19, 2011 at 4:35 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Again:</p>
+<p>I think I figured out the problem (thanks to a nice benchmark program I found online:<a href="http://git.tiker.net/pyopencl.git/blob_plain/HEAD:/examples/benchmark-all.py" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','http://git.tiker.net']);" rel="nofollow">http://git.tiker.net/pyopencl.git/blob_plain/HEAD:/examples/benchmark-all.py</a>). Here&#8217;s the result.</p>
+<p>Thanks again for the great work. I&#8217;m impressed at how easy it was to get this up and running. Nice job!</p>
+<p>Cheers,</p>
+<p>David.</p>
+<p>(&#8216;Execution time of test without OpenCL: &#8216;, 9.6666891574859619, &#8216;s&#8217;)<br />
+===============================================================<br />
+(&#8216;Platform name:&#8217;, &#8216;Apple&#8217;)<br />
+(&#8216;Platform profile:&#8217;, &#8216;FULL_PROFILE&#8217;)<br />
+(&#8216;Platform vendor:&#8217;, &#8216;Apple&#8217;)<br />
+(&#8216;Platform version:&#8217;, &#8216;OpenCL 1.0 (Dec 26 2010 12:52:21)&#8217;)<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+(&#8216;Device name:&#8217;, &#8216;ATI Radeon HD 6750M&#8217;)<br />
+(&#8216;Device type:&#8217;, &#8216;GPU&#8217;)<br />
+(&#8216;Device memory: &#8216;, 512L, &#8216;MB&#8217;)<br />
+(&#8216;Device max clock speed:&#8217;, 150, &#8216;MHz&#8217;)<br />
+(&#8216;Device compute units:&#8217;, 5)<br />
+Execution time of test: 0.0126587 s<br />
+Results OK<br />
+===============================================================<br />
+(&#8216;Platform name:&#8217;, &#8216;Apple&#8217;)<br />
+(&#8216;Platform profile:&#8217;, &#8216;FULL_PROFILE&#8217;)<br />
+(&#8216;Platform vendor:&#8217;, &#8216;Apple&#8217;)<br />
+(&#8216;Platform version:&#8217;, &#8216;OpenCL 1.0 (Dec 26 2010 12:52:21)&#8217;)<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+(&#8216;Device name:&#8217;, &#8216;Intel(R) Core(TM) i7-2720QM CPU @ 2.20GHz&#8217;)<br />
+(&#8216;Device type:&#8217;, &#8216;CPU&#8217;)<br />
+(&#8216;Device memory: &#8216;, 6144L, &#8216;MB&#8217;)<br />
+(&#8216;Device max clock speed:&#8217;, 2200, &#8216;MHz&#8217;)<br />
+(&#8216;Device compute units:&#8217;, 8)<br />
+Execution time of test: 0.00191466 s<br />
+Results OK</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="li-comment-715">
+		<div id="comment-715">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-715">
+			March 19, 2011 at 7:43 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>@Al &#8211; thanks! installing with setuptools (easy_install) will work, but that note is for Mac users who want GL interop (which is only available in the latest source for now)</p>
+<p>@David &#8211; thanks for that link. I&#8217;ve been planning on a tutorial about timing and what kind of things benefit from OpenCL. I&#8217;ll cover it after I writeup my Part 2 (OpenGL particles)</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="../../../../03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/index.html"   rel='external nofollow' class='url'>Adventures in PyOpenCL: Part 2, Particles with PyOpenGL | enj</a></p>
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="../../../../03/30/adventures-in-opencl-part-3-constant-memory-structs/index.html"   rel='external nofollow' class='url'>Adventures in OpenCL Part 3: Constant Memory Structs | enj</a></p>
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-1610">
+		<div id="comment-1610">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/20732a4efa9dd223af184501d2fd0dca?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">pm</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-1610">
+			January 13, 2012 at 5:13 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>the benchmark you mention is so wrong. </p>
+<p>you have to compare to numpy operations, not pure python on CPU.<br />
+with numpy you can write directly<br />
+c_result = (a + b) * (a+b) * (a/2)</p>
+<p>my results:<br />
+(&#8216;Execution time of test without OpenCL: &#8216;, 11.889606952667236, &#8216;s&#8217;)<br />
+(&#8216;Execution time of test within numpy &#8216;, 0.00010013580322265625, &#8216;s&#8217;)<br />
+===============================================================<br />
+(&#8216;Platform name:&#8217;, &#8216;NVIDIA CUDA&#8217;)<br />
+(&#8216;Platform profile:&#8217;, &#8216;FULL_PROFILE&#8217;)<br />
+(&#8216;Platform vendor:&#8217;, &#8216;NVIDIA Corporation&#8217;)<br />
+(&#8216;Platform version:&#8217;, &#8216;OpenCL 1.1 CUDA 4.0.1&#8242;)<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+(&#8216;Device name:&#8217;, &#8216;Quadro NVS 290&#8242;)<br />
+(&#8216;Device type:&#8217;, &#8216;GPU&#8217;)<br />
+(&#8216;Device memory: &#8216;, 255L, &#8216;MB&#8217;)<br />
+(&#8216;Device max clock speed:&#8217;, 918, &#8216;MHz&#8217;)<br />
+(&#8216;Device compute units:&#8217;, 2)<br />
+Execution time of test: 0.0360267 s<br />
+Results OK</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://www.teachmelinuxonline.com/blog/2012/02/07/parallel-programming-in-python/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.teachmelinuxonline.com']);"  rel='external nofollow' class='url'>Parallel programming in Python | TeachMeLinuxOnline official blog</a></p>
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1932">
+		<div id="comment-1932">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/45f74184fb35d98c7cb493d428727823?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Allan Douglas R. de Oliveira</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-1932">
+			May 7, 2012 at 11:40 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>pm,</p>
+<p>You need to run the test 1000 times. Like:<br />
+time1 = time()<br />
+for i in range(1000):<br />
+        c_result = (a + b) * (a + b) * (a / 2.0)<br />
+time2 = time()<br />
+print(&#8220;Execution time with numpy: &#8220;, time2 &#8211; time1, &#8220;s&#8221;)</p>
+<p>You will see OpenCL performs better than NumPy (but NumPy is still pretty good, IMHO). On my machine:</p>
+<p>(&#8216;Execution time of test without OpenCL: &#8216;, 9.549367904663086, &#8216;s&#8217;)<br />
+(&#8216;Execution time with numpy: &#8216;, 0.01725006103515625, &#8216;s&#8217;)<br />
+===============================================================<br />
+(&#8216;Platform name:&#8217;, &#8216;Intel(R) OpenCL&#8217;)<br />
+(&#8216;Platform profile:&#8217;, &#8216;FULL_PROFILE&#8217;)<br />
+(&#8216;Platform vendor:&#8217;, &#8216;Intel(R) Corporation&#8217;)<br />
+(&#8216;Platform version:&#8217;, &#8216;OpenCL 1.1 LINUX&#8217;)<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+(&#8216;Device name:&#8217;, &#8216;      Intel(R) Core(TM) i7-2630QM CPU @ 2.00GHz&#8217;)<br />
+(&#8216;Device type:&#8217;, &#8216;CPU&#8217;)<br />
+(&#8216;Device memory: &#8216;, 5864, &#8216;MB&#8217;)<br />
+(&#8216;Device max clock speed:&#8217;, 2000, &#8216;MHz&#8217;)<br />
+(&#8216;Device compute units:&#8217;, 8)<br />
+Execution time of test: 0.000382 s<br />
+Results OK<br />
+===============================================================<br />
+(&#8216;Platform name:&#8217;, &#8216;NVIDIA CUDA&#8217;)<br />
+(&#8216;Platform profile:&#8217;, &#8216;FULL_PROFILE&#8217;)<br />
+(&#8216;Platform vendor:&#8217;, &#8216;NVIDIA Corporation&#8217;)<br />
+(&#8216;Platform version:&#8217;, &#8216;OpenCL 1.1 CUDA 4.2.1&#8242;)<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+(&#8216;Device name:&#8217;, &#8216;GeForce GT 540M&#8217;)<br />
+(&#8216;Device type:&#8217;, &#8216;GPU&#8217;)<br />
+(&#8216;Device memory: &#8216;, 2047, &#8216;MB&#8217;)<br />
+(&#8216;Device max clock speed:&#8217;, 1344, &#8216;MHz&#8217;)<br />
+(&#8216;Device compute units:&#8217;, 2)<br />
+Execution time of test: 0.000624512 s<br />
+Results OK</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+			</ol>
+
+
+
+								
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-3" class="widget-container widget_search"><form role="search" method="get" id="searchform" action="../../../../../index.html" >
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" value="" name="s" id="s" />
+	<input type="submit" id="searchsubmit" value="Search" />
+	</div>
+	</form></li><li id="nav_menu-3" class="widget-container widget_nav_menu"><div class="menu-navigation-container"><ul id="menu-navigation-1" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../../index.html" >Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../../about/index.html" >About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../../d3/index.html" >d3</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../../blender/index.html" >Blender</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../../opencl/index.html" >OpenCL</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div></li><li id="text-4" class="widget-container widget_text">			<div class="textwidget"><a href="https://twitter.com/#!/enjalot" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=twitter.com"> @enjalot</a>
+<br/>
+<a href="https://plus.google.com/112153365286725889851/posts" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://plus.google.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=plus.google.com"> +Ian Johnson</a></div>
+		</li><li id="categories-414549122" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-25"><a href="../../../../../category/tutorial/advcl/index.html" title="Adventures in OpenCL">advcl</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="../../../../../category/tutorial/advd3-tutorial/index.html" title="View all posts filed under advd3">advd3</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="../../../../../category/android/index.html" title="View all posts filed under android">android</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="../../../../../category/blender/index.html" title="View all posts filed under blender">blender</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="../../../../../category/code/index.html" title="View all posts filed under code">code</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="../../../../../category/community/index.html" title="View all posts filed under community">community</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="../../../../../category/culture/index.html" title="View all posts filed under culture">culture</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="../../../../../category/d3/index.html" title="View all posts filed under d3">d3</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="../../../../../category/life/index.html" title="View all posts filed under life">life</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="../../../../../category/math/index.html" title="View all posts filed under math">math</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="../../../../../category/misc/index.html" title="View all posts filed under misc">misc</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="../../../../../category/music/index.html" title="View all posts filed under music">music</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="../../../../../category/news/index.html" title="View all posts filed under news">news</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="../../../../../category/opencl/index.html" title="View all posts filed under opencl">opencl</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="../../../../../category/processingjs/index.html" title="View all posts filed under processingjs">processingjs</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="../../../../../category/python/index.html" title="View all posts filed under python">python</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="../../../../../category/race/index.html" title="View all posts filed under race">race</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="../../../../../category/school/index.html" title="View all posts filed under school">school</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="../../../../../category/tech/index.html" title="View all posts filed under tech">tech</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="../../../../../category/travel/index.html" title="View all posts filed under travel">travel</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="../../../../../category/tutorial/index.html" title="View all posts filed under tutorial">tutorial</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="../../../../../category/uncategorized/index.html" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="../../../../../category/wtf/index.html" title="View all posts filed under wtf">wtf</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="../../../../../category/中�%2596%2587/index.html" title="View all posts filed under 中文">中文</a>
+</li>
+		</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="../../../../../index.html" title="enj" rel="home">
+					enj				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+<script type='text/javascript' src='http://d3a9pqeyre6pa0.cloudfront.net/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?aa&#038;ver=3.3.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../wp-content/plugins/jetpack/modules/wpgroho.js%3Fver=3.3.2'></script>
+	<div style="display:none">
+	<div class="grofile-hash-map-a2f31aa80a0e5fdf02de29d2e048aad4">
+	</div>
+	<div class="grofile-hash-map-fe9f1b6a7868b989d2ad24d9bdc7c2c7">
+	</div>
+	<div class="grofile-hash-map-1810f5a87de06a151e9e63e01c1c4c9d">
+	</div>
+	<div class="grofile-hash-map-e8b4cfa42119f20b3dafe5d3bfe7a355">
+	</div>
+	<div class="grofile-hash-map-decf949f7f370b8e53a56a8507cb6c5a">
+	</div>
+	<div class="grofile-hash-map-ffb51663cf1d42bd125b463e055055e5">
+	</div>
+	<div class="grofile-hash-map-89db4f3e0cfa7752306bede98888b898">
+	</div>
+	<div class="grofile-hash-map-20732a4efa9dd223af184501d2fd0dca">
+	</div>
+	<div class="grofile-hash-map-45f74184fb35d98c7cb493d428727823">
+	</div>
+	</div>
+<script type='text/javascript' src='../../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js%3Fver=3.0.83c'></script>
+<script type='text/javascript' src='../../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js%3Fver=3.0.83c'></script>
+<script type='text/javascript' src='../../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPython.js%3Fver=3.0.83c'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://enja.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://enja.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['gutter'] = false;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = true;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://apis.google.com/js/plusone.js?ver=3.3.2'></script>
+
+	<script src="http://stats.wordpress.com/e-201219.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:1.3',blog:'4037422',post:'424'});
+	var load_cmc = function(){linktracker_init(4037422,424,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script></body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 1426/1544 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:55:44 -->

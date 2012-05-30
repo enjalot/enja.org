@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<title>Hijacking the BGE for Fun and Particles | enj</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/themes/twentyten-child/style.css" />
+<link rel="pingback" href="../../../../../xmlrpc.php" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Feed" href="../../../../../enjaorg" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Comments Feed" href="../../../../../comments/feed/index.html" />
+				
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.2.3 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-16564388-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	//]]></script>
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Hijacking the BGE for Fun and Particles Comments Feed" href="../feed/index.html" />
+<link rel='stylesheet' id='tfg_style-css'  href='../../../../../wp-content/plugins/twitter-facebook-google-plusone-share/tfg_style.css%3Fver=3.3.2.css' type='text/css' media='all' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../../xmlrpc.php%3Frsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://enja.org/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Adventures in PyOpenCL: Part 1 Getting Started with Python' href='../../../../02/22/adventures-in-pyopencl-part-1-getting-started-with-python/index.html' />
+<link rel='next' title='A Python Function Timing Decorator' href='../../../09/a-python-function-timing-decorator/index.html' />
+<meta name="generator" content="WordPress 3.3.2" />
+<link rel='shortlink' href='http://wp.me/pgWjI-77' />
+
+<!-- All in One SEO Pack 1.6.14.2 by Michael Torbert of Semper Fi Web Design[82,134] -->
+<meta name="description" content="Hello world! Care to take a journey into the annals of my twisted mind? Join me on a ride through a small part of the Blender Game Engine on a rickety roller" />
+<meta name="keywords" content="blender,code" />
+<link rel="canonical" href="../index.html" />
+<!-- /all in one seo pack -->
+
+
+<!-- Facebook Like Thumbnail -->
+<link rel="image_src" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/modifier_ui.png" />
+<!-- End Facebook Like Thumbnail -->
+
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+</head>
+
+<body class="single single-post postid-441 single-format-standard">
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="../../../../../index.html" title="enj" rel="home">enj</a>
+					</span>
+				</div>
+				<div id="site-description">casin&#039; the joint since &#039;85</div>
+
+										<img src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/cropped-turtle_nom1.jpg" width="940" height="198" alt="" />
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="index.html#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu-header"><ul id="menu-navigation" class="menu"><li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../../index.html" >Home</a></li>
+<li id="menu-item-318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../../about/index.html" >About</a></li>
+<li id="menu-item-694" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../../d3/index.html" >d3</a></li>
+<li id="menu-item-316" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../../blender/index.html" >Blender</a></li>
+<li id="menu-item-315" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../../opencl/index.html" >OpenCL</a></li>
+<li id="menu-item-317" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div>			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="../../../../02/22/adventures-in-pyopencl-part-1-getting-started-with-python/index.html" rel="prev"><span class="meta-nav">&larr;</span> Adventures in PyOpenCL: Part 1 Getting Started with Python</a></div>
+					<div class="nav-next"><a href="../../../09/a-python-function-timing-decorator/index.html" rel="next">A Python Function Timing Decorator <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-441" class="post-441 post type-post status-publish format-standard hentry category-blender category-code">
+					<h1 class="entry-title">Hijacking the BGE for Fun and Particles</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="../index.html" title="6:24 pm" rel="bookmark"><span class="entry-date">March 1, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<p>Hello world! Care to take a journey into the annals of my twisted mind? Join me on a ride through a small part of the <a href="http://www.blender.org/education-help/tutorials/game-engine/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.blender.org']);">Blender Game Engine</a> on a rickety roller coaster of code and commentary. For those interested in modifying the BGE source I hope this experience will give you ideas, and my personal aspiration is that those more knowledgable than myself will suggest ways of improving what I&#8217;ve done here. You must be at least proficient with C++ to ride this ride.</p>
+<p>The ride I am talking about is the modifications I&#8217;ve made to the Blender Game Engine to add a <a href="../../../../../2010/12/16/particles-in-bge-fluids-in-real-time-with-opencl/index.html" >real-time fluid simulation</a> as part of my <a href="../../../../02/10/particles-in-bge-fluid-surface-and-collision-in-the-works/index.html" >Master&#8217;s research</a>. Right now the code is seperated into two repositories:</p>
+<ul>
+<li><a href="https://github.com/enjalot/BGERTPS" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">BGERTPS</a> ([B]lender [G]ame [E]ngine &#8211; [R]eal [T]ime [P]article [S]ystem)</li>
+<li><a href="https://github.com/enjalot/EnjaParticles" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">EnjaParticles</a> (the standalone library containing the OpenCL Fluid Simulator)</li>
+</ul>
+<p>We will primarily be focusing on the code in BGERTPS, but you will need both if you want to <a href="https://github.com/enjalot/BGERTPS/blob/master/README" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">compile and run the code</a>. If you&#8217;re mind has a built in C++ preprocessor, you may want to quit reading and check the <a href="https://github.com/enjalot/BGERTPS/blob/master/MODIFIED_FILES" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">list of modified files</a> to see the damage I&#8217;ve done for yourself.</p>
+<p>So let&#8217;s start with a little visual of the interface before we dig into the code. Here you see the modifier panel of our Domain object which controls parameters for the system. Our fluid will never leave this domain, so make sure it is big enough to hold objects you may want to interact with. The size of our particles relevant to our domain is determined by the maximum number of particles you specify. Of course smaller particles means better simulation resolution, but it also means more computation. For now the user will have to experiment with the capabilities of their machine, but in the future we hope to have guidelines and it would even be possible to automatically suggest particle counts based on available hardware. As a note, due to a limitation in the sorting code we are using right now the maximum number of particles must be a power of 2 (1024, 2048, 4096, 8192, 16384&#8230; le sigh).</p>
+<p><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/modifier_ui.png" ><img class="alignleft size-full wp-image-458" title="RTPS Modifier UI" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/modifier_ui.png" alt="RTPS Modifier UI" width="600" height="451" /></a></p>
+<p>Now let&#8217;s actually add some fluid to the domain by creating a new object within the domain and giving it a few game properties in the Logic Panel.</p>
+<p><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/emitter_ui.png" ><img class="alignleft size-full wp-image-461" title="Emitter UI" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/emitter_ui.png" alt="Emitter UI" width="600" height="336" /></a></p>
+<p>When the game starts the object&#8217;s bounding box will be filled with up to <strong>num</strong> equally spaced particles, if the volume of the bounding box is too small to hold <strong>num</strong> particles, then it will only inject however many particles are necessary to fill the volume. In the game, after the particles have been emitted, the <strong>num</strong> property is set to 0. Therefore if one would like to emit more particles, it is possible to use a Property Actuator to set the <strong>num</strong> property to a number, at which point the game engine will attempt to emit that number of particles and set the property back to 0.</p>
+<p>It is also possible to have the particles collide against triangle meshes, so if you want the fluid to interact with an object make sure to switch to Edit mode, select all and hit ctrl-T to turn all the faces to triangles. It is also important to know which way your normals are facing. Once you have those right, it is as simple as adding a collide boolean to your object&#8217;s game properties. At the moment physics of the object are not shared with the fluid, meaning that forces do not transfer between them. We also have not optimized these collisions, so too many triangles (greater than a few hundred on most systems) will start slowing things down a bit.</p>
+<p><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/collision_ui.png" ><img class="alignleft size-full wp-image-462" title="Collision UI" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/collision_ui.png" alt="Collision UI" width="600" height="554" /></a></p>
+<p>There are also example blend files in EnjaParticles in the <a href="https://github.com/enjalot/EnjaParticles/tree/master/blender" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">blender</a> folder, like rtps_dam_demo.blend that could be used as a starting point. So that&#8217;s how you use it, but how do we make it, and are there better ways to do it?</p>
+<h2>RTPS API</h2>
+<p>Let&#8217;s start with the modifier. I&#8217;m going to skip how I made my RTPS modifier because I&#8217;ve detailed it <a href="../../../../../2010/05/24/blender-creating-a-custom-modifier/index.html" >line by line before</a>. The important thing to start with is what the RTPS class needs for it to work, so let&#8217;s look at the API I use so far. (Everything in the RTPS library is in the rtps namespace)</p>
+<p>First is the constructor (in <a href="https://github.com/enjalot/BGERTPS/blob/master/blender/source/gameengine/Converter/BL_ModifierDeformer.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">BL_ModifierDeformer.cpp</a>):</p>
+<pre class="brush: cpp; first-line: 411; gutter: true; title: ; notranslate" title="">rtps::RTPSettings settings(sys, rtmd-&gt;num, rtmd-&gt;dt, grid, rtmd-&gt;collision);
+(*slot)-&gt;m_pRTPS = new rtps::RTPS(settings);</pre>
+<p>So here we create an RTPSettings object, as well as an RTPS object. I&#8217;ll explain the (*slot) business in a bit but for now let&#8217;s just say we are saving a pointer to our RTPS object. So what are the settings?</p>
+<ul>
+<li>sys: the type of system, for fluids we have rtps::RTPSettings::SPH</li>
+<li>rtmd-&gt;num: the maximum number of particles</li>
+<li>rtmd-&gt;dt: the time step we use to <a href="http://en.wikipedia.org/wiki/Numerical_ordinary_differential_equations" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://en.wikipedia.org']);">integrate the system</a></li>
+<li>grid: the bounding box of our domain</li>
+<li>rtmd-&gt;collision: whether or not to perform collision checks</li>
+</ul>
+<p>The settings object is simply passed to the constructor of the RTPS class which creates the particle system we specify. If we want to add any particles to the system (presumably we do) we can call the following function (also in <a href="https://github.com/enjalot/BGERTPS/blob/master/blender/source/gameengine/Converter/BL_ModifierDeformer.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">BL_ModifierDeformer.cpp</a>)</p>
+<pre class="brush: cpp; first-line: 331; gutter: true; title: ; notranslate" title="">rtps-&gt;system-&gt;addBox(nn, min, max, false);</pre>
+<p>Here the parameters are as follows:</p>
+<ul>
+<li>nn: the number of particles to (attempt) to add</li>
+<li>min: the &#8220;bottom left&#8221; corner of the bounding box (as a <a href="https://github.com/enjalot/EnjaParticles/blob/master/rtps/rtpslib/structs.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">float4</a>)</li>
+<li>max: the &#8220;upper right&#8221; corner of the bounding box (also a float4)</li>
+<li>false: a boolean specifying whether to scale the values for the simulation</li>
+</ul>
+<p>Before we go into detail about how we construct and populate our particle systems, there are two quick functions we need to mention, namely:</p>
+<pre class="brush: cpp; first-line: 350; gutter: true; title: ; notranslate" title="">(*slot)-&gt;m_pRTPS-&gt;update();</pre>
+<p>which does all of the simulation work every frame, and then there is (in <a href="https://github.com/enjalot/BGERTPS/blob/master/blender/source/gameengine/Rasterizer/RAS_OpenGLRasterizer/RAS_ListRasterizer.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">RAS_ListRasterizer.cpp</a>):</p>
+<pre class="brush: cpp; first-line: 234; gutter: true; title: ; notranslate" title="">if(ms.m_bRTPS)
+    ms.m_pRTPS-&gt;render();</pre>
+<p>and</p>
+<pre class="brush: cpp; first-line: 269; gutter: true; title: ; notranslate" title="">if(ms.m_bRTPS)
+    ms.m_pRTPS-&gt;render();</pre>
+<p>which handles all of the OpenGL rendering of our particles (and subsequently bypasses the normal Blender rendering of the domain). One bug here is that if you are in wireframe mode, the particles won&#8217;t render.</p>
+<h2>Modifier</h2>
+<p>Now lets go back to creating our system and seeing how we keep track of it in the game. Everything comes down to our RTPS modifier, an object with this modifier defines a system and provides a reference to it. We exploit the fact that modifiers have an Update routine which gets called every frame of game play, and we use that to tell our system what to do. So how does our system get attached to an object? Let&#8217;s start with how the modifier gets applied.<br />
+This happens in <a href="https://github.com/enjalot/BGERTPS/blob/master/blender/source/gameengine/Converter/BL_BlenderDataConversion.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">KX_BlenderDataConverter.cpp</a> in the <span class="simple_code">gameobject_from_blenderobject</span> function:</p>
+<pre class="brush: cpp; first-line: 1751; gutter: true; title: ; notranslate" title="">bool bIsRTPS = BL_ModifierDeformer::HasRTPSDeformer(ob);</pre>
+<p>and</p>
+<pre class="brush: cpp; first-line: 1756; gutter: true; title: ; notranslate" title="">BL_ModifierDeformer *dcont = new BL_ModifierDeformer((BL_DeformableGameObject *)gameobj,
+kxscene-&gt;GetBlenderScene(), ob,	meshobj, bIsRTPS);</pre>
+<p>This function is getting called on all the objects in the scene, so we want to make sure our object knows that it is an RTPS by making its ModifierDeformer aware of the fact. The first step is seeing if the current object has our RTPS modifier, with HasRTPSDeformer(obj) which is defined in <a href="https://github.com/enjalot/BGERTPS/blob/master/blender/source/gameengine/Converter/BL_ModifierDeformer.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">BL_ModifierDeformer.cpp</a> on line 147. The boolean value is stored as a member of the ModifierDeformer instance as defined in <a href="https://github.com/enjalot/BGERTPS/blob/master/blender/source/gameengine/Converter/BL_ModifierDeformer.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">BL_ModifierDeformer.h</a>:</p>
+<pre class="brush: cpp; first-line: 126; gutter: true; title: ; notranslate" title="">bool    m_bIsRTPS; //different from the RAS_MaterialBucket flag but used to set it.</pre>
+<p>As you can see from the comment, we will use a similar boolean in <a href="https://github.com/enjalot/BGERTPS/blob/master/blender/source/gameengine/Rasterizer/RAS_MaterialBucket.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">RAS_MaterialBucket.h</a> to signify whether or not a RAS_MeshSlot has our system:</p>
+<pre class="brush: cpp; first-line: 138; gutter: true; title: ; notranslate" title="">bool    m_bRTPS;
+rtps::RTPS*     m_pRTPS;</pre>
+<p>The RAS_MeshSlot is where the real action is, these are what the game engine uses to keep track of objects, at least as far as my understanding is concerned for modifiers and rendering. Now that we can keep a pointer to our system in a MeshSlot, we can access it in several places where we need it. Lets start with <a href="https://github.com/enjalot/BGERTPS/blob/master/blender/source/gameengine/Rasterizer/RAS_MaterialBucket.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">RAS_MaterialBucket.cpp</a> which of course has the constructor (line 63) and destructor (line 90) as well as foregoing the application of OpenGL transformations (we manage our own OpenGL stuff inside the library) on line 618.<br />
+As we saw earlier the MeshSlot&#8217;s m_bRTPS boolean is used to call the render function in <a href="https://github.com/enjalot/BGERTPS/blob/master/blender/source/gameengine/Rasterizer/RAS_OpenGLRasterizer/RAS_ListRasterizer.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">RAS_ListRasterizer.cpp</a> on lines 234 and 269.</p>
+<p>More interestingly, let&#8217;s look at how the boolean and the pointer are set when the modifier is applied in <a href="https://github.com/enjalot/BGERTPS/blob/master/blender/source/gameengine/Converter/BL_ModifierDeformer.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">BL_ModifierDeformer.cpp</a>:</p>
+<pre class="brush: cpp; first-line: 381; gutter: true; title: ; notranslate" title="">if(m_bIsRTPS)
+{
+    (*slot)-&gt;m_bRTPS = true;
+
+    ModifierData* md;
+    for (md = (ModifierData*)m_objMesh-&gt;modifiers.first; md; md = (ModifierData*)md-&gt;next)
+    {
+        if(md-&gt;type &amp; eModifierType_RTPS)
+        {
+            RTPSModifierData* rtmd = (RTPSModifierData*)md;
+
+            rtps::RTPSettings::SysType sys = (rtps::RTPSettings::SysType)rtmd-&gt;system;
+
+            //get the bounding box of the object for use as domain bounds
+            KX_GameObject* gobj = (KX_GameObject*)m_gameobj;
+            MT_Point3 bbpts[8];
+            gobj-&gt;GetSGNode()-&gt;getAABBox(bbpts);
+            MT_Point3 min = bbpts[0];
+            MT_Point3 max = bbpts[7];
+            using namespace rtps;
+            rtps::Domain grid(float4(min.x(), min.y(), min.z(), 0), float4(max.x(), max.y(), max.z(), 0));
+
+            if (sys == rtps::RTPSettings::SPH)
+            {
+                rtps::RTPSettings settings(sys, rtmd-&gt;num, rtmd-&gt;dt, grid, rtmd-&gt;collision);
+                (*slot)-&gt;m_pRTPS = new rtps::RTPS(settings);
+            }</pre>
+<p>Where <strong>slot</strong> is defined in a for loop over the list of MeshSlots in the lines that precede this excerpt. First we set our boolean flag to true (383), then we loop over the modifier data on our object (it is conceivable that our object could have more than one modifier) until we find the RTPS modifier (388). So we get the modifier data (390) which contains the values input into the UI, starting with what type of system we are making. Then we get the Axis Aligned Bounding Box for our object to construct the <a href="https://github.com/enjalot/EnjaParticles/blob/master/rtps/rtpslib/domain/Domain.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">domain</a> for the simulation (395-401). Finally we construct our RTPS object and save the pointer to our slot (406). If you look at the actual code you will see that there are a couple other systems that are possible, one of which my <a href="http://mymese.blogspot.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mymese.blogspot.com']);">colleague</a> is using to bring superfast boids to the game engine, but I&#8217;ll let her write about them!</p>
+<h2>Modifier Update</h2>
+<p>So now that we&#8217;ve got a system created, we want to simulate some fluids, preferably every frame. So let&#8217;s turn our attention to the Update function of our modifier, still in <a href="https://github.com/enjalot/BGERTPS/blob/master/blender/source/gameengine/Converter/BL_ModifierDeformer.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">BL_ModifierDeformer.cpp</a> we again loop over the slots and find our system and make sure it&#8217;s pointer is valid</p>
+<pre class="brush: cpp; first-line: 254; gutter: true; title: ; notranslate" title=""> if((*slot)-&gt;m_bRTPS &amp;&amp; (*slot)-&gt;m_pRTPS)
+{
+    rtps::RTPS* rtps = (*slot)-&gt;m_pRTPS;</pre>
+<p>Here we make a convenience variable to refer to our system for the rest of the Update. Next we skip a few lines that aren&#8217;t being used right now, and move on to interacting with other objects in the game!</p>
+<pre class="brush: cpp; first-line: 282; gutter: true; title: ; notranslate" title="">if(rtps-&gt;settings.system == rtps::RTPSettings::SPH)
+{
+    CListValue* oblist = kxs-&gt;GetObjectList();
+    int num_objects = oblist-&gt;GetCount();</pre>
+<p>The first thing we need to do is make sure we are dealing with the right kind of system, other systems might want to interact differently. The real work starts when we get the list of objects from the game engine.<br />
+A quick note, if you look in the code you might see timers sprinkled around:</p>
+<pre class="brush: cpp; first-line: 290; gutter: true; title: ; notranslate" title="">timers[TI_EMIT]-&gt;start();</pre>
+<p>these are defined in the <a href="https://github.com/enjalot/EnjaParticles/blob/master/rtps/rtpslib/timege.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">rtps library</a> and this one was setup in the ModifierDeformer <a href="https://github.com/enjalot/BGERTPS/blob/master/blender/source/gameengine/Converter/BL_ModifierDeformer.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">constructor</a>.<br />
+On the next line you will see a vector of <a href="https://github.com/enjalot/EnjaParticles/blob/master/rtps/rtpslib/structs.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">Triangles</a>:</p>
+<pre class="brush: cpp; first-line: 288; gutter: true; title: ; notranslate" title="">std::vector triangles;</pre>
+<p>which we will use to store all of the triangles from the meshes of objects we wish to collide against.</p>
+<p>So lets loop over the objects in the game and check for properties we care about:</p>
+<pre class="brush: cpp; first-line: 292; gutter: true; title: ; notranslate" title="">for(int iob = 0; iob &lt; num_objects; iob++)     {         KX_GameObject* gobj = (KX_GameObject*)oblist-&gt;GetValue(iob);
+        STR_String name = gobj-&gt;GetName();
+        //printf(&quot;obj: %s\n&quot;, name.Ptr());</pre>
+<p>So we have our game object <strong>gobj</strong>, and we can print out it&#8217;s name to give us an idea of whats going on (of course this will print out the name for all objects every frame, so you only want to do this while debugging and figuring things out)</p>
+<h2>Collisions</h2>
+<p>Now let&#8217;s see how we interact with collider objects:</p>
+<pre class="brush: cpp; first-line: 300; gutter: true; title: ; notranslate" title="">//Check if object is a collider
+bool collider = false;
+CBoolValue* boolprop = (CBoolValue*)gobj-&gt;GetProperty(&quot;collider&quot;);
+if(boolprop)
+{
+    //printf(&quot;obj: %s, collider: %d\n&quot;, name.Ptr(), boolprop-&gt;GetBool());
+    collider = boolprop-&gt;GetBool();
+    if(collider)
+    {
+        getTriangles(gobj, triangles);
+    }
+}</pre>
+<p>Here we get the boolean value of our <strong>collider</strong> game property, and if it is true we populate the triangles vector with the triangle faces of the game object by calling the <span class="simple_code">getTriangles</span> function:</p>
+<pre class="brush: cpp; first-line: 486; gutter: true; title: ; notranslate" title="">int getTriangles(KX_GameObject* gobj, std::vector &amp;triangles)
+{
+    //get the mesh and the derived mesh so we can get faces/verts
+    RAS_MeshObject* meshobj = gobj-&gt;GetMesh(0);
+    Mesh* mesh = meshobj-&gt;GetMesh();
+    DerivedMesh *dm = CDDM_from_mesh(mesh, NULL);
+
+    //for now we are assuming triangles
+    int n_faces = dm-&gt;getNumFaces(dm);
+    MFace* face = dm-&gt;getFaceArray(dm);
+
+    MT_Matrix3x3 grot = gobj-&gt;NodeGetWorldOrientation();
+    MT_Point3 gp = gobj-&gt;NodeGetWorldPosition();
+
+    Triangle tri;
+    MT_Vector3 fv, ftv;
+
+    for(int i = 0; i &lt; n_faces; i++)
+    {
+        getTriangle(face[i], grot, gp, dm, tri);
+        triangles.push_back(tri);
+    }
+    return triangles.size();
+}</pre>
+<p>This function loops over all of the faces in the derived mesh and gets the individual Triangle struct for each one. These triangles are in global coordinates (rather than local to the object) which we accomplish by applying the global transformation (rotation and translation) to them in the <span class="simple_code">getTriangle</span> function:</p>
+<pre class="brush: cpp; first-line: 515; gutter: true; title: ; notranslate" title="">void getTriangle(MFace&amp; face, MT_Matrix3x3&amp; grot, MT_Point3&amp; gp, DerivedMesh* dm, Triangle&amp; tri)
+{
+    MT_Vector3 fv, ftv;
+    float mv[3];
+
+    dm-&gt;getVertCo(dm, face.v1, mv);
+    //rotate and translate by global rotation/translation to get global coords
+    fv = MT_Vector3(mv[0], mv[1], mv[2]);
+    ftv = grot*fv + gp;
+    tri.verts[0] = float4(ftv.x(), ftv.y(), ftv.z(), 1);
+
+    dm-&gt;getVertCo(dm, face.v2, mv);
+    fv = MT_Vector3(mv[0], mv[1], mv[2]);
+    ftv = grot*fv + gp;
+    tri.verts[1] = float4(ftv.x(), ftv.y(), ftv.z(), 1);
+
+    dm-&gt;getVertCo(dm, face.v3, mv);
+    fv = MT_Vector3(mv[0], mv[1], mv[2]);
+    ftv = grot*fv + gp;
+    tri.verts[2] = float4(ftv.x(), ftv.y(), ftv.z(), 1);
+
+    float4 e1 = float4(tri.verts[1].x - tri.verts[0].x, tri.verts[1].y - tri.verts[0].y, tri.verts[1].z - tri.verts[0].z, 0);
+    float4 e2 = float4(tri.verts[2].x - tri.verts[0].x, tri.verts[2].y - tri.verts[0].y, tri.verts[2].z - tri.verts[0].z, 0);
+    tri.normal = normalize(cross(e1, e2));
+}</pre>
+<p>Here we simply get the vertex coordinates of the face and transform them with the rotation matrix and translation vector. This is nice and easy because the <a href="https://github.com/enjalot/BGERTPS/tree/master/blender/intern/moto" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">moto</a> library provides operator overloading for doing matrix and vector operations. Finally we compute the normal using normalize and cross functions defined in the RTPS <a href="https://github.com/enjalot/EnjaParticles/blob/master/rtps/rtpslib/structs.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">library</a>.</p>
+<p>For the collisions to happen we need to tell our system about it, which we do after we are done with looping over objects and right before the <span class="simple_code">update</span> call:</p>
+<pre class="brush: cpp; first-line: 342; gutter: true; title: ; notranslate" title="">if(triangles.size() &gt; 0 &amp;&amp; rtps-&gt;settings.tri_collision)
+{
+    rtps-&gt;system-&gt;loadTriangles(triangles);
+}</pre>
+<h2>Emitters</h2>
+<p>We jumped ahead a little bit, before we get to the <span class="simple_code">update</span> call and we are done with checking for the <strong>collider</strong> property, we do emitters by checking if an object has a <strong>num</strong> property:</p>
+<pre class="brush: cpp; first-line: 314; gutter: true; title: ; notranslate" title="">//Check if object is an emitter
+//for now we are just doing boxes
+CIntValue* intprop = (CIntValue*)gobj-&gt;GetProperty(&quot;num&quot;);
+if(intprop)
+{
+    //get the number of particles in this emitter
+    int num = (int)intprop-&gt;GetInt();
+    if (num == 0) { continue;} //out of particles
+
+    int nn = makeEmitter(num, gobj);
+    if( nn == 0) {continue;}
+}</pre>
+<p>After we get the value of <strong>num</strong> we first we make sure we aren&#8217;t trying to emit 0 particles. The <span class="simple_code">makeEmitter</span> function is defined on line 435 but has a bunch of extra dev stuff, with the important part being the following lines:</p>
+<pre class="brush: cpp; first-line: 476; gutter: true; title: ; notranslate" title="">nn = num;
+CIntValue *numprop = new CIntValue(0);
+gobj-&gt;SetProperty(&quot;num&quot;, numprop);
+return nn;</pre>
+<p>Which simply sets the <strong>num</strong> property to 0 and returns the original value. This is more complicated than it needs to be because the <span class="simple_code">makeEmitter</span> function will add more capabilities in the future such as turning an object into a &#8220;hose&#8221; to spray particles.  This effect can be simulated for now by setting the <strong>num</strong> property to the number of particles you would like to emit over and over again (because every frame that the num property has a value greater than 0, that many particles will be emitted and then it will be set back to 0).<br />
+Finally we get the object&#8217;s bounding box in order to call the API function for adding a box of particles to our system.</p>
+<pre class="brush: cpp; first-line: 326; gutter: true; title: ; notranslate" title="">    MT_Point3 bbpts[8];
+    gobj-&gt;GetSGNode()-&gt;getAABBox(bbpts);
+    float4 min = float4(bbpts[0].x(), bbpts[0].y(), bbpts[0].z(), 0);
+    float4 max = float4(bbpts[7].x(), bbpts[7].y(), bbpts[7].z(), 0);
+    rtps-&gt;system-&gt;addBox(nn, min, max, false); </pre>
+<h2>Conclusion</h2>
+<p>Whew, so I&#8217;ve taken you through just about all the changes I&#8217;ve made to the Blender source code. The one thing I haven&#8217;t really touched on is the includes I added in <a href="https://github.com/enjalot/BGERTPS/blob/master/blender/source/gameengine/Converter/BL_ModifierDeformer.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">BL_ModifierDeformer.cpp</a> (lines 59-71) some of which I am hoping for insight on, because it may not be good to include a KX_* header in a BL_* file. Other than that I added <span class="simple_code">#include &#8220;RTPS.h&#8221;</span> or <span class="simple_code">#include &#8220;timege.h&#8221;</span> to some of the various files I&#8217;ve gone over. The MODIFIED_FILES document should cover all the files I&#8217;ve changed, including CMake related changes. I try to keep my git mirror up-to-date with the <a href="http://gitorious.org/blender" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://gitorious.org']);">blender git mirror</a> so one could also use git or svn tools to see my exact changes.</p>
+<p>Again, I hope this detailed breakdown will be helpful to someone! I&#8217;d like to thank <a href="http://mogurijin.wordpress.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mogurijin.wordpress.com']);">Moguri</a>, jbakker and dfelinto from the Blender community for their invaluable help so far. As the material from this post will most likely end up in my Master&#8217;s thesis, I&#8217;d like to shout out to my advisor <a href="http://people.sc.fsu.edu/~gerlebacher/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://people.sc.fsu.edu']);">Gordon Erlebacher</a> my colleague <a href="http://rbfzone.blogspot.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://rbfzone.blogspot.com']);">Evan Bollig</a> (for all kinds of CMake and programming help) and the <a href="http://www.facebook.com/FSUSciComp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.facebook.com']);">Department of Scientific Computing</a>!</p>
+<p>If you made it this far, we got love for the same thing, so holler when you see me on IRC (enjalot) or gtalk :D</p>
+<div class="bottomcontainerBox" style="background-color:#FFFFFF;">
+			<div style="float:left; width:85px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fenja.org%2F2011%2F03%2F01%2Fhijacking-the-bge-for-fun-and-particles%2F&amp;layout=button_count&amp;show_faces=false&amp;width=85&amp;action=like&amp;font=verdana&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:85px; height:21px;"></iframe></div>
+			<div style="float:left; width:80px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<g:plusone size="medium" href="http://enja.org/2011/03/01/hijacking-the-bge-for-fun-and-particles/"></g:plusone>
+			</div>
+			<div style="float:left; width:95px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<a href="http://twitter.com/share" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);" class="twitter-share-button" data-url="http://enja.org/2011/03/01/hijacking-the-bge-for-fun-and-particles/"  data-text="Hijacking the BGE for Fun and Particles" data-count="horizontal" data-via="enjalot"></a>
+			</div>			
+			</div><div style="clear:both"></div><div style="padding-bottom:4px;"></div>											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+						This entry was posted in <a href="../../../../../category/blender/index.html" title="View all posts in blender" rel="category tag">blender</a>, <a href="../../../../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>. Bookmark the <a href="../index.html" title="Permalink to Hijacking the BGE for Fun and Particles" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="../../../../02/22/adventures-in-pyopencl-part-1-getting-started-with-python/index.html" rel="prev"><span class="meta-nav">&larr;</span> Adventures in PyOpenCL: Part 1 Getting Started with Python</a></div>
+					<div class="nav-next"><a href="../../../09/a-python-function-timing-decorator/index.html" rel="next">A Python Function Timing Decorator <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">2 Responses to <em>Hijacking the BGE for Fun and Particles</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-684">
+		<div id="comment-684">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/83acfb9122421230def4b3ea0cff542c?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Lyy</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-684">
+			March 4, 2011 at 5:51 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thanks!!! *&#8212;*</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-728">
+		<div id="comment-728">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/e8340a8f57b2ba2f79acceea78cd729a?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Krystof</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-728">
+			March 25, 2011 at 1:41 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I&#8217;ve only had a quick read through, and I don&#8217;t think I&#8217;ll be attempting anything of the above however, I just want to let you know that what you&#8217;re doing is fabulous! Absolutely fucking beautiful!<br />
+Nice one mate.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+			</ol>
+
+
+
+								
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-3" class="widget-container widget_search"><form role="search" method="get" id="searchform" action="../../../../../index.html" >
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" value="" name="s" id="s" />
+	<input type="submit" id="searchsubmit" value="Search" />
+	</div>
+	</form></li><li id="nav_menu-3" class="widget-container widget_nav_menu"><div class="menu-navigation-container"><ul id="menu-navigation-1" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../../index.html" >Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../../about/index.html" >About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../../d3/index.html" >d3</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../../blender/index.html" >Blender</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../../opencl/index.html" >OpenCL</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div></li><li id="text-4" class="widget-container widget_text">			<div class="textwidget"><a href="https://twitter.com/#!/enjalot" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=twitter.com"> @enjalot</a>
+<br/>
+<a href="https://plus.google.com/112153365286725889851/posts" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://plus.google.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=plus.google.com"> +Ian Johnson</a></div>
+		</li><li id="categories-414549122" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-25"><a href="../../../../../category/tutorial/advcl/index.html" title="Adventures in OpenCL">advcl</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="../../../../../category/tutorial/advd3-tutorial/index.html" title="View all posts filed under advd3">advd3</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="../../../../../category/android/index.html" title="View all posts filed under android">android</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="../../../../../category/blender/index.html" title="View all posts filed under blender">blender</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="../../../../../category/code/index.html" title="View all posts filed under code">code</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="../../../../../category/community/index.html" title="View all posts filed under community">community</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="../../../../../category/culture/index.html" title="View all posts filed under culture">culture</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="../../../../../category/d3/index.html" title="View all posts filed under d3">d3</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="../../../../../category/life/index.html" title="View all posts filed under life">life</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="../../../../../category/math/index.html" title="View all posts filed under math">math</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="../../../../../category/misc/index.html" title="View all posts filed under misc">misc</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="../../../../../category/music/index.html" title="View all posts filed under music">music</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="../../../../../category/news/index.html" title="View all posts filed under news">news</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="../../../../../category/opencl/index.html" title="View all posts filed under opencl">opencl</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="../../../../../category/processingjs/index.html" title="View all posts filed under processingjs">processingjs</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="../../../../../category/python/index.html" title="View all posts filed under python">python</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="../../../../../category/race/index.html" title="View all posts filed under race">race</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="../../../../../category/school/index.html" title="View all posts filed under school">school</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="../../../../../category/tech/index.html" title="View all posts filed under tech">tech</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="../../../../../category/travel/index.html" title="View all posts filed under travel">travel</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="../../../../../category/tutorial/index.html" title="View all posts filed under tutorial">tutorial</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="../../../../../category/uncategorized/index.html" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="../../../../../category/wtf/index.html" title="View all posts filed under wtf">wtf</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="../../../../../category/中�%2596%2587/index.html" title="View all posts filed under 中文">中文</a>
+</li>
+		</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="../../../../../index.html" title="enj" rel="home">
+					enj				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+<script type='text/javascript' src='http://d3a9pqeyre6pa0.cloudfront.net/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?aa&#038;ver=3.3.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../wp-content/plugins/jetpack/modules/wpgroho.js%3Fver=3.3.2'></script>
+	<div style="display:none">
+	<div class="grofile-hash-map-83acfb9122421230def4b3ea0cff542c">
+	</div>
+	<div class="grofile-hash-map-e8340a8f57b2ba2f79acceea78cd729a">
+	</div>
+	</div>
+<script type='text/javascript' src='../../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js%3Fver=3.0.83c'></script>
+<script type='text/javascript' src='../../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js%3Fver=3.0.83c'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://enja.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://enja.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['gutter'] = false;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = true;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://apis.google.com/js/plusone.js?ver=3.3.2'></script>
+
+	<script src="http://stats.wordpress.com/e-201219.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:1.3',blog:'4037422',post:'441'});
+	var load_cmc = function(){linktracker_init(4037422,441,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script></body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 1250/1357 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:55:48 -->

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<title>Adventures in OpenCL Part 3: Constant Memory Structs | enj</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/themes/twentyten-child/style.css" />
+<link rel="pingback" href="../../../../xmlrpc.php" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Feed" href="../../../../enjaorg" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+				
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.2.3 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-16564388-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	//]]></script>
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Adventures in OpenCL Part 3: Constant Memory Structs Comments Feed" href="feed/index.html" />
+<link rel='stylesheet' id='tfg_style-css'  href='../../../../wp-content/plugins/twitter-facebook-google-plusone-share/tfg_style.css%3Fver=3.3.2.css' type='text/css' media='all' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc.php%3Frsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://enja.org/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Adventures in PyOpenCL: Part 2, Particles with PyOpenGL' href='../../22/adventures-in-pyopencl-part-2-particles-with-pyopengl/index.html' />
+<link rel='next' title='Particles in BGE: Improved Code, Collisions and Hose' href='../../31/particles-in-bge-improved-code-collisions-and-hose/index.html' />
+<meta name="generator" content="WordPress 3.3.2" />
+<link rel='shortlink' href='http://wp.me/pgWjI-8p' />
+
+<!-- All in One SEO Pack 1.6.14.2 by Michael Torbert of Semper Fi Web Design[82,147] -->
+<meta name="description" content="Today we make a brief stop on our journey to examine a technique which has proven useful but not straightforward; passing in a structure as a parameter to an" />
+<meta name="keywords" content="advcl,code,python,tutorial" />
+<link rel="canonical" href="index.html" />
+<!-- /all in one seo pack -->
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+</head>
+
+<body class="single single-post postid-521 single-format-standard">
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="../../../../index.html" title="enj" rel="home">enj</a>
+					</span>
+				</div>
+				<div id="site-description">casin&#039; the joint since &#039;85</div>
+
+										<img src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/cropped-turtle_nom1.jpg" width="940" height="198" alt="" />
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="index.html#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu-header"><ul id="menu-navigation" class="menu"><li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../index.html" >Home</a></li>
+<li id="menu-item-318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../about/index.html" >About</a></li>
+<li id="menu-item-694" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../d3/index.html" >d3</a></li>
+<li id="menu-item-316" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../blender/index.html" >Blender</a></li>
+<li id="menu-item-315" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../opencl/index.html" >OpenCL</a></li>
+<li id="menu-item-317" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div>			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="../../22/adventures-in-pyopencl-part-2-particles-with-pyopengl/index.html" rel="prev"><span class="meta-nav">&larr;</span> Adventures in PyOpenCL: Part 2, Particles with PyOpenGL</a></div>
+					<div class="nav-next"><a href="../../31/particles-in-bge-improved-code-collisions-and-hose/index.html" rel="next">Particles in BGE: Improved Code, Collisions and Hose <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-521" class="post-521 post type-post status-publish format-standard hentry category-advcl category-code category-python category-tutorial">
+					<h1 class="entry-title">Adventures in OpenCL Part 3: Constant Memory Structs</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="index.html" title="4:46 pm" rel="bookmark"><span class="entry-date">March 30, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<p>Today we make a brief stop on our journey to examine a technique which has proven useful but not straightforward; passing in a structure as a parameter to an <a href="http://www.khronos.org/registry/cl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">OpenCL</a> kernel as <span class="simple_code">__constant</span> memory. Why would you want to do this? Allow me to spin you <a href="../../../../category/blender/index.html" >a tale</a> of 8 kernels which share an assortment of around <a href="https://github.com/enjalot/EnjaParticles/blob/rtps/rtps/rtpslib/system/sph/cl_src/cl_structs.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">30 parameters</a> many of which are either configurable by the user or can change at runtime based on user input. Throw in the fact that a complex program like this requires plenty of debugging and who knows which parameters will end up at the finish line and which will be left by the wayside. So rather than specify an assortment of variables to pass to each kernel, we define a structure to hold our colorful collection of floats and ints and just throw the whole bundle at each kernel. This is of course convenient for us programmers, at least once structs in OpenCL make some sense to us, and as a bonus it turns out to be a good idea in terms of memory usage as well. So lets get into it!</p>
+<h3>Grab the code</h3>
+<p>You can follow along in <a href="https://github.com/enjalot/adventures_in_opencl/tree/master/part3" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">C++</a> or <a href="https://github.com/enjalot/adventures_in_opencl/tree/master/python/part3" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">Python</a></p>
+<p>This is just a slight adaption of my Part 1 (<a href="../../../../2010/07/20/adventures-in-opencl-part-1-5-cpp-bindings/index.html" >C++</a>, <a href="../../../02/22/adventures-in-pyopencl-part-1-getting-started-with-python/index.html" >Python</a>) tutorial code, so check those out if you need help getting started.</p>
+<p>So lets take a look at what we want to achieve in OpenCL:</p>
+<pre class="brush: cpp; gutter: true; title: ; notranslate" title="">
+typedef struct Params
+{
+    float A;
+    float B;
+    int C;
+} Params;
+
+__kernel void part3(__global const float *a,
+                  __global const float *b,
+                  __global float *c,
+                  __constant struct Params* test
+                  )
+{
+    int gid = get_global_id(0);
+    c[gid] = test-&gt;A * a[gid] + test-&gt;B * b[gid] + test-&gt;C;
+}
+</pre>
+<p>You can see on line 16 that all we are doing here is a simple sum, but multiplying each number by a (float) parameter and adding an (int) parameter. You may already have noticed something weird going on in line 12, why is the Params struct a pointer? Excellent question. Even though we only want one structure, we still need to pass it in as a buffer to appease OpenCL (NOTE: This is a problem we&#8217;ve come across, we&#8217;d love to see sample code which allowed straightforward passing of a struct). So it&#8217;s just going to pass a bunch of binary data to the kernel, and then the kernel will have to structure the data when it gets there. And as far as I can tell the only way to get a buffer into a kernel is by passing it in with the pointer syntax you see on line 12 here.<br />
+Passing a struct as a buffer is not much different from passing a regular array in <a href="https://github.com/enjalot/adventures_in_opencl/blob/master/part3/part3.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">C++</a>:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">
+Params params;
+params.A = .5f;
+params.B = 10.0f;
+params.C = 3;
+cl_params = cl::Buffer(context, CL_MEM_READ_ONLY, sizeof(Params), NULL, &amp;err);
+err = queue.enqueueWriteBuffer(cl_params, CL_TRUE, 0, sizeof(Params), &amp;params, NULL, &amp;event);
+</pre>
+<p>In <a href="https://github.com/enjalot/adventures_in_opencl/blob/master/python/part3/part3.py" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">Python</a> (more on the <a href="http://docs.python.org/library/struct.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://docs.python.org']);">struct module</a>)</p>
+<pre class="brush: python; title: ; notranslate" title="">
+params = struct.pack('ffffi', .5, 10., 0., 0., 3)
+params_buf = cl.Buffer(ctx, mf.READ_ONLY, len(params))
+cl.enqueue_write_buffer(queue, params_buf, params).wait()
+</pre>
+<p>And that&#8217;s all it takes to have access to our structure in OpenCL!</p>
+<p><strong>Update: Please see David Garcias comment below for a correction of this section. A quick experiment showed that it&#8217;s not necessary to have padding in this case. I still find this a confusing issue and it would be nice to see some self-contained example code showing cases where alignment breaks.</strong><br />
+<em><br />
+So about that <span class="simple_code">float padding[2];</span> in the struct definition. This is because of memory <em>alignment</em> in OpenCL. The best explanation I&#8217;ve seen so far is by <a href="http://forums.amd.com/forum/messageview.cfm?catid=390&amp;threadid=122209&amp;forumid=9 " onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://forums.amd.com']);">AndreasStahl</a> which I will briefly summarize in relation to the struct above.<br />
+When interpreting a struct, OpenCL accesses the memory in blocks of 16 bytes, which is the same as 4 floats (each 4 bytes). So in our example if we did not have the padding, we would not be able to access our int because opencl would have interpreted it as the 3rd float out of the first 16bytes. This can get even more complicated if you have an array of structs, because then the size of you&#8217;re struct will need to be a multiple of 16, as explained in the linked forum post.<br />
+</em></p>
+<p>So lets talk a little bit about <span class="simple_code">__constant</span> memory. On a GPU this memory is read-only, cached and usually around 64kb per multiprocessor (you can query this, for an example look to the CLInfo example in the <a href="http://developer.amd.com/gpu/AMDAPPSDK/Pages/default.aspx" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://developer.amd.com']);">AMD SDK</a> and oclDeviceQuery in the <a href="http://developer.download.nvidia.com/compute/opencl/sdk/website/samples.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://developer.download.nvidia.com']);">NVIDIA SDK</a>). It is closer to the processor than <span class="simple_code">__global</span> and much faster to access, while slightly slower than <span class="simple_code">__local</span> memory, so if you are passing in a ton of them you may be eating into the precious few (48) kilobytes you have, so moving them to <span class="simple_code">__constant</span> memory can free up a little space as well.</p>
+<p>Additionally, at least on some implementations there seems to be an <del datetime="2011-04-01T21:08:53+00:00">arbitrary</del> limit of 9 constant (non-buffer) parameters, which using a struct will help you avoid. (NOTE: as David points out below, the limit is not arbitrary. It can be queried through clGetDeviceInfo() and CL_DEVICE_MAX_CONSTANT_ARGS)</p>
+<p>What about other people&#8217;s approaches? What kind of trouble have you run into with structs? kernel parameters?</p>
+<div class="bottomcontainerBox" style="background-color:#FFFFFF;">
+			<div style="float:left; width:85px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fenja.org%2F2011%2F03%2F30%2Fadventures-in-opencl-part-3-constant-memory-structs%2F&amp;layout=button_count&amp;show_faces=false&amp;width=85&amp;action=like&amp;font=verdana&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:85px; height:21px;"></iframe></div>
+			<div style="float:left; width:80px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<g:plusone size="medium" href="http://enja.org/2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/"></g:plusone>
+			</div>
+			<div style="float:left; width:95px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<a href="http://twitter.com/share" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);" class="twitter-share-button" data-url="http://enja.org/2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/"  data-text="Adventures in OpenCL Part 3: Constant Memory Structs" data-count="horizontal" data-via="enjalot"></a>
+			</div>			
+			</div><div style="clear:both"></div><div style="padding-bottom:4px;"></div>											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+						This entry was posted in <a href="../../../../category/tutorial/advcl/index.html" title="View all posts in advcl" rel="category tag">advcl</a>, <a href="../../../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../../category/python/index.html" title="View all posts in python" rel="category tag">python</a>, <a href="../../../../category/tutorial/index.html" title="View all posts in tutorial" rel="category tag">tutorial</a>. Bookmark the <a href="index.html" title="Permalink to Adventures in OpenCL Part 3: Constant Memory Structs" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="../../22/adventures-in-pyopencl-part-2-particles-with-pyopengl/index.html" rel="prev"><span class="meta-nav">&larr;</span> Adventures in PyOpenCL: Part 2, Particles with PyOpenGL</a></div>
+					<div class="nav-next"><a href="../../31/particles-in-bge-improved-code-collisions-and-hose/index.html" rel="next">Particles in BGE: Improved Code, Collisions and Hose <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">7 Responses to <em>Adventures in OpenCL Part 3: Constant Memory Structs</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-753">
+		<div id="comment-753">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/357a20e8c56e69d6f9734d23ef9517e8?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Bunt</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-753">
+			March 30, 2011 at 10:14 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hey enja great tutorials.  Is there any reason why you switched from Python back to C++ though, did you find any particular drawbacks in working with Python and PyOpenCL?  Cheers, Bunt, BVI</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="li-comment-754">
+		<div id="comment-754">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-754">
+			March 30, 2011 at 10:38 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hey Bunt, I didn&#8217;t switch, this one has the same code in both languages. My main project is still in C++ so I will have to focus on it. I still prefer PyOpenCL for development though, and I&#8217;ve been playing in it recently. From now on I will probably be doing my tutorials in both languages.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-761">
+		<div id="comment-761">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/090f54f0afb9d6f34f1a44264826a0ab?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="http://www.khronos.org/message_boards/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.khronos.org']);"  rel='external nofollow' class='url'>David Garcia</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-761">
+			March 31, 2011 at 10:20 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I believe there are some inaccuracies in the article.</p>
+<p><cite>Even though we only want one structure, we still need to pass it in as a buffer to appease OpenCL.</cite></p>
+<p>I don&#8217;t think there&#8217;s anything in the OpenCL spec preventing you to pass a struct as a kernel argument. For instance, section 5.7.2 lists how to pass different types of arguments to clSetKernelArg. After listing all built-in types and pointers, it says <i>&#8220;For all other kernel arguments, the arg_value entry must be a pointer to the actual data to be used as argument value.&#8221;</i> Additionally, section 6.8-p reads <i>&#8220;Arguments to __kernel functions that are declared to be a struct do not allow OpenCL objects to be passed as elements of the struct&#8221;</i>, which implies that it&#8217;s okay to pass structs as kernel arguments.</p>
+<p><cite>When interpreting a struct, OpenCL accesses the memory in blocks of 16 bytes, which is the same as 4 floats (each 4 bytes).</cite></p>
+<p>That is not correct either. What OpenCL requires is that each struct member must be naturally aligned. For example, a float variable, since it has a size of 4 bytes, must be aligned to a 4-byte boundary. Your example struct could be defined just fine as</p>
+<blockquote><p>
+typedef struct Params<br />
+{<br />
+    float A;<br />
+    float B;<br />
+    int C;<br />
+} Params;
+</p></blockquote>
+<p>Keep in mind that, in accordance to C99 rules (of which OpenCL C is a derivative), compilers are free to insert padding between struct members and at the end of the struct. It wouldn&#8217;t be surprising at all if the particular compiler you are using has decided to pad the struct size to 16 bytes.</p>
+<p>If you want to pass structs to kernels it makes sense to specify alignment attributes, as explained in section 6.10.1 rather than attempting to guess what the particular OpenCL compiler you have installed is doing. Inserting hand-crafted padding members means that your program may not work correctly in a different computer.</p>
+<p><cite>Additionally, at least on some implementations there seems to be an arbitrary limit of 9 constant (non-buffer) parameters, which using a struct will help you avoid.</cite></p>
+<p>This limit is not arbitrary. It can be queried through clGetDeviceInfo() and CL_DEVICE_MAX_CONSTANT_ARGS.</p>
+<p>If you have any other doubts or questions about the OpenCL standard, please refer to the <a href="http://www.khronos.org/message_boards/" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','http://www.khronos.org']);" rel="nofollow">Khronos message boards</a> where people will be happy to help.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="li-comment-766">
+		<div id="comment-766">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-766">
+			April 1, 2011 at 5:07 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hello David,<br />
+Thank&#8217;s for pointing these out, I will revise my post with some of your corrections, after making sure I have a grasp on my misunderstandings.<br />
+The alignment issue is certainly a case of me not having the whole story, I have been telling the compiler to align the structs in my project&#8217;s code to 16 bytes (with __attribute__(alligned(16)) keyword, or #pragma pack(16) on windows). I read because of the fact that compilers can arbitrarily add padding it was a good idea to specify. I left that out of the tutorial, but perhaps I should put it back after double checking this. It helps me to try it out for myself.</p>
+<p>As far as passing in a struct not as an array, I have tried many different combinations to no avail. If someone can give me an example which works I will gladly update the tutorial but we&#8217;ve had to play this trick finding no alternative.</p>
+<p>Also thanks for pointing out the constant args device info, that&#8217;s good to know. 9 still seems rather small.</p>
+<p>Thanks again<br />
+Ian</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-767">
+		<div id="comment-767">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-767">
+			April 1, 2011 at 5:38 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>@David<br />
+I just did a quick test, if I don&#8217;t have padding it works whether I specify the alignment or not, so I will remove that part from the post until I find a use for it.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-770">
+		<div id="comment-770">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/090f54f0afb9d6f34f1a44264826a0ab?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="http://www.khronos.org/message_boards/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.khronos.org']);"  rel='external nofollow' class='url'>David Garcia</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-770">
+			April 1, 2011 at 7:21 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p><cite>As far as passing in a struct not as an array, I have tried many different combinations to no avail.</cite></p>
+<p>I looked at the OpenCL conformance tests and couldn&#8217;t find any place that tests that feature. It&#8217;s possible that it&#8217;s broken in some implementations :(</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-1893">
+		<div id="comment-1893">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/1810f5a87de06a151e9e63e01c1c4c9d?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Emanuel Ey</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-1893">
+			April 17, 2012 at 6:26 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>So i have been playing around with passing structures to OpenCL kernels as well, and I&#8217;ve actually been able to pass structs directly (i.e., without a pointer).<br />
+I did this in C, but it should be easy to adapt for C++.</p>
+<p>Here are the most relevant points from the host code:<br />
+<code><br />
+typedef struct{<br />
+    cl_uchar    cDist;<br />
+    cl_uchar    cClass<br />
+    float       y[N_POINTS_DEPTH];<br />
+    float       x[N_POINTS_RANGE];<br />
+    float       c1D[N_POINTS_DEPTH];<br />
+}myStruct_t;<br />
+</code></p>
+<p>The test kernel takes only 2 arguments, the struct as for input, and another struct of the same type to hold some test data computed from the input. Here&#8217;s the host-side memory allocation:<br />
+<code><br />
+//instantiate a struct for input:<br />
+myStruct_t a;<br />
+a.y[0] = 1.4;<br />
+a.y[1] = 2.5;</p>
+<p>//allocate memory for output:<br />
+cl_mem out = clCreateBuffer(context, CL_MEM_READ_WRITE, sizeof(myStruct_t), NULL, &amp;errNum);<br />
+    if(errNum != CL_SUCCESS){<br />
+        fatal(clError(errNum));<br />
+    }else{<br />
+        DEBUG(2, "Successfully allocated memory for output.\n");<br />
+    }<br />
+</code></p>
+<p>Then, set the kernel args:<br />
+<code><br />
+    errNum = clSetKernelArg(kernel, 0, sizeof(myStruct_t), &amp;a);<br />
+    errNum |= clSetKernelArg(kernel, 1, sizeof(cl_mem), &amp;out);<br />
+    if (errNum != CL_SUCCESS){<br />
+        fprintf(stderr, "Error setting kernel arguments.\n");<br />
+        fatal(clError(errNum));<br />
+        exit(EXIT_FAILURE);<br />
+    }else{<br />
+        DEBUG(2, "Successfully defined kernel arguments.\n");<br />
+    }<br />
+</code></p>
+<p>The kernel:<br />
+<code><br />
+__kernel void testStructs( private myStruct_t soundIn,<br />
+                                               global myStruct_t *result){<br />
+    local myStruct_t      ssp;</p>
+<p>    ssp.y[0] = 2*soundIn.y[0];<br />
+    ssp.y[1] = 2*soundIn.y[1];</p>
+<p>    *result = ssp;<br />
+}<br />
+</code></p>
+<p>So from my tests i figured out that apparently you cannot actually use the &#8216;constant&#8217; qualifier when passing in a struct, it has to be &#8216;private&#8217;. This is ok for me, since &#8216;constant&#8217; is a special type of &#8216;global&#8217; and reading it comes at a performance penalty anyway. To me it makes sense to have a settings struct in the fastest available memory.<br />
+I tested this on an Nvidia GPU with OpenCL 1.1 and on a Intel Ivy Bridge CPU also with a OpenCL 1.1 implementation.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+			</ol>
+
+
+
+								
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-3" class="widget-container widget_search"><form role="search" method="get" id="searchform" action="../../../../index.html" >
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" value="" name="s" id="s" />
+	<input type="submit" id="searchsubmit" value="Search" />
+	</div>
+	</form></li><li id="nav_menu-3" class="widget-container widget_nav_menu"><div class="menu-navigation-container"><ul id="menu-navigation-1" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../index.html" >Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../about/index.html" >About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../d3/index.html" >d3</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../blender/index.html" >Blender</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../opencl/index.html" >OpenCL</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div></li><li id="text-4" class="widget-container widget_text">			<div class="textwidget"><a href="https://twitter.com/#!/enjalot" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=twitter.com"> @enjalot</a>
+<br/>
+<a href="https://plus.google.com/112153365286725889851/posts" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://plus.google.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=plus.google.com"> +Ian Johnson</a></div>
+		</li><li id="categories-414549122" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-25"><a href="../../../../category/tutorial/advcl/index.html" title="Adventures in OpenCL">advcl</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="../../../../category/tutorial/advd3-tutorial/index.html" title="View all posts filed under advd3">advd3</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="../../../../category/android/index.html" title="View all posts filed under android">android</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="../../../../category/blender/index.html" title="View all posts filed under blender">blender</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="../../../../category/code/index.html" title="View all posts filed under code">code</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="../../../../category/community/index.html" title="View all posts filed under community">community</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="../../../../category/culture/index.html" title="View all posts filed under culture">culture</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="../../../../category/d3/index.html" title="View all posts filed under d3">d3</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="../../../../category/life/index.html" title="View all posts filed under life">life</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="../../../../category/math/index.html" title="View all posts filed under math">math</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="../../../../category/misc/index.html" title="View all posts filed under misc">misc</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="../../../../category/music/index.html" title="View all posts filed under music">music</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="../../../../category/news/index.html" title="View all posts filed under news">news</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="../../../../category/opencl/index.html" title="View all posts filed under opencl">opencl</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="../../../../category/processingjs/index.html" title="View all posts filed under processingjs">processingjs</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="../../../../category/python/index.html" title="View all posts filed under python">python</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="../../../../category/race/index.html" title="View all posts filed under race">race</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="../../../../category/school/index.html" title="View all posts filed under school">school</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="../../../../category/tech/index.html" title="View all posts filed under tech">tech</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="../../../../category/travel/index.html" title="View all posts filed under travel">travel</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="../../../../category/tutorial/index.html" title="View all posts filed under tutorial">tutorial</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="../../../../category/uncategorized/index.html" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="../../../../category/wtf/index.html" title="View all posts filed under wtf">wtf</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="../../../../category/中�%2596%2587/index.html" title="View all posts filed under 中文">中文</a>
+</li>
+		</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="../../../../index.html" title="enj" rel="home">
+					enj				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+<script type='text/javascript' src='http://d3a9pqeyre6pa0.cloudfront.net/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?aa&#038;ver=3.3.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/plugins/jetpack/modules/wpgroho.js%3Fver=3.3.2'></script>
+	<div style="display:none">
+	<div class="grofile-hash-map-357a20e8c56e69d6f9734d23ef9517e8">
+	</div>
+	<div class="grofile-hash-map-89db4f3e0cfa7752306bede98888b898">
+	</div>
+	<div class="grofile-hash-map-090f54f0afb9d6f34f1a44264826a0ab">
+	</div>
+	<div class="grofile-hash-map-1810f5a87de06a151e9e63e01c1c4c9d">
+	</div>
+	</div>
+<script type='text/javascript' src='../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js%3Fver=3.0.83c'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js%3Fver=3.0.83c'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPython.js%3Fver=3.0.83c'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://enja.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://enja.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['gutter'] = false;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = true;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://apis.google.com/js/plusone.js?ver=3.3.2'></script>
+
+	<script src="http://stats.wordpress.com/e-201219.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:1.3',blog:'4037422',post:'521'});
+	var load_cmc = function(){linktracker_init(4037422,521,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script></body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 1251/1362 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:42:39 -->

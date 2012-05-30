@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<title>enja - Part 4</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/themes/twentyten-child/style.css" />
+<link rel="pingback" href="../../xmlrpc.php" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Feed" href="../../enjaorg" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Comments Feed" href="../../comments/feed/index.html" />
+				
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.2.3 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-16564388-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	//]]></script>
+<link rel='stylesheet' id='tfg_style-css'  href='../../wp-content/plugins/twitter-facebook-google-plusone-share/tfg_style.css%3Fver=3.3.2.css' type='text/css' media='all' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php%3Frsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://enja.org/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 3.3.2" />
+<link rel='shortlink' href='http://wp.me/gWjI' />
+
+<!-- All in One SEO Pack 1.6.14.2 by Michael Torbert of Semper Fi Web Design[82,140] -->
+<link rel="canonical" href="index.html" />
+<!-- /all in one seo pack -->
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+</head>
+
+<body class="home blog paged paged-4">
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<h1 id="site-title">
+					<span>
+						<a href="../../index.html" title="enj" rel="home">enj</a>
+					</span>
+				</h1>
+				<div id="site-description">casin&#039; the joint since &#039;85</div>
+
+										<img src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/cropped-turtle_nom1.jpg" width="940" height="198" alt="" />
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="index.html#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu-header"><ul id="menu-navigation" class="menu"><li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-319"><a href="../../index.html" >Home</a></li>
+<li id="menu-item-318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../about/index.html" >About</a></li>
+<li id="menu-item-694" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../d3/index.html" >d3</a></li>
+<li id="menu-item-316" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../blender/index.html" >Blender</a></li>
+<li id="menu-item-315" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../opencl/index.html" >OpenCL</a></li>
+<li id="menu-item-317" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../side-projects/index.html" >Side Projects</a></li>
+</ul></div>			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+	<div id="nav-above" class="navigation">
+		<div class="nav-previous"><a href="../5/index.html" ><span class="meta-nav">&larr;</span> Older posts</a></div>
+		<div class="nav-next"><a href="../3/index.html" >Newer posts <span class="meta-nav">&rarr;</span></a></div>
+	</div><!-- #nav-above -->
+
+
+
+
+			<div id="post-248" class="post-248 post type-post status-publish format-standard hentry category-advcl category-code category-opencl category-tutorial">
+			<h2 class="entry-title"><a href="../../2010/07/20/adventures-in-opencl-part-1-5-cpp-bindings/index.html" title="Permalink to Adventures in OpenCL: Part 1.5, C++ Bindings" rel="bookmark">Adventures in OpenCL: Part 1.5, C++ Bindings</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../2010/07/20/adventures-in-opencl-part-1-5-cpp-bindings/index.html" title="12:02 am" rel="bookmark"><span class="entry-date">July 20, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-content">
+				<p>This tutorial series is aimed at developers trying to learn <a href="http://www.khronos.org/opencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">OpenCL</a> from the bottom up, with a focus on practicality. This part is a reworking of my <a href="../../2010/07/13/adventures-in-opencl-part-1-getting-started/index.html" >first tutorial</a> using the OpenCL C++ Bindings. Learning by example works best for me so make sure to <a href="http://github.com/enjalot/adventures_in_opencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">get the code</a>! It can only help you to have a copy of the <a href="http://www.khronos.org/registry/cl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">OpenCL specification handy</a>, and it doesn&#8217;t hurt (too bad) to read it!</p>
+<p>My code works for me on my Macbook Pro (with Geforce 9400M) running Snow Leopard with the <a href="http://developer.nvidia.com/object/cuda_3_1_downloads.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://developer.nvidia.com']);">NVIDIA GPU SDK</a> as well as on the Ubuntu 10.4 workstations (with GTX 480 or Geforce 8800GTX). Unfortunately I haven&#8217;t spent any time developing on Windows so for now my tutorials will be UNIX centric (I would LOVE any help in setting up a windows environment, I&#8217;ll need to eventually for my <a href="../../2010/05/20/blender-and-opencl-the-journey-begins/index.html" >Blender project</a>). Also the code should build against the ATI Stream SDK and run on the runtime, you can assume I&#8217;m complying with OpenCL 1.0 (1.1 may be covered in the more advanced topics, and I&#8217;ll point it out). Please let me know if you have build problems or device issues! Throughout the tutorial I will refer to device and GPU interchangeably, OpenCL can run on CPUs already and is targeting many other devices, but for now I&#8217;m assuming a <a href="http://gpgpu.org/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://gpgpu.org']);">GPGPU</a> bias.</p>
+<h2>Let&#8217;s get started!</h2>
+<p>You&#8217;ll need to have installed:</p>
+<p><a href="http://developer.nvidia.com/object/cuda_3_1_downloads.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://developer.nvidia.com']);">NVIDIA</a> or <a href="http://developer.amd.com/gpu/atistreamsdk/pages/default.aspx" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://developer.amd.com']);">ATI</a> GPU SDK and OpenCL enabled drivers<br />
+(Ubuntu ATI users might like <a href="http://mathnathan.com/2010/08/30/opencl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mathnathan.com']);">extra guidance</a>)<br />
+<a href="http://www.cmake.org/cmake/resources/software.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.cmake.org']);"> CMake</a> (<a href="http://mathnathan.com/2010/07/11/getting-started-with-cmake/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mathnathan.com']);">introduction</a> and <a href="http://www.elpauer.org/stuff/learning_cmake.pdf" onclick="javascript:_gaq.push(['_trackEvent','download','http://www.elpauer.org/stuff/learning_cmake.pdf']);">in-depth tutorial [pdf]</a>)<br />
+and it helps to have <a href="http://git-scm.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://git-scm.com']);">Git</a> (<a href="http://mathnathan.com/2010/07/09/git/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mathnathan.com']);">introduction</a> and <a href="http://progit.org/book/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://progit.org']);">nice book</a>)</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">Download the code</a> and for the rest of the tutorial I will refer to the directory it&#8217;s in as <span class="simple_code">advcl</span></p>
+<p>In the advcl directory you should have the following directories:</p>
+<pre>part1.5/     //the source code files for this tutorial
+cmake/       //CMake scripts that help locate necessary libraries
+opencl10/    //OpenCL 1.0 header files (downloaded from <a href="http://www.khronos.org/registry/cl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">Khronos.org</a>)
+opencl11/    //OpenCL 1.1 header files (downloaded from <a href="http://www.khronos.org/registry/cl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">Khronos.org</a>)
+</pre>
+<p>First we will build the code to make sure it works, I like to do an &#8220;out of source&#8221; build like so:</p>
+<pre class="brush: bash; title: ; notranslate" title="">cd part1.5
+mkdir build
+cd build
+cmake ..
+make
+</pre>
+<p>This will generate all of the build files, the Makefile, the library and executable in the build directory which avoids cluttering up your source code directory. You can run the example like so:</p>
+<pre class="brush: bash; title: ; notranslate" title="">./part1.x</pre>
+<h2>The Source Code Files </h2>
+<p>Let&#8217;s first have a broad overview of each of the source files and then we can dive in and look at what the code is doing. I&#8217;ve the code up to be a library with a CL class that can be instantiated and utilized anywhere. For this tutorial it is not very generalized so that it&#8217;s easier to see what&#8217;s going on behind the scenes. In future tutorials we will refactor and make our library more powerful!</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1.5/main.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">main.cpp</a><br />
+This is where we test out our CL class. We instantiate it, give it an opencl program to compile and run, then execute the kernel.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1.5/cll.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">cll.h</a><br />
+The main header file for our CL class definition, also handles including the OpenCL libraries. I&#8217;ve downloaded the header files from the <a href="http://khronos.org/registry/cl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://khronos.org']);">Khronos website</a> to avoid having to search the computer for a particular SDK.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1.5/cll.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">cll.cpp</a><br />
+The core implementation of our CL class, including functions for initializing the OpenCL context, loading and building an OpenCL program.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1.5/part1.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">part1.cpp</a><br />
+Implementation of the functions that setup and run the OpenCL kernel. This is where we actually see OpenCL in action. </p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1.5/part1.cl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">part1.cl</a><br />
+The actual OpenCL code to be executed. Right now it&#8217;s a simple kernel that adds two arrays and stores the result in a third.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1.5/util.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">util.h</a> and <a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1.5/util.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">util.cpp</a><br />
+Utility functions that make things like reading files or printing out OpenCL error messages easier</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1.5/CMakeLists.txt" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">CMakeLists.txt</a><br />
+The configuration and build script used to build the project. This makes it easier to be portable, and building our code as a library makes it easier to contribute to other projects.</p>
+<h2>The Source Code Contents</h2>
+<p>Let&#8217;s follow the execution of the main function to see what order things need to be done in. Of course we need to include our library&#8217;s definitions:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">#include &quot;cll.h&quot;</pre>
+<p>This includes the OpenCL headers as well as defines our CL class. If you look there you will see a few public member objects of type <span class="simple_code">cl::Buffer</span> which will point to arrays on our device. The private <span class="simple_code">cl::*</span> member objects are key OpenCL objects which we will use in the constructor to setup OpenCL for execution.<br />
+The constructor is defined in cll.cpp where it does a few things: sets the platform, sets the device to use, creates the OpenCL context and a command queue. Let&#8217;s see how its done:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">    std::vector&lt;cl::Platform&gt; platforms;
+    cl::Platform::get(&amp;platforms);
+    printf(&quot;cl::Platform::get(): %s\n&quot;, oclErrorString(err));</pre>
+<p>This is the first example of the nice cl wrapper class specified in the C++ bindings where we get the device Platforms. As you can see it is much cleaner than <a href="../../2010/07/13/adventures-in-opencl-part-1-getting-started/index.html" >the previous code</a>. The 3rd line is something you will see peppered throughout the code, <span class="simple_code">oclErrorString(err)</span> is a useful helper function I lifted from the NVIDIA SDK that gives you a little more info about what went wrong if you have a problem. You can get some more explanation of the different error types if you go to the khronos specification for the function that errored, for example <a href="http://www.khronos.org/registry/cl/sdk/1.0/docs/man/xhtml/clGetDeviceIDs.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">clGetDeviceIDs</a> (a quick google search for the function name generally returns the khronos page first).</p>
+<p>After we set the platform (for now we just select the first platform in the list), we use it to create a context. For this tutorial we choose the GPU to be the device. This could of course become more sophisticated with multiple graphics cards or other devices, and in another tutorial we will discuss checking for device capabilities.</p>
+<pre class="brush: cpp; title: ; notranslate" title="">
+    cl_context_properties properties[] =
+        { CL_CONTEXT_PLATFORM, (cl_context_properties)(platforms[0])(), 0};
+    context = cl::Context(CL_DEVICE_TYPE_GPU, properties);
+    devices = context.getInfo&lt;CL_CONTEXT_DEVICES&gt;();
+</pre>
+<p>and the last action of the constructor is to create the command queue</p>
+<pre class="brush: cpp; title: ; notranslate" title="">
+    deviceUsed = 0;
+    try{
+        queue = cl::CommandQueue(context, devices[deviceUsed], 0, &amp;err);
+    }
+    catch (cl::Error er) {
+        printf(&quot;ERROR: %s(%d)\n&quot;, er.what(), er.err());
+    }
+</pre>
+<p>Here you see some use of exceptions provided by <a href="http://www.khronos.org/registry/cl/api/1.1/cl.hpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">cl.hpp</a>, note it is necessary to set</p>
+<pre class="brush: cpp; title: ; notranslate" title="">#define __CL_ENABLE_EXCEPTIONS</pre>
+<p> as I did at the top of cll.h.</p>
+<p>Once the constructor is finished, we want to load our OpenCL program, so in main.cpp we do:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">
+#include &quot;part1.cl&quot;
+example.loadProgram(&quot;part1.cl&quot;);</pre>
+<p>You may wonder why we have an include here, I find it a nice way to bundle our OpenCL source with our library using a neat little <a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1.5/part1.cl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">macro trick</a>.<br />
+<span class="simple_code">loadProgram</span> is defined in cll.cpp:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">
+    int pl;
+    cl::Program::Sources source(1,
+        std::make_pair(kernel_source,pl));
+    program = cl::Program(context, source);</pre>
+<p>Once the program is created, it must also be compiled. It also helps to have some compiler output incase we have syntax errors (never!).</p>
+<pre class="brush: cpp; title: ; notranslate" title="">
+    err = program.build(devices);
+    printf(&quot;program.build: %s\n&quot;, oclErrorString(err));
+    if(err != CL_SUCCESS){
+        std::cout &lt;&lt; &quot;Build Status: &quot; &lt;&lt; program.getBuildInfo&lt;CL_PROGRAM_BUILD_STATUS&gt;(devices[0]) &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;Build Options:\t&quot; &lt;&lt; program.getBuildInfo&lt;CL_PROGRAM_BUILD_OPTIONS&gt;(devices[0]) &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;Build Log:\t &quot; &lt;&lt; program.getBuildInfo&lt;CL_PROGRAM_BUILD_LOG&gt;(devices[0]) &lt;&lt; std::endl;
+    }
+</pre>
+<p>Once the program is loaded and built we are ready to pass the data to our device and do some computing! Let&#8217;s take a quick look at our simple kernel in part1.cl so we have an idea of what we are trying to do:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">__kernel void part1(__global float* a, __global float* b, __global float* c)
+{
+    unsigned int i = get_global_id(0);
+    c[i] = a[i] + b[i];
+}</pre>
+<p>Since I&#8217;m still forming my understanding of OpenCL I&#8217;ll avoid explaining the details (you and me both gotta read the spec! or check out some of NVIDIA&#8217;s nice webinars). This serves as a practical starting point for you to write your own kernels, so lets see what I&#8217;m doing here.<br />
+I define my kernel as <span class="simple_code">part1</span> and it takes in three paramaters. The <span class="simple_code">__global</span> keyword says what kind of device memory our input is stored in, and besides that we should already be familiar with passing arrays to functions as a pointer.</p>
+<p>One way to think of the kernel is as a replacement for a for loop (you can do much cooler things, but we gotta start somewhere). We get the index in the for loop from the get_global_id built in function, and then we do our operation on the arrays at that index. We let OpenCL split up the arrays into work-units  and it will try to do as many of them as possible in parallel.</p>
+<p>So how do we give OpenCL our arrays and tell it to do the work? That&#8217;s all in <a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/part1.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">part1.cpp</a><br />
+We setup our kernel with the <span class="simple_code">popCorn</span> function (hehe)<br />
+First we go ahead and call it (with error checking)</p>
+<pre class="brush: cpp; title: ; notranslate" title="">
+    try{
+        kernel = cl::Kernel(program, &quot;part1&quot;, &amp;err);
+    }
+    catch (cl::Error er) {
+        printf(&quot;ERROR: %s(%d)\n&quot;, er.what(), er.err());
+    }
+</pre>
+<p>Notice that the string we pass in is the name of the kernel as we defined it in the .cl file.<br />
+Then we setup the arrays we want to work on, I created a trivial example as you can see in the file. The important part is creating the OpenCL array buffers and pushing the data to the device:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">
+    size_t array_size = sizeof(float) * num;
+    //our input arrays
+    cl_a = cl::Buffer(context, CL_MEM_READ_ONLY, array_size, NULL, &amp;err);
+    cl_b = cl::Buffer(context, CL_MEM_READ_ONLY, array_size, NULL, &amp;err);
+    //our output arrayw
+    cl_c = cl::Buffer(context, CL_MEM_WRITE_ONLY, array_size, NULL, &amp;err);
+</pre>
+<p>Note that our input are defined as read buffers, and our output is a write, there is also CL_MEM_READ_WRITE, and these are suggestions to the device on how you will use the buffers so it can optimize for performance.<br />
+Pushing the data is the same for each one:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">err = queue.enqueueWriteBuffer(cl_a, CL_TRUE, 0, array_size, a, NULL, &amp;event);</pre>
+<p>Then we tell the kernel which buffers correspond to which arguments</p>
+<pre class="brush: cpp; title: ; notranslate" title="">
+    err = kernel.setArg(0, cl_a);
+    err = kernel.setArg(1, cl_b);
+    err = kernel.setArg(2, cl_c);
+</pre>
+<p>You can also pass in other types of arguments, but we should see that in the next installment.<br />
+We introduce</p>
+<pre class="brush: cpp; title: ; notranslate" title="">queue.finish();</pre>
+<p>Which makes sure that all commands in the queue are done executing before the program continues. This will be more important in later tutorials where we run our kernel in a loop as fast as possible.<br />
+For now we just run it once in the <span class="simple_code">runKernel()</span> function:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">err = queue.enqueueNDRangeKernel(kernel, cl::NullRange, cl::NDRange(num), cl::NullRange, NULL, &amp;event);</pre>
+<p>The <span class="simple_code">cl::NDRange(num)</span> is the global workgroup size, and is one-dimensional like our arrays.<br />
+Finally, we read from our device memory to see if the c array got updated the way we expected!</p>
+<pre class="brush: cpp; title: ; notranslate" title="">float *c_done;
+err = queue.enqueueReadBuffer(cl_c, CL_TRUE, 0, sizeof(float) * num, c_done, NULL, &amp;event);</pre>
+<p>now we can simply print out the contents of the c_done array!</p>
+<pre class="brush: cpp; title: ; notranslate" title="">for(int i=0; i &lt; num; i++)
+{
+    printf(&quot;c_done[%d] = %g\n&quot;, i, c_done[i]);
+}</pre>
+<p>Hopefully the code and this walk-through give you a good starting point to learn more. Expect more tutorials, with the next one involving the OpenCL Profiler and determining device information, followed by OpenCL/OpenGL context sharing.<br />
+I definitely appreciate any feedback!</p>
+							</div><!-- .entry-content -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../category/tutorial/advcl/index.html" title="View all posts in advcl" rel="category tag">advcl</a>, <a href="../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../category/opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>, <a href="../../category/tutorial/index.html" title="View all posts in tutorial" rel="category tag">tutorial</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../2010/07/20/adventures-in-opencl-part-1-5-cpp-bindings/index.html#comments" title="Comment on Adventures in OpenCL: Part 1.5, C++ Bindings">11 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-218" class="post-218 post type-post status-publish format-standard hentry category-advcl category-code category-opencl category-tutorial">
+			<h2 class="entry-title"><a href="../../2010/07/13/adventures-in-opencl-part-1-getting-started/index.html" title="Permalink to Adventures in OpenCL: Part 1, Getting Started" rel="bookmark">Adventures in OpenCL: Part 1, Getting Started</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../2010/07/13/adventures-in-opencl-part-1-getting-started/index.html" title="4:31 am" rel="bookmark"><span class="entry-date">July 13, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-content">
+				<p>This tutorial series is aimed at developers trying to learn <a href="http://www.khronos.org/opencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">OpenCL</a> from the bottom up, with a focus on practicality (i.e. I&#8217;m still learning, I&#8217;m sharing what I&#8217;ve found to work). Learning by example works best for me so make sure to <a href="http://github.com/enjalot/adventures_in_opencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">get the code</a>! It can only help you to have a copy of the <a href="http://www.khronos.org/registry/cl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">OpenCL specification handy</a>, and it doesn&#8217;t hurt (too bad) to read it!</p>
+<p>NOTE: If you are interested in using the C++ Bindings, I recommend you check out my <a href="../../2010/07/20/adventures-in-opencl-part-1-5-cpp-bindings/index.html" >revision of this tutorial</a>.</p>
+<p>My code works for me on my Macbook Pro (with Geforce 9400M) running Snow Leopard with the <a href="http://developer.nvidia.com/object/cuda_3_1_downloads.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://developer.nvidia.com']);">NVIDIA GPU SDK</a> as well as on the Ubuntu 10.4 workstations (with GTX 480 or Geforce 8800GTX). Unfortunately I haven&#8217;t spent any time developing on Windows so for now my tutorials will be UNIX centric (I would LOVE any help in setting up a windows environment, I&#8217;ll need to eventually for my <a href="../../2010/05/20/blender-and-opencl-the-journey-begins/index.html" >Blender project</a>). Also the code should build against the ATI Stream SDK and run on the runtime, you can assume I&#8217;m complying with OpenCL 1.0 (1.1 may be covered in the more advanced topics, and I&#8217;ll point it out). Please let me know if you have build problems or device issues! Throughout the tutorial I will refer to device and GPU interchangeably, OpenCL can run on CPUs already and is targeting many other devices, but for now I&#8217;m assuming a <a href="http://gpgpu.org/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://gpgpu.org']);">GPGPU</a> bias.</p>
+<h2>Let&#8217;s get started!</h2>
+<p>You&#8217;ll need to have installed:</p>
+<p><a href="http://developer.nvidia.com/object/cuda_3_1_downloads.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://developer.nvidia.com']);">NVIDIA</a> or <a href="http://developer.amd.com/gpu/atistreamsdk/pages/default.aspx" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://developer.amd.com']);">ATI</a> GPU SDK and OpenCL enabled drivers<br />
+<span style="font-size: 15.6px;">(Ubuntu ATI users might like <a href="http://mathnathan.com/2010/08/30/opencl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mathnathan.com']);">extra guidance</a>)</span><br />
+<a href="http://www.cmake.org/cmake/resources/software.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.cmake.org']);"> CMake</a> (<a href="http://mathnathan.com/2010/07/11/getting-started-with-cmake/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mathnathan.com']);">introduction</a> and <a href="http://www.elpauer.org/stuff/learning_cmake.pdf" onclick="javascript:_gaq.push(['_trackEvent','download','http://www.elpauer.org/stuff/learning_cmake.pdf']);">in-depth tutorial [pdf]</a>)<br />
+and it helps to have <a href="http://git-scm.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://git-scm.com']);">Git</a> (<a href="http://mathnathan.com/2010/07/09/git/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mathnathan.com']);">introduction</a> and <a href="http://progit.org/book/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://progit.org']);">nice book</a>)</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">Download the code</a> and for the rest of the tutorial I will refer to the directory it&#8217;s in as <span class="simple_code">advcl</span></p>
+<p>In the advcl directory you should have the following directories:</p>
+<pre>part1/       //the source code files for this tutorial
+part1.5/     //the source code for the part1.5 (C++ bindings)
+cmake/       //CMake scripts that help locate necessary libraries
+opencl10/    //OpenCL 1.0 header files (downloaded from <a href="http://www.khronos.org/registry/cl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">Khronos.org</a>)
+opencl11/    //OpenCL 1.1 header files (downloaded from <a href="http://www.khronos.org/registry/cl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">Khronos.org</a>)</pre>
+<p>First we will build the code to make sure it works, I like to do an &#8220;out of source&#8221; build like so:</p>
+<pre class="brush: bash; title: ; notranslate" title="">cd part1
+mkdir build
+cd build
+cmake ..
+make
+</pre>
+<p>This will generate all of the build files, the Makefile, the library and executable in the build directory which avoids cluttering up your source code directory. You can run the example like so:</p>
+<pre class="brush: bash; title: ; notranslate" title="">./part1.x</pre>
+<h2>The Source Code Files</h2>
+<p>Let&#8217;s first have a broad overview of each of the source files and then we can dive in and look at what the code is doing. I&#8217;ve the code up to be a library with a CL class that can be instantiated and utilized anywhere. For this tutorial it is not very generalized so that it&#8217;s easier to see what&#8217;s going on behind the scenes. In future tutorials we will refactor and make our library more powerful!</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/main.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">main.cpp</a><br />
+This is where we test out our CL class. We instantiate it, give it an opencl program to compile and run, then execute the kernel.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/cll.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">cll.h</a><br />
+The main header file for our CL class definition, also handles including the OpenCL libraries on both Linux and Mac.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/cll.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">cll.cpp</a><br />
+The core implementation of our CL class, including functions for initializing the OpenCL context, loading and building an OpenCL program and cleaning up the GPU memory we used.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/part1.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">part1.cpp</a><br />
+Implementation of the functions that setup and run the OpenCL kernel. This is where we actually see OpenCL in action.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/part1.cl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">part1.cl</a><br />
+The actual OpenCL code to be executed. Right now it&#8217;s a simple kernel that adds two arrays and stores the result in a third.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/util.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">util.h</a> and <a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/util.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">util.cpp</a><br />
+Utility functions that make things like reading files or printing out OpenCL error messages easier</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/CMakeLists.txt" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">CMakeLists.txt</a><br />
+The configuration and build script used to build the project. This makes it easier to be portable, and building our code as a library makes it easier to contribute to other projects.</p>
+<h2>The Source Code Contents</h2>
+<p>Let&#8217;s follow the execution of the main function to see what order things need to be done in. Of course we need to include our library&#8217;s definitions:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">#include &quot;cll.h&quot;</pre>
+<p>This includes the OpenCL headers as well as defines our CL class. If you look there you will see a few public members of type <span class="simple_code">cl_mem</span> which will point to arrays on our device. The private <span class="simple_code">cl_*</span> members are handles to key OpenCL objects which we will use in the constructor to setup OpenCL for execution.<br />
+The constructor is defined in cll.cpp where it does a few things: sets the platform, sets the device to use, creates the OpenCL context and a command queue. Let&#8217;s see how its done:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">err = oclGetPlatformID(&amp;platform);
+printf(&quot;oclGetPlatformID: %s\n&quot;, oclErrorString(err));</pre>
+<p>The <span class="simple_code">oclGetPlatformID</span> function is a helper function defined in util.cpp I lifted from the NVIDIA SDK (I figure they won&#8217;t mind for educational purposes but it&#8217;s not under a free license so be careful!). This function looks for the NVIDIA platform and defaults to the first available one if its not found (&#8220;Apple&#8221; is the only platform on my Mac). The 2nd line is something you will see peppered throughout the code, <span class="simple_code">oclErrorString(err)</span> is another useful NVIDIA helper function that gives you a little more info about what went wrong if you have a problem. You can get some more explanation of the different error types if you go to the khronos specification for the function that errored, for example <a href="http://www.khronos.org/registry/cl/sdk/1.0/docs/man/xhtml/clGetDeviceIDs.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">clGetDeviceIDs</a> (a quick google search for the function name generally returns the khronos page first).</p>
+<p>After we set the platform, we use it to select a device. In this code we get a list of the available devices but we end up just choosing the first in the list. This could of course become more sophisticated with multiple graphics cards, and in another tutorial we will discuss checking for device capabilities.</p>
+<pre class="brush: cpp; title: ; notranslate" title="">
+err = clGetDeviceIDs(platform, CL_DEVICE_TYPE_GPU, 0, NULL, &amp;numDevices);
+devices = new cl_device_id [numDevices];
+err = clGetDeviceIDs(platform, CL_DEVICE_TYPE_GPU, numDevices, devices, NULL);
+deviceUsed = 0;</pre>
+<p>Note that we hardcoded the device type to be GPU, you can check the specification for the others but I&#8217;ll give you a hint that one of them starts with CL and ends with CPU ;)<br />
+Now we can make an <a href="http://www.khronos.org/registry/cl/sdk/1.0/docs/man/xhtml/clCreateContext.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">OpenCL context</a> using our device (the more advanced options like sharing an OpenGL context will come in a following tutorial):</p>
+<pre class="brush: cpp; title: ; notranslate" title="">context = clCreateContext(0, 1, &amp;devices[deviceUsed], NULL, NULL, &amp;err);</pre>
+<p>and the last action of the constructor is to create the command queue</p>
+<pre class="brush: cpp; title: ; notranslate" title="">command_queue = clCreateCommandQueue(context, devices[deviceUsed], 0, &amp;err);</pre>
+<p>Once the constructor is finished, we want to load our OpenCL program, so in main.cpp we call</p>
+<pre class="brush: cpp; title: ; notranslate" title="">example.loadProgram(&quot;part1.cl&quot;);</pre>
+<p><span class="simple_code">loadProgram</span> is defined in cll.cpp, it simply reads in the .cl file as a string and passes the string to</p>
+<pre class="brush: cpp; title: ; notranslate" title="">program = clCreateProgramWithSource(context, 1, (const char **) &amp;cSourceCL, &amp;program_length, &amp;err);</pre>
+<p>Here we load only one string of <span class="simple_code">program_length</span> characters, but you could do more at once.<br />
+Once the program is created, it must also be compiled so we call the private function <span class="simple_code">buildExecutable</span> to do that. It has some nice error checking that will output the build log if you have syntax errors in your OpenCL code. I won&#8217;t detail it here but check out the <a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/cll.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">bottom of the cll.cpp</a> file.</p>
+<p>Once the program is loaded and built we are ready to pass the data to our device and do some computing! Let&#8217;s take a quick look at our simple kernel in part1.cl so we have an idea of what we are trying to do:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">__kernel void part1(__global float* a, __global float* b, __global float* c)
+{
+    unsigned int i = get_global_id(0);
+    c[i] = a[i] + b[i];
+}</pre>
+<p>Since I&#8217;m still forming my understanding of OpenCL I&#8217;ll avoid explaining the details (you and me both gotta read the spec! or check out some of NVIDIA&#8217;s nice webinars). This serves as a practical starting point for you to write your own kernels, so lets see what I&#8217;m doing here.<br />
+I define my kernel as <span class="simple_code">part1</span> and it takes in three paramaters. The <span class="simple_code">__global</span> keyword says what kind of device memory our input is stored in, and besides that we should already be familiar with passing arrays to functions as a pointer.</p>
+<p>One way to think of the kernel is as a replacement for a for loop (you can do much cooler things, but we gotta start somewhere). We get the index in the for loop from the get_global_id built in function, and then we do our operation on the arrays at that index. We let OpenCL split up the arrays into work-units  and it will try to do as many of them as possible in parallel.</p>
+<p>So how do we give OpenCL our arrays and tell it to do the work? That&#8217;s all in <a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/part1.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">part1.cpp</a><br />
+We setup our kernel with the <span class="simple_code">popCorn</span> function (hehe)<br />
+First we go ahead and call</p>
+<pre class="brush: cpp; title: ; notranslate" title="">kernel = clCreateKernel(program, &quot;part1&quot;, &amp;err);</pre>
+<p>Then we setup the arrays we want to work on, I created a trivial example as you can see in the file. The important part is creating the OpenCL array buffers and pushing the data to the device:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">//our input arrays
+cl_a = clCreateBuffer(context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, sizeof(float) * num, a, &amp;err);
+cl_b = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(float) * num, NULL, &amp;err);
+//our output array
+cl_c = clCreateBuffer(context, CL_MEM_WRITE_ONLY, sizeof(float) * num, NULL, &amp;err);
+</pre>
+<p>Note that our input are defined as read buffers, and our output is a write, there is also CL_MEM_READ_WRITE, and these are suggestions to the device on how you will use the buffers so it can optimize for performance. For the a array the clCreateBuffer function copies the data from the CPU to the GPU for us. If you want to separate creating the buffer from pushing the data you can do the data push as a separate call:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">err = clEnqueueWriteBuffer(command_queue, cl_b, CL_TRUE, 0, sizeof(float) * num, b, 0, NULL, &amp;event);</pre>
+<p>Then we tell the kernel which buffers correspond to which arguments</p>
+<pre class="brush: cpp; title: ; notranslate" title="">err  = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void *) &amp;cl_a);
+err  = clSetKernelArg(kernel, 1, sizeof(cl_mem), (void *) &amp;cl_b);
+err  = clSetKernelArg(kernel, 2, sizeof(cl_mem), (void *) &amp;cl_c);
+</pre>
+<p>You can also pass in other types of arguments, but we should see that in the next example.<br />
+We introduce</p>
+<pre class="brush: cpp; title: ; notranslate" title="">clFinish(command_queue);</pre>
+<p>Which makes sure that all commands in the queue are done executing before the program continues. This will be more important in later tutorials where we run our kernel in a loop as fast as possible.<br />
+For now we just run it once in the <span class="simple_code">runKernel()</span> function:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">err = clEnqueueNDRangeKernel(command_queue, kernel, 1, NULL, workGroupSize, NULL, 0, NULL, &amp;event);</pre>
+<p>The workGroupSize is defined to be the same size as our data arrays, and so it is 1 dimensional. This will be much more interesting with more complex kernels, but for now we just make them the same.<br />
+Finally, we read from our device memory to see if the c array got updated the way we expected!</p>
+<pre class="brush: cpp; title: ; notranslate" title="">float *c_done;
+err = clEnqueueReadBuffer(command_queue, cl_c, CL_TRUE, 0, sizeof(float) * num, c_done, 0, NULL, &amp;event);</pre>
+<p>now we can simply print out the contents of the c_done array!</p>
+<pre class="brush: cpp; title: ; notranslate" title="">for(int i=0; i &lt; num; i++)
+{
+    printf(&quot;c_done[%d] = %g\n&quot;, i, c_done[i]);
+}</pre>
+<p>Hopefully the code and this walk-through give you a good starting point to learn more. Expect more tutorials, with the next one involving the OpenCL Profiler and determining device information, followed by OpenCL/OpenGL context sharing.<br />
+I definitely appreciate any feedback!</p>
+							</div><!-- .entry-content -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../category/tutorial/advcl/index.html" title="View all posts in advcl" rel="category tag">advcl</a>, <a href="../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../category/opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>, <a href="../../category/tutorial/index.html" title="View all posts in tutorial" rel="category tag">tutorial</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../2010/07/13/adventures-in-opencl-part-1-getting-started/index.html#comments" title="Comment on Adventures in OpenCL: Part 1, Getting Started">36 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-208" class="post-208 post type-post status-publish format-standard hentry category-blender category-code category-opencl">
+			<h2 class="entry-title"><a href="../../2010/07/09/20-million-particles-in-opencl-on-the-gtx480/index.html" title="Permalink to 20 million particles in OpenCL on the GTX480" rel="bookmark">20 million particles in OpenCL on the GTX480</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../2010/07/09/20-million-particles-in-opencl-on-the-gtx480/index.html" title="2:11 am" rel="bookmark"><span class="entry-date">July 9, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-content">
+				<p>I&#8217;m trying to push the limits of interactive <a href="http://sc.fsu.edu/vislab" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://sc.fsu.edu']);">scientific visualization</a>, so I gotta start somewhere! Ok, so 20 million particles running at ~40fps is not a bad start, but this is also using the simplest rendering possible (GL_POINTS of size 1, with no alpha blending or lighting).</p>
+<p>I&#8217;m running <a href="http://github.com/enjalot/EnjaParticles" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">my code</a> on Ubuntu 10.04 on a Dell Precision T7500 with a <a href="http://www.nvidia.com/object/product_geforce_gtx_480_us.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.nvidia.com']);">NVIDIA GTX480</a> (1.5GB GDDR5). The machine has 12GB of ram and 8 cores of CPU which don&#8217;t get used at all by this (besides to initialize the system and run the main loop of course). Check out <a href="http://www.youtube.com/watch?v=FnrC3_8bhQ0" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.youtube.com']);">the video</a> to see some pretty patterns and a large amount of particles!</p>
+<p><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="640" height="385" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/FnrC3_8bhQ0&amp;hl=en_US&amp;fs=1" /><param name="allowfullscreen" value="true" /><embed type="application/x-shockwave-flash" width="640" height="385" src="http://www.youtube.com/v/FnrC3_8bhQ0&amp;hl=en_US&amp;fs=1" allowscriptaccess="always" allowfullscreen="true"></embed></object></p>
+<p>A quick note for those waiting for these in Blender, currently I have it working but only with about 100k particles if I use a Mesh as the emitter (any more and Blender starts choking before I get in the game engine). I&#8217;m going to start looking at the existing particle interface (as well as the <a href="http://wiki.blender.org/index.php/User:Phonybone/Particle_systems_thoughts" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://wiki.blender.org']);">redesign</a>) to start integrating tighter into Blender now that I&#8217;m getting comfortable with OpenCL/OpenGL.</p>
+<p>Let&#8217;s talk some math and look at some numbers, if that doesn&#8217;t sound fun it&#8217;s ok to stop reading now ;)</p>
+<p>So first let me admit that this OpenCL kernel is not doing that much work. I&#8217;m solving the <a href="http://en.wikipedia.org/wiki/Lorenz_attractor" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://en.wikipedia.org']);">Lorenz Attractor</a> ODEs with the <a href="http://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://en.wikipedia.org']);">RK4</a> method for each particle. It&#8217;s all embarrassingly parallel and there is no interaction between them. Second, I tuned down the rendering so it&#8217;s doing as little as possible. This lets us get to the memory limit of the GTX480 at 20 million particles with my setup. Lets see why:</p>
+<p>I use float4 arrays (OpenCL variables of 4 32bit floats in a row) for vertices, colors, generators and velocities. I use one float array to keep track of the life of each particle.</p>
+<p>4 (arrays) x 20,000,000 (particles) x 4 (floats) x 4 (bytes) = 1,280,000,000 bytes</p>
+<p>1 (array) x 20,000,000 (particles) x 1 (float) x 4 (bytes) = 80,000,000 bytes</p>
+<p>So thats 1,360,000,000 bytes / 1024E3 = 1.267GB of memory on the graphics card!</p>
+<p>Luckily I&#8217;m using OpenGL interop, so the vertices and color array are actually <a href="http://www.songho.ca/opengl/gl_vbo.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.songho.ca']);">VBOs</a> in OpenGL&#8217;s context and are modified in place. Since that&#8217;s the case we don&#8217;t transfer any of that memory back to the CPU, which would be a serious problem. It&#8217;s possible my kernel could be optimized more, but right now memory and rendering are the limiting factors. When I start implementing more interesting physics like collision detection and fluid dynamics this will be a bigger issue. I&#8217;m also planning to implement depth sorting using an index array VBO so I can render cool effects with proper alpha blending. This of course will also limit the number of particles possible, with my guess being that rendering will be the biggest culprit (not memory).</p>
+<div id="attachment_212" class="wp-caption aligncenter" style="width: 650px"><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/1mill_lorentz.png" ><img class="size-large wp-image-212" title="1 million particles" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/1mill_lorentz-1024x622.png" alt="1 million particles" width="640" height="388" /></a><p class="wp-caption-text">1 million particles with alpha blending and pointsize=10</p></div>
+							</div><!-- .entry-content -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../category/blender/index.html" title="View all posts in blender" rel="category tag">blender</a>, <a href="../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../category/opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../2010/07/09/20-million-particles-in-opencl-on-the-gtx480/index.html#comments" title="Comment on 20 million particles in OpenCL on the GTX480">5 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-198" class="post-198 post type-post status-publish format-standard hentry category-blender category-code category-opencl">
+			<h2 class="entry-title"><a href="../../2010/06/30/blender-game-engine-particles-in-the-mix/index.html" title="Permalink to Blender Game Engine: Particles in the Mix" rel="bookmark">Blender Game Engine: Particles in the Mix</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../2010/06/30/blender-game-engine-particles-in-the-mix/index.html" title="11:46 pm" rel="bookmark"><span class="entry-date">June 30, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-content">
+				<p>I think I can show you better than I can tell you</p>
+<p><object width="560" height="340"><param name="movie" value="http://www.youtube.com/v/lP6zfAVm7B0&amp;hl=en_US&amp;fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/lP6zfAVm7B0&amp;hl=en_US&amp;fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="560" height="340"></embed></object></p>
+<p><a href="http://github.com/enjalot/BGEnjaParticles" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">check out the code</a></p>
+<p>This is the first major milestone in my <a href="../../2010/05/20/blender-and-opencl-the-journey-begins/index.html" >journey</a>! I&#8217;ve got a lot of work to do before this is in any usable condition for artists, but none the less it feels good to see my OpenCL Particle System and interact with it through the Blender Game Engine. Right now I&#8217;ve linked to my <a href="http://github.com/enjalot/EnjaParticles" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">EnjaParticles</a> library from Blender, I create a system using a custom modifier (called Enja for now) on an object and if the modifier is present I divert rendering of that object to a custom function.</p>
+<p>My next step is to get a better understanding of all the OpenGL magic going on because my colors and alpha blending are not behaving as expected. At the same time I&#8217;m thinking I&#8217;ll rewrite the particle system code inside the BGE and start looking at how the existing particle system works. I&#8217;m going to start with a small subset of the existing functionality, so please let me know if you&#8217;re dying to have a certain particle effect in the game engine so I can prioritize better, otherwise I&#8217;ll just do what looks the most fun.</p>
+<p>I want to spend some more time thinking about handling the OpenCL context, perhaps loading it, building the programs and preparing the kernels when the game engine starts. Right now an entirely new context is created for each system which seems quite wasteful. I also need to clean up the build process, which should be helped by moving the code internal to blender, but making OpenCL available to the whole of blender might encourage other developers to try their hand at accelerating other areas.</p>
+							</div><!-- .entry-content -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../category/blender/index.html" title="View all posts in blender" rel="category tag">blender</a>, <a href="../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../category/opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../2010/06/30/blender-game-engine-particles-in-the-mix/index.html#comments" title="Comment on Blender Game Engine: Particles in the Mix">8 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-183" class="post-183 post type-post status-publish format-standard hentry category-blender category-code category-opencl">
+			<h2 class="entry-title"><a href="../../2010/06/26/simple-particles-with-opencl-and-opengl/index.html" title="Permalink to Simple Particles with OpenCL and OpenGL" rel="bookmark">Simple Particles with OpenCL and OpenGL</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../2010/06/26/simple-particles-with-opencl-and-opengl/index.html" title="1:44 pm" rel="bookmark"><span class="entry-date">June 26, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-content">
+				<p>And so I reach another milestone in my journey to put <a href="../../2010/05/20/blender-and-opencl-the-journey-begins/index.html" >OpenCL Particles in Blender</a>! I&#8217;ve written my own (very) simple particle system from scratch in C++ using OpenGL and OpenCL, taking advantage of <a href="http://www.songho.ca/opengl/gl_vbo.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.songho.ca']);">VBO</a> interoperability. OpenCL and OpenGL interop is all about keeping the processing on the GPU, so the array of vertices you are drawing from and the array of vertices you are moving around are actually pointers to the same spot in GPU memory. This saves lots of time, especially if you are manipulating millions of particles in real time and you don&#8217;t want to transfer megabytes of data back and forth each frame!</p>
+<p><a href="http://github.com/enjalot/EnjaParticles" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">Check out the code</a></p>
+<p>I based my work on the NVIDIA GPU SDK example oclSimpleGL, but I wanted to make my code a standalone library that could be popped into some other graphics context (namely Blender). I was able to nicely separate my code into relevant files: opencl.cpp for opencl functions, enja.cpp for all the particle stuff and main.cpp is responsible for the window/GLUT and rendering stuff. Instantiating an EnjaParticles class creates a system and populates two VBOs, one for vertices and one for colors as well as an OpenCL context and all the necessary OpenCL variables. All one has to do is call the update function and the OpenCL kernel is executed, automatically updating the vbos which can be rendered by OpenGL. Right now the constructor for the particle system only takes in an array for vertices (which I intend to get from a DerivedMesh object in Blender) and makes the VBO ids available so the rendering context can use them.</p>
+<p>The code currently compiles and runs on both Ubuntu with NVIDIA drivers on a GTX480 (yeah baby!) and my Macbook Pro with NVIDIA GeForce 9400M (it shouldn&#8217;t be hard to port to windows but I don&#8217;t have time for that now). I use CMAKE so check out the README to make sure you configure your environment correctly (you need to set up a couple environment variables so it can find the right headers to include and libraries to link against). In the CMakeLists.txt file you can also turn GL_INTEROP on and off if you want to see the performance difference. This code also runs in the OpenCL Visual Profiler, which <a href="http://forums.nvidia.com/index.php?showtopic=107840" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://forums.nvidia.com']);">wasn&#8217;t the easiest thing</a> to get working. You need to be very careful not only with the OpenCL objects you instantiate, but ones that implicitly get created by calling cl functions! Once it works it&#8217;s very nice for seeing how your code is behaving on the GPU.</p>
+<p>I&#8217;ve noticed that on my MacBook Pro the GL/CL interop is not behaving as expected, and I suspect that there is still memory being transfered. Without the opencl profiler I will have to do my own timings to get to the bottom of this. Adding to my suspicion is that there is no difference in performance for the oclSimpleGL example on my MBP.</p>
+<p>It took me over a week to get this working like I expected to, I don&#8217;t intend it for it to take that long to get it into Blender. I really want to start working on interesting stuff like Rigid Body collision and python interaction, let alone more complex physics!</p>
+<div id="attachment_185" class="wp-caption aligncenter" style="width: 426px"><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/06/particles_ubuntu_gtx480.png" ><img class="size-full wp-image-185" title="particles_ubuntu_gtx480" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/06/particles_ubuntu_gtx480.png" alt="screenshot of 1million particles" width="416" height="346" /></a><p class="wp-caption-text">1,000,000 particles strong!</p></div>
+							</div><!-- .entry-content -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../category/blender/index.html" title="View all posts in blender" rel="category tag">blender</a>, <a href="../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../category/opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../2010/06/26/simple-particles-with-opencl-and-opengl/index.html#comments" title="Comment on Simple Particles with OpenCL and OpenGL">9 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-177" class="post-177 post type-post status-publish format-standard hentry category-android category-code">
+			<h2 class="entry-title"><a href="../../2010/06/19/particles-on-my-android/index.html" title="Permalink to Particles on my Android" rel="bookmark">Particles on my Android</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../2010/06/19/particles-on-my-android/index.html" title="3:32 pm" rel="bookmark"><span class="entry-date">June 19, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-content">
+				<p>Since I just got my first Android phone (an HTC Eris while I wait for my HTC Incredible to be shipped)</p>
+<p><img class="alignright size-medium wp-image-178" title="simple particle fountain" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/06/particles1-200x300.png" alt="" width="200" height="300" /> and I read about the <a href="http://developer.android.com/sdk/ndk/index.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://developer.android.com']);">Android NDK</a> as well as OpenGL ES support it seemed like a good idea to write a simple particle system in C as practice for my <a href="../../2010/05/20/blender-and-opencl-the-journey-begins/index.html" >Blender OpenCL Particle project</a>. For some reason I also find it plain <em>cool</em> to write in C on a phone with such a nice SDK and support system.</p>
+<p>I&#8217;ve <a href="http://github.com/enjalot/EnjaParticles" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">uploaded my code</a> in hopes that others trying to get into C development with OpenGL may benefit from this example. I based the Java part off the san-angeles demo in the NDK and added more touch interaction, dragging rotates the scene and touching moves the emitter of the particles. The system is pretty simple right now and I still need to get more familiar with OpenGL. I&#8217;m looking forward to trying OpenGL ES 2.0 but I need to wait for my Incredible since the Eris doesn&#8217;t support it.</p>
+<p>This was a fun exercise and it feels good to get some fairly low level control over my phone. I need to focus more on the OpenCL acceleration of particle system&#8217;s on bigger GPUs, but luckily almost all of the C code could be copy pasted into a GLUT project and run on a PC. There are some interesting differences that need to be considered like the <a href="http://apistudios.com/hosted/marzec/badlogic/wordpress/?p=71 " onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://apistudios.com']);">lack of floating point support</a> in most Android hardware. As a hobby I&#8217;m going to explore more interesting effects on the phone, and for work I&#8217;m going to add timing/profiling and keep the code modular so I can measure performance on many different platforms (now including phones!).</p>
+<p>Hmm&#8230; what if we ported the Blender Game Engine to Android with the NDK? I hear they have <a href="http://apistudios.com/hosted/marzec/badlogic/wordpress/?p=248" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://apistudios.com']);">Bullet Physics</a> already&#8230; ok I&#8217;m getting ahead of myself!</p>
+							</div><!-- .entry-content -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../category/android/index.html" title="View all posts in android" rel="category tag">android</a>, <a href="../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../2010/06/19/particles-on-my-android/index.html#comments" title="Comment on Particles on my Android">7 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-153" class="post-153 post type-post status-publish format-standard hentry category-blender">
+			<h2 class="entry-title"><a href="../../2010/05/24/blender-creating-a-custom-modifier/index.html" title="Permalink to Blender: Creating a Custom Modifier" rel="bookmark">Blender: Creating a Custom Modifier</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../2010/05/24/blender-creating-a-custom-modifier/index.html" title="9:52 pm" rel="bookmark"><span class="entry-date">May 24, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-content">
+				<p style="text-align: justify;">On my quest to create an <a href="../../2010/05/20/blender-and-opencl-the-journey-begins/index.html" >OpenCL enabled Particle System</a> I realized that I need a way for the Blender Game Engine to know when to render an object as a particles as opposed to a regular mesh. A straight forward way to achieve this (with other benefits) would be to create a Particle modifier that can be added to an object which the game engine can then check for. I&#8217;d like to thank <a href="http://mogurijin.wordpress.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mogurijin.wordpress.com']);">Moguri</a> for this idea!</p>
+<p style="text-align: justify;">So I set out today to make a custom modifier that does nothing but printf its existence! I figured this out by copying the SoftBody modifier and scouring the source code for all references to it. I called my modifier RTPS, so just replace any instance of RTPS in this post with your own chosen name.</p>
+<p style="text-align: justify;">First we want to create our main modifier code file (all paths start in the source folder)</p>
+<p style="text-align: justify;"><strong>blender/modifiers/intern/MOD_rtps.c</strong></p>
+<pre style="text-align: justify;">cp blender/modifiers/intern/MOD_softbody.c blender/modifiers/intern/MOD_rtps.c</pre>
+<p style="text-align: justify;">In here you will add functionality, initialize default values and of course replace all instances of SoftBody with RTPS. You can see my code <a href="https://github.com/enjalot/BGERTPS/blob/mar11/blender/source/blender/modifiers/intern/MOD_rtps.c">MOD_rtps.c<br />
+</a></p>
+<p style="text-align: justify;">The rest of the instructions are just modifying files (if you are confused about where things go, just look at Softbody!</p>
+<p>At line 52 of <strong>blender/modifiers/CMakeLists.txt</strong></p>
+<blockquote>
+<pre style="text-align: justify;">	intern/MOD_rtps.c</pre>
+</blockquote>
+<p>At line 184 of <strong>blender/modifiers/intern/MOD_util.c</strong></p>
+<blockquote>
+<pre style="text-align: justify;">	INIT_TYPE(RTPS);</pre>
+</blockquote>
+<p>At line 70 of <strong>blender/modifiers/MOD_modifiertypes.h</strong></p>
+<blockquote>
+<pre style="text-align: justify;">extern ModifierTypeInfo modifierType_RTPS;</pre>
+</blockquote>
+<p>At line 564 of: <strong>blender/makesrna/RNA_access.h</strong></p>
+<blockquote>
+<pre style="text-align: justify;">extern StructRNA RNA_RTPSModifier;</pre>
+</blockquote>
+<p style="text-align: justify;">At line 303 of: <strong>blender/blenkernel/BKE_modifier.h</strong></p>
+<blockquote>
+<pre>int modifiers_isRTPSEnabled(struct Object *ob);</pre>
+</blockquote>
+<p>We need to edit b<strong>lender/makesdna/DNA_modifier_types.h</strong> in several places:</p>
+<p style="text-align: justify;">on line 69, just after eModifierType_Screw and before NUM_MODIFIER_TYPES add</p>
+<blockquote>
+<pre>eModifierType_RTPS,</pre>
+</blockquote>
+<p style="text-align: justify;">on line 441, after the SoftbodyModifierData struct, add</p>
+<blockquote>
+<pre>typedef struct RTPSModifierData {
+    ModifierData modifier;
+    int system;
+} RTPSModifierData;</pre>
+</blockquote>
+<div>on line 85 of <strong>blender/makesrna/intern/rna_modifier.c </strong>(before the {0,NULL,0,NULL,NULL} entry:</div>
+<div>
+<pre>{eModifierType_RTPS, "RTPS", ICON_MOD_SOFT, "RTPS", ""},</pre>
+</div>
+<div>and on line 171</div>
+<div>
+<pre>case eModifierType_RTPS:
+  	return &#038;RNA_RTPSModifier;</pre>
+</div>
+<div>and on line 2210:</div>
+<div>
+<pre>static void rna_def_modifier_rtps(BlenderRNA *brna)
+{
+
+    StructRNA *srna;
+    PropertyRNA *prop;
+
+    srna= RNA_def_struct(brna, "RTPSModifier", "Modifier");
+    RNA_def_struct_ui_text(srna, "RTPS Modifier", "Add a particle system");
+    RNA_def_struct_sdna(srna, "RTPSModifierData");
+    RNA_def_struct_ui_icon(srna, ICON_MOD_SOFT);
+
+    prop= RNA_def_property(srna, "system", PROP_INT, PROP_NONE);
+    RNA_def_property_int_sdna(prop, NULL, "system");
+    // we should use an enum but this is hacked together for now
+    // this range is to allow the user to select a different system
+    RNA_def_property_ui_range(prop, 0, 2, 1, 0);
+    RNA_def_property_ui_text(prop, "Systems", "Available particle systems");
+    RNA_def_property_update(prop, 0, "rna_Modifier_update");
+
+}</pre>
+</div>
+<div>line 2337:</div>
+<div>
+<div>
+<pre>rna_def_modifier_rtps(brna);</pre>
+</div>
+</div>
+<div>To add the modifier to our UI we need to edit one more file: <strong>../release/scripts/ui/properties_data_modifier.py</strong> around line 624</div>
+<blockquote>
+<pre>def RTPS(self, layout, ob, md):
+    layout.label(text="System:")
+    layout.prop(md, "system")
+    layout.label(text="0: lorentz 1: gravity")</pre>
+</blockquote>
+<div>This should build and give you a modifier under the Simulate header that does nothing but print out a message when you add it. My next step is to check for this modifier in the Game Engine and of course, start adding some functionality! I wish I could explain more about what each of these lines do, but I&#8217;m still trying to understand the RNA/DNA system and the Blender way of doing things.</div>
+							</div><!-- .entry-content -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../category/blender/index.html" title="View all posts in blender" rel="category tag">blender</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../2010/05/24/blender-creating-a-custom-modifier/index.html#comments" title="Comment on Blender: Creating a Custom Modifier">3 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-140" class="post-140 post type-post status-publish format-standard hentry category-blender category-opencl">
+			<h2 class="entry-title"><a href="../../2010/05/20/blender-and-opencl-the-journey-begins/index.html" title="Permalink to Blender and OpenCL: The Journey Begins" rel="bookmark">Blender and OpenCL: The Journey Begins</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../2010/05/20/blender-and-opencl-the-journey-begins/index.html" title="6:39 pm" rel="bookmark"><span class="entry-date">May 20, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-content">
+				<p><em><span style=""><strong>Latest Update:</strong> <a href="../../2011/03/31/particles-in-bge-improved-code-collisions-and-hose/index.html" >Improved Code, Collisions and Hose</a></span></em></p>
+<p>And so I embark upon an epic journey, just like that I leave my normal life behind and dive into the depths of Blender&#8217;s source code armed only with courage inspired by the powers and promises of OpenCL. The treasure I seek is an interactive particle system in the Blender Game Engine, accelerated by OpenCL and capable of visualizing millions of particles. I am not so greedy to desire collisions and sophisticated particle physics on my first quest, interactive visualization of scientific simulations will be a worthy reward for a summers work.</p>
+<p>One does not embark on such a voyage without any direction, so I have set forth a preliminary map to guide my efforts as I learn more and triumph over unforeseen perils. The Blender Game Engine (BGE) is made up of several models that interact to provide an interactive 3D experience. The 3D objects are defined in the Blender Kernel, typically they are mesh based and efficiently store the coordinates of their vertices in arrays. The 3D objects are rendered to the screen by the <a href="http://www.blender.org/documentation/intranet/docs/develop/realtimegraphics/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.blender.org']);">OpenGL Rasterizer</a> which act upon these vertex arrays. The objects are interacted with and manipulated by the <a href="http://www.blender.org/documentation/intranet/docs/develop/gamelogic/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.blender.org']);">Game Logic Module</a>, the meat of which is found in different Actuators provided by the BGE. The particle system I envision is essentially a bunch of simple points that move around the screen based on some defined behavior patterns. This means we want a custom Blender object where the mesh vertices serve as the location of each particle. We want to do custom rendering where we draw a little ball (or use a trick called <a href="http://www.lighthouse3d.com/opengl/billboarding/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.lighthouse3d.com']);">billboarding</a> for more speed) at each vertex to represent the particle. We can then create a custom actuator which will define the behavior of the particles by changing their location, color and size based on user defined functions (or later, physics).</p>
+<p>Each journey has a first step, and mine starts with the rendering aspect. I was able to find the OpenGL code where (VertexArray) meshes are drawn to the screen, and inserted my own code to draw simple gluSpheres at each vertex.</p>
+<p><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/05/glusphere.jpg" ><img class="aligncenter size-medium wp-image-141" title="glusphere" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/05/glusphere-300x165.jpg" alt="" width="300" height="165" /></a></p>
+<p>The next step in the rendering aspect will be to figure out where each object in the scene is added to the list of items to be drawn and call a custom rendering routine for only the cube. Once I have a better understanding of this process I can make the particle rendering more general so that any object of a certain type (my future particle type) or that have my future particle actuator will be rendered in this way.</p>
+<p>I&#8217;ll be setting up a git repo for what I&#8217;m doing but for now one could add the following snippet around line 170 of</p>
+<p><em>source/gameengine/Rasterizer/RAS_OpenGLRasterizer/RAS_VAOpenGLRasterizer.cpp</em></p>
+<pre>//try to draw at vertices
+glColor4f(0.5f, 0.0f, 0.0f, 1.0f);
+//iterate over vertex arrays
+int iti = 0;
+for(ms.begin(it); !ms.end(it); ms.next(it)) {
+  //normal meshes have one vertex array so this loop only happens once
+  printf("iti: %d\n", iti);
+  iti++;
+  if(it.totindex == 0)
+    continue;
+
+  RAS_TexVert *vertex;
+  size_t i;
+
+  //iterate over the vertices in the vertex arrays
+  for(i=0; i&lt;it.totindex; i++)
+  {
+     vertex = &amp;it.vertex[it.index[i]];
+     const float* v = vertex-&gt;getXYZ();
+     //move to the vertex (starts at center of object
+     glTranslatef(v[0], v[1], v[2]);
+     glBegin(GL_QUADS);
+     //draw a sphere
+     gluSphere(gluNewQuadric(), .2, 10, 10);
+     glEnd();
+     //move back to center for the next vertex
+     glTranslatef(-v[0], -v[1], -v[2]);
+   }
+}</pre>
+<p>I admit that I am no expert in OpenGL (or OpenCL) and all my Blender experience comes from using the Python API, so I am learning at least 2 new technologies and one complex software package hence my description of this as a journey. I look forward to getting involved in the Blender development community and learning a lot along the way!</p>
+							</div><!-- .entry-content -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../category/blender/index.html" title="View all posts in blender" rel="category tag">blender</a>, <a href="../../category/opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../2010/05/20/blender-and-opencl-the-journey-begins/index.html#comments" title="Comment on Blender and OpenCL: The Journey Begins">15 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-132" class="post-132 post type-post status-publish format-standard hentry category-blender category-code">
+			<h2 class="entry-title"><a href="../../2010/04/28/compiling-blender-2-5/index.html" title="Permalink to Compiling Blender 2.5" rel="bookmark">Compiling Blender 2.5</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../2010/04/28/compiling-blender-2-5/index.html" title="3:13 pm" rel="bookmark"><span class="entry-date">April 28, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-content">
+				<p>This summer I will be working on improving Blender with <a href="http://en.wikipedia.org/wiki/Opencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://en.wikipedia.org']);">OpenCL</a>, specifically integrating and improving particles inside the Game Engine. The first step of course is getting the source code and compiling it. I&#8217;m building on two systems, my MacBook with Snow Leopard (10.6) in 32bit (Intel core 2 duo and intel integrated graphics) and on an Ubuntu 9.10 workstation with 4 64bit CPUs and 4GB of memory and a GeForce 8800 GTX.</p>
+<p>I followed the build instructions on Blender&#8217;s website, but of course nothing is ever that straightforward.</p>
+<h2>Ubuntu</h2>
+<p>Lets start with the <strong>Ubuntu</strong> build:</p>
+<p>I followed <a href="http://wiki.blender.org/index.php/Dev:2.5/Doc/Building_Blender/Linux/Ubuntu_9.10/Scons" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://wiki.blender.org']);">these instructions</a> to build Blender 2.5 and <a href="http://wiki.blender.org/index.php/Dev:2.4/Doc/Building_Blender/Linux" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://wiki.blender.org']);">these to build Blender 2.49b</a>, as well as <a href="http://wiki.blender.org/index.php/Dev:2.5/Doc/Building_Blender/Linux/Compiling_Python3.1" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://wiki.blender.org']);">building Python3.1</a> from source:</p>
+<p><a href="http://wiki.blender.org/index.php/Dev:2.5/Doc/Building_Blender/Linux/Compiling_Python3.1" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://wiki.blender.org']);"></a>I copied blender/config/linux2-config.py to blender/user-config.py (for scons). I modified a few lines:</p>
+<blockquote><p>BF_PYTHON=&#8217;/opt/py31&#8242;</p>
+<p>WITH_BF_STATICPYTHON=True</p></blockquote>
+<p>This means I statically linked Python 3.1 (I couldn&#8217;t get it to work with shared libs, scons complained about undefined symbols: <a href="http://pastebin.com/iKGMDpk2" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://pastebin.com']);">http://pastebin.com/iKGMDpk2</a> )</p>
+<p>Note: I&#8217;ve since installed python3-all-dev and now dynamic linking of python3 works, and I avoided having to build python3.1 myself.</p>
+<p>to run just do</p>
+<blockquote><p>blender-svn/install/linux2/blender</p></blockquote>
+<p>A note about the necessary dev packages, make sure you have them! If you are getting &#8220;file not found&#8221; errors while building its probably because you don&#8217;t have the dev package you need. These are the ones I used:</p>
+<blockquote>
+<div>sudo apt-get install subversion build-essential gettext \</div>
+<div>libxi-dev  libsndfile1-dev \</div>
+<div>libpng12-dev libfftw3-dev \</div>
+<div>libopenexr-dev  libopenjpeg-dev \</div>
+<div>libopenal-dev libalut-dev libvorbis-dev\</div>
+<div>libglu1-mesa-dev  libsdl-dev libfreetype6-dev \</div>
+<div>libtiff4-dev  libsamplerate0-dev libavdevice-dev \</div>
+<div>libavformat-dev  libavutil-dev libavcodec-dev libjack-dev \</div>
+<div>libswscale-dev  libx264-dev libmp3lame-dev \</div>
+<div>libsdl1.2-dev libopenal-dev \</div>
+<div>python3-all-dev</div>
+</blockquote>
+<h2>Mac</h2>
+<p>For the <strong>Mac</strong> build I used the <a href="http://wiki.blender.org/index.php/Dev:2.5/Doc/Building_Blender/Mac" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://wiki.blender.org']);">CMake instructions</a> (scons gave me problems):</p>
+<p>I have XCode and developer tools installed for 10.6 (default options). I also followed these instructions and installed ffmpeg through MacPorts</p>
+<p>I configured cmake with the GUI. Here is a screenshot of most of the options.<a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/04/Screen-shot-2010-04-28-at-2.46.03-PM.png" ><img class="alignright size-thumbnail wp-image-133" title="Screen shot 2010-04-28 at 2.46.03 PM" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/04/Screen-shot-2010-04-28-at-2.46.03-PM-150x150.png" alt="CMake config" width="150" height="150" /></a></p>
+<p>Note: I configured it WITHOUT blender player or quicktime, having either of these enabled caused problems. I also built for i386 (32bit) as I had problems with 64bit when using scons.</p>
+<p>Things aren&#8217;t perfect, and 2.5 is only in alpha so we don&#8217;t expect it to be! This is just the first baby step getting into Blender&#8217;s guts, I hope to have a better understanding of the whole process soon!</p>
+							</div><!-- .entry-content -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../category/blender/index.html" title="View all posts in blender" rel="category tag">blender</a>, <a href="../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../2010/04/28/compiling-blender-2-5/index.html#comments" title="Comment on Compiling Blender 2.5">1 Comment</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+
+			<div id="post-127" class="post-127 post type-post status-publish format-standard hentry category-school category-tech">
+			<h2 class="entry-title"><a href="../../2010/04/09/the-day-the-data-stood-still/index.html" title="Permalink to the day the data stood still" rel="bookmark">the day the data stood still</a></h2>
+
+			<div class="entry-meta">
+				<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../2010/04/09/the-day-the-data-stood-still/index.html" title="5:28 am" rel="bookmark"><span class="entry-date">April 9, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../author/admin/index.html" title="View all posts by enj">enj</a></span>			</div><!-- .entry-meta -->
+
+				<div class="entry-content">
+				<p>I still remember the day that I first understood how data was communicated between programs. I was 17 years old and programming Java applets about <a href="http://micro.magnet.fsu.edu/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://micro.magnet.fsu.edu']);">microscopes</a>. When it first sank in, I was happy to be able to solve the task in front of me, but I had little idea how fundamental it was. I was trying to get a set of curves that were modeled in 3ds max into my applet so I could draw them on a graph and make them move, and I didn&#8217;t know anything about how file formats work. My mentor at the time had the 3D curves converted to 2D (that&#8217;s all we needed) and outputted them into a file format he defined. So what was the 2D curve and what is the file format?</p>
+<p>The 2D curve was the information I needed to get my task done, it was nothing more than a list of numbers, or pairs of numbers, the (x, y) coordinates of the curve that I could use to draw it. The file format was nothing more than the number of pairs, followed by each x and y coordinate in order. Since I needed to draw a bunch of these curves, and they were essentially &#8220;written down&#8221; in the file all my program had to do was to read them.</p>
+<p>As most people are aware of these days, computers store their information as ones and zeros, or binary. Each 1 or 0 takes up one <strong>bit</strong> of space, 8 bits make a <strong>byte</strong>, and we describe most things in terms of bytes (kilobytes, megabytes). To read in my curves, I had to read in a series of numbers. In most cases computers deal with two kinds of numbers, integers and floating point numbers. Integers are the whole numbers, and can usually be stored in 4 bytes. Floating point numbers are almost the same as real numbers (not perfect) and in Java can be stored in either floats (4 bytes) or doubles (8 bytes). The doubles can be more accurate because they can store more information about the number than a float.</p>
+<p>So if the first number in the file is an int (integer) I need to read 4 bytes, and then I can use the value found there in my program to see how many coordinates I need to read. Since I want my x and y values to be precise, they were stored as doubles. That means if I have 10 points, I will need to read 20 coordinates (10 x&#8217;s and 10 y&#8217;s) and a total of 160 bytes. So I tell the program to read 8 bytes 20 times, each time saving the double value to a list in the program. Once I&#8217;m done reading I can use this list to draw the curve from the coordinates.</p>
+<p>This idea that all you need to know is the order in which the information is written, and how it is represented (integer vs. float vs. double vs. character vs. string&#8230;) is very powerful. It is essentially how all file formats work. There is always some sort of <strong>header</strong>, which contains information about the data that will be found in the file. Just like the number of points, this header allows for the amount of data in the file to be flexible. The program doesn&#8217;t need to know ahead of time how much data to read, but it will always start by reading the header. How big the header is decided when you design the file format, in our case it was just one integer.</p>
+<p>Things like XML and CSV take this concept to a higher level. Using these formats your program creates a format within the rules of XML or CSV. CSV stands for comma separated values, and its just a list of numbers or words separated by a comma on each line. This way a program that can read CSVs will automatically load the values between the commas into variables.</p>
+<p>So as long as you know the format, you can read the data, you can communicate with other programs as well as with programs you write. Open formats are great, and usually you wont have to worry about writing the code to read them. Sometimes you want to get data into a program that you weren&#8217;t supposed to get, or maybe the data was only meant to be read by one program (like maybe a wc3/sc/sc2 game replay file?) but enough smart people have messed with it that its pretty well documented. Some people like to figure out formats that are not supposed to be read without permission&#8230; and sometimes you just want to get some data from your javascript to your web server!</p>
+<p>This is how I think about data formats, I use this thought process every day at school and in just about every project I work on.</p>
+							</div><!-- .entry-content -->
+	
+			<div class="entry-utility">
+									<span class="cat-links">
+						<span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="../../category/school/index.html" title="View all posts in school" rel="category tag">school</a>, <a href="../../category/tech/index.html" title="View all posts in tech" rel="category tag">tech</a>					</span>
+					<span class="meta-sep">|</span>
+												<span class="comments-link"><a href="../../2010/04/09/the-day-the-data-stood-still/index.html#comments" title="Comment on the day the data stood still">2 Comments</a></span>
+							</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+		
+	
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="../5/index.html" ><span class="meta-nav">&larr;</span> Older posts</a></div>
+					<div class="nav-next"><a href="../3/index.html" >Newer posts <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-below -->
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-3" class="widget-container widget_search"><form role="search" method="get" id="searchform" action="../../index.html" >
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" value="" name="s" id="s" />
+	<input type="submit" id="searchsubmit" value="Search" />
+	</div>
+	</form></li><li id="nav_menu-3" class="widget-container widget_nav_menu"><div class="menu-navigation-container"><ul id="menu-navigation-1" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-319"><a href="../../index.html" >Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../about/index.html" >About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../d3/index.html" >d3</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../blender/index.html" >Blender</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../opencl/index.html" >OpenCL</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../side-projects/index.html" >Side Projects</a></li>
+</ul></div></li><li id="text-4" class="widget-container widget_text">			<div class="textwidget"><a href="https://twitter.com/#!/enjalot" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=twitter.com"> @enjalot</a>
+<br/>
+<a href="https://plus.google.com/112153365286725889851/posts" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://plus.google.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=plus.google.com"> +Ian Johnson</a></div>
+		</li><li id="categories-414549122" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-25"><a href="../../category/tutorial/advcl/index.html" title="Adventures in OpenCL">advcl</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="../../category/tutorial/advd3-tutorial/index.html" title="View all posts filed under advd3">advd3</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="../../category/android/index.html" title="View all posts filed under android">android</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="../../category/blender/index.html" title="View all posts filed under blender">blender</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="../../category/code/index.html" title="View all posts filed under code">code</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="../../category/community/index.html" title="View all posts filed under community">community</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="../../category/culture/index.html" title="View all posts filed under culture">culture</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="../../category/d3/index.html" title="View all posts filed under d3">d3</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="../../category/life/index.html" title="View all posts filed under life">life</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="../../category/math/index.html" title="View all posts filed under math">math</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="../../category/misc/index.html" title="View all posts filed under misc">misc</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="../../category/music/index.html" title="View all posts filed under music">music</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="../../category/news/index.html" title="View all posts filed under news">news</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="../../category/opencl/index.html" title="View all posts filed under opencl">opencl</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="../../category/processingjs/index.html" title="View all posts filed under processingjs">processingjs</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="../../category/python/index.html" title="View all posts filed under python">python</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="../../category/race/index.html" title="View all posts filed under race">race</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="../../category/school/index.html" title="View all posts filed under school">school</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="../../category/tech/index.html" title="View all posts filed under tech">tech</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="../../category/travel/index.html" title="View all posts filed under travel">travel</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="../../category/tutorial/index.html" title="View all posts filed under tutorial">tutorial</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="../../category/uncategorized/index.html" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="../../category/wtf/index.html" title="View all posts filed under wtf">wtf</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="../../category/中�%2596%2587/index.html" title="View all posts filed under 中文">中文</a>
+</li>
+		</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="../../index.html" title="enj" rel="home">
+					enj				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+<script type='text/javascript' src='http://d3a9pqeyre6pa0.cloudfront.net/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?aa&#038;ver=3.3.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../wp-content/plugins/jetpack/modules/wpgroho.js%3Fver=3.3.2'></script>
+	<div style="display:none">
+	</div>
+<script type='text/javascript' src='../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js%3Fver=3.0.83c'></script>
+<script type='text/javascript' src='../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushBash.js%3Fver=3.0.83c'></script>
+<script type='text/javascript' src='../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js%3Fver=3.0.83c'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://enja.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://enja.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['gutter'] = false;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = true;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://apis.google.com/js/plusone.js?ver=3.3.2'></script>
+
+	<script src="http://stats.wordpress.com/e-201219.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:1.3',blog:'4037422',post:'0'});
+	var load_cmc = function(){linktracker_init(4037422,0,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script></body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 2028/2245 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:55:28 -->

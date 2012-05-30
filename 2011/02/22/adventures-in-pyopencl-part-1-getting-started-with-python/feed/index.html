@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+		>
+<channel>
+	<title>Comments on: Adventures in PyOpenCL: Part 1 Getting Started with Python</title>
+	<atom:link href="http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/feed/" rel="self" type="application/rss+xml" />
+	<link>http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=adventures-in-pyopencl-part-1-getting-started-with-python</link>
+	<description>casin&#039; the joint since &#039;85</description>
+	<lastBuildDate>Wed, 09 May 2012 06:22:44 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.3.2</generator>
+	<item>
+		<title>By: Allan Douglas R. de Oliveira</title>
+		<link>http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/comment-page-1/#comment-1932</link>
+		<dc:creator>Allan Douglas R. de Oliveira</dc:creator>
+		<pubDate>Tue, 08 May 2012 03:40:40 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=424#comment-1932</guid>
+		<description>pm,
+
+You need to run the test 1000 times. Like:
+time1 = time()
+for i in range(1000):
+        c_result = (a + b) * (a + b) * (a / 2.0)
+time2 = time()
+print(&quot;Execution time with numpy: &quot;, time2 - time1, &quot;s&quot;)
+
+You will see OpenCL performs better than NumPy (but NumPy is still pretty good, IMHO). On my machine:
+
+(&#039;Execution time of test without OpenCL: &#039;, 9.549367904663086, &#039;s&#039;)
+(&#039;Execution time with numpy: &#039;, 0.01725006103515625, &#039;s&#039;)
+===============================================================
+(&#039;Platform name:&#039;, &#039;Intel(R) OpenCL&#039;)
+(&#039;Platform profile:&#039;, &#039;FULL_PROFILE&#039;)
+(&#039;Platform vendor:&#039;, &#039;Intel(R) Corporation&#039;)
+(&#039;Platform version:&#039;, &#039;OpenCL 1.1 LINUX&#039;)
+---------------------------------------------------------------
+(&#039;Device name:&#039;, &#039;      Intel(R) Core(TM) i7-2630QM CPU @ 2.00GHz&#039;)
+(&#039;Device type:&#039;, &#039;CPU&#039;)
+(&#039;Device memory: &#039;, 5864, &#039;MB&#039;)
+(&#039;Device max clock speed:&#039;, 2000, &#039;MHz&#039;)
+(&#039;Device compute units:&#039;, 8)
+Execution time of test: 0.000382 s
+Results OK
+===============================================================
+(&#039;Platform name:&#039;, &#039;NVIDIA CUDA&#039;)
+(&#039;Platform profile:&#039;, &#039;FULL_PROFILE&#039;)
+(&#039;Platform vendor:&#039;, &#039;NVIDIA Corporation&#039;)
+(&#039;Platform version:&#039;, &#039;OpenCL 1.1 CUDA 4.2.1&#039;)
+---------------------------------------------------------------
+(&#039;Device name:&#039;, &#039;GeForce GT 540M&#039;)
+(&#039;Device type:&#039;, &#039;GPU&#039;)
+(&#039;Device memory: &#039;, 2047, &#039;MB&#039;)
+(&#039;Device max clock speed:&#039;, 1344, &#039;MHz&#039;)
+(&#039;Device compute units:&#039;, 2)
+Execution time of test: 0.000624512 s
+Results OK</description>
+		<content:encoded><![CDATA[<p>pm,</p>
+<p>You need to run the test 1000 times. Like:<br />
+time1 = time()<br />
+for i in range(1000):<br />
+        c_result = (a + b) * (a + b) * (a / 2.0)<br />
+time2 = time()<br />
+print(&#8220;Execution time with numpy: &#8220;, time2 &#8211; time1, &#8220;s&#8221;)</p>
+<p>You will see OpenCL performs better than NumPy (but NumPy is still pretty good, IMHO). On my machine:</p>
+<p>(&#8216;Execution time of test without OpenCL: &#8216;, 9.549367904663086, &#8216;s&#8217;)<br />
+(&#8216;Execution time with numpy: &#8216;, 0.01725006103515625, &#8216;s&#8217;)<br />
+===============================================================<br />
+(&#8216;Platform name:&#8217;, &#8216;Intel(R) OpenCL&#8217;)<br />
+(&#8216;Platform profile:&#8217;, &#8216;FULL_PROFILE&#8217;)<br />
+(&#8216;Platform vendor:&#8217;, &#8216;Intel(R) Corporation&#8217;)<br />
+(&#8216;Platform version:&#8217;, &#8216;OpenCL 1.1 LINUX&#8217;)<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+(&#8216;Device name:&#8217;, &#8216;      Intel(R) Core(TM) i7-2630QM CPU @ 2.00GHz&#8217;)<br />
+(&#8216;Device type:&#8217;, &#8216;CPU&#8217;)<br />
+(&#8216;Device memory: &#8216;, 5864, &#8216;MB&#8217;)<br />
+(&#8216;Device max clock speed:&#8217;, 2000, &#8216;MHz&#8217;)<br />
+(&#8216;Device compute units:&#8217;, 8)<br />
+Execution time of test: 0.000382 s<br />
+Results OK<br />
+===============================================================<br />
+(&#8216;Platform name:&#8217;, &#8216;NVIDIA CUDA&#8217;)<br />
+(&#8216;Platform profile:&#8217;, &#8216;FULL_PROFILE&#8217;)<br />
+(&#8216;Platform vendor:&#8217;, &#8216;NVIDIA Corporation&#8217;)<br />
+(&#8216;Platform version:&#8217;, &#8216;OpenCL 1.1 CUDA 4.2.1&#8242;)<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+(&#8216;Device name:&#8217;, &#8216;GeForce GT 540M&#8217;)<br />
+(&#8216;Device type:&#8217;, &#8216;GPU&#8217;)<br />
+(&#8216;Device memory: &#8216;, 2047, &#8216;MB&#8217;)<br />
+(&#8216;Device max clock speed:&#8217;, 1344, &#8216;MHz&#8217;)<br />
+(&#8216;Device compute units:&#8217;, 2)<br />
+Execution time of test: 0.000624512 s<br />
+Results OK</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Parallel programming in Python &#124; TeachMeLinuxOnline official blog</title>
+		<link>http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/comment-page-1/#comment-1709</link>
+		<dc:creator>Parallel programming in Python &#124; TeachMeLinuxOnline official blog</dc:creator>
+		<pubDate>Tue, 07 Feb 2012 03:07:14 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=424#comment-1709</guid>
+		<description>[...] great pointer to OpenCL programming in Python&#8230;    &#160;           If you enjoyed this article, please consider sharing [...]</description>
+		<content:encoded><![CDATA[<p>[...] great pointer to OpenCL programming in Python&#8230;    &nbsp;           If you enjoyed this article, please consider sharing [...]</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: pm</title>
+		<link>http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/comment-page-1/#comment-1610</link>
+		<dc:creator>pm</dc:creator>
+		<pubDate>Fri, 13 Jan 2012 10:13:25 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=424#comment-1610</guid>
+		<description>the benchmark you mention is so wrong. 
+
+you have to compare to numpy operations, not pure python on CPU. 
+with numpy you can write directly
+c_result = (a + b) * (a+b) * (a/2)
+
+
+my results: 
+(&#039;Execution time of test without OpenCL: &#039;, 11.889606952667236, &#039;s&#039;)
+(&#039;Execution time of test within numpy &#039;, 0.00010013580322265625, &#039;s&#039;)
+===============================================================
+(&#039;Platform name:&#039;, &#039;NVIDIA CUDA&#039;)
+(&#039;Platform profile:&#039;, &#039;FULL_PROFILE&#039;)
+(&#039;Platform vendor:&#039;, &#039;NVIDIA Corporation&#039;)
+(&#039;Platform version:&#039;, &#039;OpenCL 1.1 CUDA 4.0.1&#039;)
+---------------------------------------------------------------
+(&#039;Device name:&#039;, &#039;Quadro NVS 290&#039;)
+(&#039;Device type:&#039;, &#039;GPU&#039;)
+(&#039;Device memory: &#039;, 255L, &#039;MB&#039;)
+(&#039;Device max clock speed:&#039;, 918, &#039;MHz&#039;)
+(&#039;Device compute units:&#039;, 2)
+Execution time of test: 0.0360267 s
+Results OK</description>
+		<content:encoded><![CDATA[<p>the benchmark you mention is so wrong. </p>
+<p>you have to compare to numpy operations, not pure python on CPU.<br />
+with numpy you can write directly<br />
+c_result = (a + b) * (a+b) * (a/2)</p>
+<p>my results:<br />
+(&#8216;Execution time of test without OpenCL: &#8216;, 11.889606952667236, &#8216;s&#8217;)<br />
+(&#8216;Execution time of test within numpy &#8216;, 0.00010013580322265625, &#8216;s&#8217;)<br />
+===============================================================<br />
+(&#8216;Platform name:&#8217;, &#8216;NVIDIA CUDA&#8217;)<br />
+(&#8216;Platform profile:&#8217;, &#8216;FULL_PROFILE&#8217;)<br />
+(&#8216;Platform vendor:&#8217;, &#8216;NVIDIA Corporation&#8217;)<br />
+(&#8216;Platform version:&#8217;, &#8216;OpenCL 1.1 CUDA 4.0.1&#8242;)<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+(&#8216;Device name:&#8217;, &#8216;Quadro NVS 290&#8242;)<br />
+(&#8216;Device type:&#8217;, &#8216;GPU&#8217;)<br />
+(&#8216;Device memory: &#8216;, 255L, &#8216;MB&#8217;)<br />
+(&#8216;Device max clock speed:&#8217;, 918, &#8216;MHz&#8217;)<br />
+(&#8216;Device compute units:&#8217;, 2)<br />
+Execution time of test: 0.0360267 s<br />
+Results OK</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Adventures in OpenCL Part 3: Constant Memory Structs &#124; enj</title>
+		<link>http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/comment-page-1/#comment-768</link>
+		<dc:creator>Adventures in OpenCL Part 3: Constant Memory Structs &#124; enj</dc:creator>
+		<pubDate>Fri, 01 Apr 2011 21:52:24 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=424#comment-768</guid>
+		<description>[...] is just a slight adaption of my Part 1 (C++, Python) tutorial code, so check those out if you need help getting [...]</description>
+		<content:encoded><![CDATA[<p>[...] is just a slight adaption of my Part 1 (C++, Python) tutorial code, so check those out if you need help getting [...]</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Adventures in PyOpenCL: Part 2, Particles with PyOpenGL &#124; enj</title>
+		<link>http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/comment-page-1/#comment-726</link>
+		<dc:creator>Adventures in PyOpenCL: Part 2, Particles with PyOpenGL &#124; enj</dc:creator>
+		<pubDate>Thu, 24 Mar 2011 15:17:10 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=424#comment-726</guid>
+		<description>[...] loadProgram is the same as in Part 1 where we simply read in the file to instantiate and build a program object. So lets skip that and [...]</description>
+		<content:encoded><![CDATA[<p>[...] loadProgram is the same as in Part 1 where we simply read in the file to instantiate and build a program object. So lets skip that and [...]</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: enj</title>
+		<link>http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/comment-page-1/#comment-715</link>
+		<dc:creator>enj</dc:creator>
+		<pubDate>Sat, 19 Mar 2011 23:43:45 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=424#comment-715</guid>
+		<description>@Al - thanks! installing with setuptools (easy_install) will work, but that note is for Mac users who want GL interop (which is only available in the latest source for now)
+
+@David - thanks for that link. I&#039;ve been planning on a tutorial about timing and what kind of things benefit from OpenCL. I&#039;ll cover it after I writeup my Part 2 (OpenGL particles)</description>
+		<content:encoded><![CDATA[<p>@Al &#8211; thanks! installing with setuptools (easy_install) will work, but that note is for Mac users who want GL interop (which is only available in the latest source for now)</p>
+<p>@David &#8211; thanks for that link. I&#8217;ve been planning on a tutorial about timing and what kind of things benefit from OpenCL. I&#8217;ll cover it after I writeup my Part 2 (OpenGL particles)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: David</title>
+		<link>http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/comment-page-1/#comment-714</link>
+		<dc:creator>David</dc:creator>
+		<pubDate>Sat, 19 Mar 2011 20:35:19 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=424#comment-714</guid>
+		<description>Hi Again:
+
+I think I figured out the problem (thanks to a nice benchmark program I found online:http://git.tiker.net/pyopencl.git/blob_plain/HEAD:/examples/benchmark-all.py). Here&#039;s the result.
+
+Thanks again for the great work. I&#039;m impressed at how easy it was to get this up and running. Nice job!
+
+Cheers,
+
+David.
+
+
+(&#039;Execution time of test without OpenCL: &#039;, 9.6666891574859619, &#039;s&#039;)
+===============================================================
+(&#039;Platform name:&#039;, &#039;Apple&#039;)
+(&#039;Platform profile:&#039;, &#039;FULL_PROFILE&#039;)
+(&#039;Platform vendor:&#039;, &#039;Apple&#039;)
+(&#039;Platform version:&#039;, &#039;OpenCL 1.0 (Dec 26 2010 12:52:21)&#039;)
+---------------------------------------------------------------
+(&#039;Device name:&#039;, &#039;ATI Radeon HD 6750M&#039;)
+(&#039;Device type:&#039;, &#039;GPU&#039;)
+(&#039;Device memory: &#039;, 512L, &#039;MB&#039;)
+(&#039;Device max clock speed:&#039;, 150, &#039;MHz&#039;)
+(&#039;Device compute units:&#039;, 5)
+Execution time of test: 0.0126587 s
+Results OK
+===============================================================
+(&#039;Platform name:&#039;, &#039;Apple&#039;)
+(&#039;Platform profile:&#039;, &#039;FULL_PROFILE&#039;)
+(&#039;Platform vendor:&#039;, &#039;Apple&#039;)
+(&#039;Platform version:&#039;, &#039;OpenCL 1.0 (Dec 26 2010 12:52:21)&#039;)
+---------------------------------------------------------------
+(&#039;Device name:&#039;, &#039;Intel(R) Core(TM) i7-2720QM CPU @ 2.20GHz&#039;)
+(&#039;Device type:&#039;, &#039;CPU&#039;)
+(&#039;Device memory: &#039;, 6144L, &#039;MB&#039;)
+(&#039;Device max clock speed:&#039;, 2200, &#039;MHz&#039;)
+(&#039;Device compute units:&#039;, 8)
+Execution time of test: 0.00191466 s
+Results OK</description>
+		<content:encoded><![CDATA[<p>Hi Again:</p>
+<p>I think I figured out the problem (thanks to a nice benchmark program I found online:<a href="http://git.tiker.net/pyopencl.git/blob_plain/HEAD:/examples/benchmark-all.py" rel="nofollow">http://git.tiker.net/pyopencl.git/blob_plain/HEAD:/examples/benchmark-all.py</a>). Here&#8217;s the result.</p>
+<p>Thanks again for the great work. I&#8217;m impressed at how easy it was to get this up and running. Nice job!</p>
+<p>Cheers,</p>
+<p>David.</p>
+<p>(&#8216;Execution time of test without OpenCL: &#8216;, 9.6666891574859619, &#8216;s&#8217;)<br />
+===============================================================<br />
+(&#8216;Platform name:&#8217;, &#8216;Apple&#8217;)<br />
+(&#8216;Platform profile:&#8217;, &#8216;FULL_PROFILE&#8217;)<br />
+(&#8216;Platform vendor:&#8217;, &#8216;Apple&#8217;)<br />
+(&#8216;Platform version:&#8217;, &#8216;OpenCL 1.0 (Dec 26 2010 12:52:21)&#8217;)<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+(&#8216;Device name:&#8217;, &#8216;ATI Radeon HD 6750M&#8217;)<br />
+(&#8216;Device type:&#8217;, &#8216;GPU&#8217;)<br />
+(&#8216;Device memory: &#8216;, 512L, &#8216;MB&#8217;)<br />
+(&#8216;Device max clock speed:&#8217;, 150, &#8216;MHz&#8217;)<br />
+(&#8216;Device compute units:&#8217;, 5)<br />
+Execution time of test: 0.0126587 s<br />
+Results OK<br />
+===============================================================<br />
+(&#8216;Platform name:&#8217;, &#8216;Apple&#8217;)<br />
+(&#8216;Platform profile:&#8217;, &#8216;FULL_PROFILE&#8217;)<br />
+(&#8216;Platform vendor:&#8217;, &#8216;Apple&#8217;)<br />
+(&#8216;Platform version:&#8217;, &#8216;OpenCL 1.0 (Dec 26 2010 12:52:21)&#8217;)<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+(&#8216;Device name:&#8217;, &#8216;Intel(R) Core(TM) i7-2720QM CPU @ 2.20GHz&#8217;)<br />
+(&#8216;Device type:&#8217;, &#8216;CPU&#8217;)<br />
+(&#8216;Device memory: &#8216;, 6144L, &#8216;MB&#8217;)<br />
+(&#8216;Device max clock speed:&#8217;, 2200, &#8216;MHz&#8217;)<br />
+(&#8216;Device compute units:&#8217;, 8)<br />
+Execution time of test: 0.00191466 s<br />
+Results OK</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: David</title>
+		<link>http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/comment-page-1/#comment-713</link>
+		<dc:creator>David</dc:creator>
+		<pubDate>Sat, 19 Mar 2011 20:15:36 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=424#comment-713</guid>
+		<description>Hi:
+
+Thanks for the great tutorial. This is a great toolkit and very easy to use. The only problem I have is that using pyopencl is *slower* than numpy! I&#039;ve been struggling for the last few hours to find  a combination of data size/kernel that would show the power of OpenCL. So far no luck..
+
+Any thoughts? (Btw I&#039;m using pyopencl on a MacBook Pro 2.2GHz, running python2.6, and the latest version of pyopencl).
+
+Thanks,
+
+David.</description>
+		<content:encoded><![CDATA[<p>Hi:</p>
+<p>Thanks for the great tutorial. This is a great toolkit and very easy to use. The only problem I have is that using pyopencl is *slower* than numpy! I&#8217;ve been struggling for the last few hours to find  a combination of data size/kernel that would show the power of OpenCL. So far no luck..</p>
+<p>Any thoughts? (Btw I&#8217;m using pyopencl on a MacBook Pro 2.2GHz, running python2.6, and the latest version of pyopencl).</p>
+<p>Thanks,</p>
+<p>David.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Al</title>
+		<link>http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/comment-page-1/#comment-710</link>
+		<dc:creator>Al</dc:creator>
+		<pubDate>Wed, 16 Mar 2011 05:46:32 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=424#comment-710</guid>
+		<description>Great` tutorial!
+easy_install works fine on mac for pyopencl
+
+The enthought python distro is an easy way to install a stack of packages (numpy, mathplot etc etc) no opencl in there yet.
+
+Would love to get this working on gumstix overo and pandaboard.
+
+Its a shame no python on iOS.</description>
+		<content:encoded><![CDATA[<p>Great` tutorial!<br />
+easy_install works fine on mac for pyopencl</p>
+<p>The enthought python distro is an easy way to install a stack of packages (numpy, mathplot etc etc) no opencl in there yet.</p>
+<p>Would love to get this working on gumstix overo and pandaboard.</p>
+<p>Its a shame no python on iOS.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: georgebastille</title>
+		<link>http://enja.org/2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/comment-page-1/#comment-686</link>
+		<dc:creator>georgebastille</dc:creator>
+		<pubDate>Sun, 06 Mar 2011 23:43:49 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=424#comment-686</guid>
+		<description>Brilliant tutorial, please put up more, I am really excited about using OpenCL with Python, seems like the perfect combination and your tutorial is really helpful, please please continue with part 1.5 (and the rest!)
+
+Thank you</description>
+		<content:encoded><![CDATA[<p>Brilliant tutorial, please put up more, I am really excited about using OpenCL with Python, seems like the perfect combination and your tutorial is really helpful, please please continue with part 1.5 (and the rest!)</p>
+<p>Thank you</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 354/375 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:55:44 -->

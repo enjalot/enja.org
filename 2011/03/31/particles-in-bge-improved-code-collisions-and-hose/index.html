@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<title>Particles in BGE: Improved Code, Collisions and Hose | enj</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/themes/twentyten-child/style.css" />
+<link rel="pingback" href="../../../../xmlrpc.php" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Feed" href="../../../../enjaorg" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+				
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.2.3 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-16564388-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	//]]></script>
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Particles in BGE: Improved Code, Collisions and Hose Comments Feed" href="feed/index.html" />
+<link rel='stylesheet' id='tfg_style-css'  href='../../../../wp-content/plugins/twitter-facebook-google-plusone-share/tfg_style.css%3Fver=3.3.2.css' type='text/css' media='all' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc.php%3Frsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://enja.org/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Adventures in OpenCL Part 3: Constant Memory Structs' href='../../30/adventures-in-opencl-part-3-constant-memory-structs/index.html' />
+<link rel='next' title='Can you see the force?' href='../../../05/01/can-you-see-the-force/index.html' />
+<meta name="generator" content="WordPress 3.3.2" />
+<link rel='shortlink' href='http://wp.me/pgWjI-8K' />
+
+<!-- All in One SEO Pack 1.6.14.2 by Michael Torbert of Semper Fi Web Design[82,147] -->
+<meta name="description" content="Hello world! I'm back with another video to show you guys what we are cooking up here at DSC. I've made a lot of internal improvements to the code, but I have a" />
+<meta name="keywords" content="blender,code,opencl" />
+<link rel="canonical" href="index.html" />
+<!-- /all in one seo pack -->
+
+
+<!-- Facebook Like Thumbnail -->
+<link rel="image_src" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/dsc_fsuseal_small.jpg" />
+<!-- End Facebook Like Thumbnail -->
+
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+</head>
+
+<body class="single single-post postid-542 single-format-standard">
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="../../../../index.html" title="enj" rel="home">enj</a>
+					</span>
+				</div>
+				<div id="site-description">casin&#039; the joint since &#039;85</div>
+
+										<img src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/cropped-turtle_nom1.jpg" width="940" height="198" alt="" />
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="index.html#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu-header"><ul id="menu-navigation" class="menu"><li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../index.html" >Home</a></li>
+<li id="menu-item-318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../about/index.html" >About</a></li>
+<li id="menu-item-694" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../d3/index.html" >d3</a></li>
+<li id="menu-item-316" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../blender/index.html" >Blender</a></li>
+<li id="menu-item-315" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../opencl/index.html" >OpenCL</a></li>
+<li id="menu-item-317" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div>			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="../../30/adventures-in-opencl-part-3-constant-memory-structs/index.html" rel="prev"><span class="meta-nav">&larr;</span> Adventures in OpenCL Part 3: Constant Memory Structs</a></div>
+					<div class="nav-next"><a href="../../../05/01/can-you-see-the-force/index.html" rel="next">Can you see the force? <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-542" class="post-542 post type-post status-publish format-standard hentry category-blender category-code category-opencl">
+					<h1 class="entry-title">Particles in BGE: Improved Code, Collisions and Hose</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="index.html" title="5:01 am" rel="bookmark"><span class="entry-date">March 31, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<p>Hello world! I&#8217;m back with another video to show you guys what we are cooking up here at <a href="http://www.facebook.com/FSUSciComp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.facebook.com']);">DSC</a>. I&#8217;ve made a lot of internal improvements to the code, but I have a little something to show as far as features too. Check out the video!</p>
+<p><iframe src="http://player.vimeo.com/video/21743717" width="640" height="480" frameborder="0"></iframe>
+<p><a href="http://vimeo.com/21743717" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://vimeo.com']);">[RTPS] Improved Code, Collisions and Hose</a> from <a href="http://vimeo.com/user4640702" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://vimeo.com']);">Ian Johnson</a> on <a href="http://vimeo.com" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://vimeo.com']);">Vimeo</a>.</p>
+<p>So what have I been up to? Mostly I&#8217;ve been cleaning up the code, fixing some nasty bugs in OpenCL that were causing crashes. They seem to all be squashed for now so I can start focusing on some key things (besides writing my thesis!) such as fixing up the collisions even more. I also want to take the hose object I&#8217;ve got now and make it more interactive so gamers can start spraying things! I&#8217;ve been upgrading the UI and exposing more simulation parameters, but there is plenty more work to be done in that area. I look forward to getting it set up in the Particle Panel when the rendering mode is set to Blender Game.</p>
+<p>We&#8217;ve also been working on getting the project built on windows, which <a href="http://andrewfsu.blogspot.com" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://andrewfsu.blogspot.com']);">Andrew Young</a> has gotten well underway. He&#8217;s got the standalone library compiling and running on windows (even with stereo 3D rendering!) but we still need to link it up to Blender.</p>
+<p>I&#8217;m in the process of writing this up for my Master&#8217;s thesis, which will lead to some extensive documentation. I hope that with a proper writeup it will be easier to collaborate with other Blender developers and get my code better integrated. I do want to thank the Blender community and especially the devs in the IRC channel for all the help so far, it really is amazing to learn so much from people all over the world!</p>
+<p><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/dsc_fsuseal_small.jpg" ><img class="aligncenter size-full wp-image-545" title="DSC" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/dsc_fsuseal_small.jpg" alt="" width="600" height="325" /></a></p>
+<p>The DSC model used to contain the fluid particles in this picture was created by <a href="http://www.medborgarplatsen.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.medborgarplatsen.com']);">Martin Lindelöf</a>. Also thanks to <a href="http://dustycloud.org/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://dustycloud.org']);">Chris Webber</a> and <a href="http://tube.freefac.org/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://tube.freefac.org']);">Slikdigit</a> for Blender Python UI inspiration and tutelage. Shout out to <a href="http://mogurijin.wordpress.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mogurijin.wordpress.com']);">Moguri</a> for all his help!</p>
+<div class="bottomcontainerBox" style="background-color:#FFFFFF;">
+			<div style="float:left; width:85px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fenja.org%2F2011%2F03%2F31%2Fparticles-in-bge-improved-code-collisions-and-hose%2F&amp;layout=button_count&amp;show_faces=false&amp;width=85&amp;action=like&amp;font=verdana&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:85px; height:21px;"></iframe></div>
+			<div style="float:left; width:80px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<g:plusone size="medium" href="http://enja.org/2011/03/31/particles-in-bge-improved-code-collisions-and-hose/"></g:plusone>
+			</div>
+			<div style="float:left; width:95px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<a href="http://twitter.com/share" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);" class="twitter-share-button" data-url="http://enja.org/2011/03/31/particles-in-bge-improved-code-collisions-and-hose/"  data-text="Particles in BGE: Improved Code, Collisions and Hose" data-count="horizontal" data-via="enjalot"></a>
+			</div>			
+			</div><div style="clear:both"></div><div style="padding-bottom:4px;"></div>											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+						This entry was posted in <a href="../../../../category/blender/index.html" title="View all posts in blender" rel="category tag">blender</a>, <a href="../../../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../../category/opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>. Bookmark the <a href="index.html" title="Permalink to Particles in BGE: Improved Code, Collisions and Hose" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="../../30/adventures-in-opencl-part-3-constant-memory-structs/index.html" rel="prev"><span class="meta-nav">&larr;</span> Adventures in OpenCL Part 3: Constant Memory Structs</a></div>
+					<div class="nav-next"><a href="../../../05/01/can-you-see-the-force/index.html" rel="next">Can you see the force? <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">16 Responses to <em>Particles in BGE: Improved Code, Collisions and Hose</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-760">
+		<div id="comment-760">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/f509f2ab127d35e2b94473463dde6134?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Blenderificus</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-760">
+			March 31, 2011 at 10:03 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>whoa, hope this makes it into trunk someday!</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-762">
+		<div id="comment-762">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/cbcbad1722ada4b9c779fe2cc81ebdd8?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="http://www.martinlindelof.com/graphics/blender" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.martinlindelof.com']);"  rel='external nofollow' class='url'>Martin Lindelöf</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-762">
+			April 1, 2011 at 4:06 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Nice work! you&#8217;re making progress all the time, I&#8217;ll have to read on your pyOpenCl findings … atm im at work it&#8217;s morning in Sweden and I have a deadline and need to fix the animation today. </p>
+<p>RTPS i assume stands for real-time particle system. I&#8217;ve recently started to explore physics but for flash and mostly 2d and simple systems. using runge-kutta solver.</p>
+<p>I&#8217;ve read the wikipedia article about krylov solver.</p>
+<p>what kind of integrator are you using for your particle system? it seems really stable only now and then I see some particles bouncing away.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-765">
+		<div id="comment-765">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-765">
+			April 1, 2011 at 4:55 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thanks @blenderificus, me too :)</p>
+<p>@Martin Thanks, let me know what you think of PyOpenCL. RTPS is indeed real-time particle system, and I have a &#8220;Simple&#8221; system as well as my colleague&#8217;s boid system which all use the same base libraries. I&#8217;m using leapfrog integration, which is just 2nd order in time. SPH does not require a higher order method like RK4 because it won&#8217;t help the accuracy nearly as much as adding more particles. I did do an RK4 solver in my Simple system at one point. There are other techniques part of SPH which help with stability, such as a smoothing technique called XSPH. </p>
+<p>The few particles bouncing away is most likely because of a weakness in the collision. I have noticed that lone or pairs of particles can get separated in other tests, which happens more depending on the various parameters chosen.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-795">
+		<div id="comment-795">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/596a6b3519eeea6ed035e2bf29416037?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Seth</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-795">
+			April 9, 2011 at 1:09 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Great! Thanks for emailing me about the update. Any approximate estimates at when test builds will be publicly  available? Thanks. :)</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://www.blendernation.com/2011/04/20/ian-johnson-fluid-simulation-blender-game-engine-using-opencl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.blendernation.com']);"  rel='external nofollow' class='url'>Ian Johnson : Fluid Simulation Blender game engine using OpenCL at BlenderNation</a></p>
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-824">
+		<div id="comment-824">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/a8bdccf353abe122f618dfbe824aa5d7?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="http://benjaminsohn.de" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://benjaminsohn.de']);"  rel='external nofollow' class='url'>benjamin</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-824">
+			April 20, 2011 at 3:21 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>you guy rock it dude ! It&#8217;s sooooo unbelievable awesome what you have created. Hope I will get a computer with a quadFX card to run openCL &#8211; theres no different way right ?<br />
+gretings &#8211; benNO!</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-826">
+		<div id="comment-826">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/4f22d46b235fda12cbfb914f0b7d68b6?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Elam</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-826">
+			April 21, 2011 at 12:24 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>This is great!</p>
+<p>Is the code available for checkout?</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://cn.blendernation.com/2011/04/21/ian-johnson-%e5%9c%a8blender%e7%9a%84%e6%b8%b8%e6%88%8f%e5%bc%95%e6%93%8e%e9%87%8c%e9%9d%a2%e4%bd%bf%e7%94%a8opencl%e8%bf%9b%e8%a1%8c%e6%b5%81%e4%bd%93%e6%a8%a1%" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://cn.blendernation.com']);"  rel='external nofollow' class='url'>Ian Johnson : 在Blender的游戏引擎里面使用OpenCL进行流体模拟 at BlenderNation</a></p>
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://de.blendernation.com/2011/04/21/ian-johnson-fluid-simulation-blender-game-engine-verwendet-opencl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://de.blendernation.com']);"  rel='external nofollow' class='url'>Ian Johnson : Fluid Simulation Blender Game Engine verwendet OpenCL at BlenderNation</a></p>
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://pl.blendernation.com/2011/04/22/ian-johnson-symulacja-plynow-w-game-engine-z-uzyciem-opencl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://pl.blendernation.com']);"  rel='external nofollow' class='url'>Ian Johnson : Symulacja płynów w game engine z użyciem OpenCL at BlenderNation</a></p>
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://jp.blendernation.com/2011/04/25/ian-johnson%ef%bc%9aopencl%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9f%e3%80%81blender-game-engine%e3%81%ab%e3%82%88%e3%82%8b%e6%b5%81%e4%bd%93%e3%82%b7%e3%83%9f%e3%83%a" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://jp.blendernation.com']);"  rel='external nofollow' class='url'>Ian Johnson：OpenCLを使った、Blender Game Engineによる流体シミュレーション at BlenderNation</a></p>
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-836">
+		<div id="comment-836">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-836">
+			April 25, 2011 at 11:17 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thanks guys!<br />
+The code is available at:<br />
+<a href="https://github.com/enjalot/BGERTPS" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','http://github.com']);" rel="nofollow">https://github.com/enjalot/BGERTPS</a></p>
+<p>and I&#8217;m sending alpha builds to people who email me with their OS and GFX card info and are willing to deal with bugs/crashes for a while!</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="../../../05/01/can-you-see-the-force/index.html"   rel='external nofollow' class='url'>Can you see the force? | enj</a></p>
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://fr.blendernation.com/2011/05/03/ian-johnson-simulation-de-fluides-utilisant-lopencl-dans-le-moteur-de-jeu-de-blender/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://fr.blendernation.com']);"  rel='external nofollow' class='url'>Ian Johnson : simulation de fluides utilisant l&#8217;OpenCL dans le moteur de jeu de Blender at BlenderNation</a></p>
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://ru.blendernation.com/2011/05/11/%d1%8f%d0%bd-%d0%b4%d0%b6%d0%be%d0%bd%d1%81%d0%be%d0%bd-%d1%81%d0%b8%d0%bc%d1%83%d0%bb%d1%8f%d1%82%d0%be%d1%80-%d0%b6%d0%b8%d0%b4%d0%ba%d0%be%d1%81%d1%82%d0%b8-%" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://ru.blendernation.com']);"  rel='external nofollow' class='url'>Ян Джонсон: Симулятор жидкости для Blender Game Еngine использующий OpenCL at BlenderNation</a></p>
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="../../../08/02/lbl-summer-research-final-report/index.html"   rel='external nofollow' class='url'>LBL Summer Research: Final Report | enj</a></p>
+	</li>
+			</ol>
+
+
+
+								
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-3" class="widget-container widget_search"><form role="search" method="get" id="searchform" action="../../../../index.html" >
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" value="" name="s" id="s" />
+	<input type="submit" id="searchsubmit" value="Search" />
+	</div>
+	</form></li><li id="nav_menu-3" class="widget-container widget_nav_menu"><div class="menu-navigation-container"><ul id="menu-navigation-1" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../index.html" >Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../about/index.html" >About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../d3/index.html" >d3</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../blender/index.html" >Blender</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../opencl/index.html" >OpenCL</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div></li><li id="text-4" class="widget-container widget_text">			<div class="textwidget"><a href="https://twitter.com/#!/enjalot" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=twitter.com"> @enjalot</a>
+<br/>
+<a href="https://plus.google.com/112153365286725889851/posts" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://plus.google.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=plus.google.com"> +Ian Johnson</a></div>
+		</li><li id="categories-414549122" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-25"><a href="../../../../category/tutorial/advcl/index.html" title="Adventures in OpenCL">advcl</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="../../../../category/tutorial/advd3-tutorial/index.html" title="View all posts filed under advd3">advd3</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="../../../../category/android/index.html" title="View all posts filed under android">android</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="../../../../category/blender/index.html" title="View all posts filed under blender">blender</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="../../../../category/code/index.html" title="View all posts filed under code">code</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="../../../../category/community/index.html" title="View all posts filed under community">community</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="../../../../category/culture/index.html" title="View all posts filed under culture">culture</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="../../../../category/d3/index.html" title="View all posts filed under d3">d3</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="../../../../category/life/index.html" title="View all posts filed under life">life</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="../../../../category/math/index.html" title="View all posts filed under math">math</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="../../../../category/misc/index.html" title="View all posts filed under misc">misc</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="../../../../category/music/index.html" title="View all posts filed under music">music</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="../../../../category/news/index.html" title="View all posts filed under news">news</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="../../../../category/opencl/index.html" title="View all posts filed under opencl">opencl</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="../../../../category/processingjs/index.html" title="View all posts filed under processingjs">processingjs</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="../../../../category/python/index.html" title="View all posts filed under python">python</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="../../../../category/race/index.html" title="View all posts filed under race">race</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="../../../../category/school/index.html" title="View all posts filed under school">school</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="../../../../category/tech/index.html" title="View all posts filed under tech">tech</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="../../../../category/travel/index.html" title="View all posts filed under travel">travel</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="../../../../category/tutorial/index.html" title="View all posts filed under tutorial">tutorial</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="../../../../category/uncategorized/index.html" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="../../../../category/wtf/index.html" title="View all posts filed under wtf">wtf</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="../../../../category/中�%2596%2587/index.html" title="View all posts filed under 中文">中文</a>
+</li>
+		</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="../../../../index.html" title="enj" rel="home">
+					enj				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+<script type='text/javascript' src='http://d3a9pqeyre6pa0.cloudfront.net/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?aa&#038;ver=3.3.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/plugins/jetpack/modules/wpgroho.js%3Fver=3.3.2'></script>
+	<div style="display:none">
+	<div class="grofile-hash-map-f509f2ab127d35e2b94473463dde6134">
+	</div>
+	<div class="grofile-hash-map-cbcbad1722ada4b9c779fe2cc81ebdd8">
+	</div>
+	<div class="grofile-hash-map-89db4f3e0cfa7752306bede98888b898">
+	</div>
+	<div class="grofile-hash-map-596a6b3519eeea6ed035e2bf29416037">
+	</div>
+	<div class="grofile-hash-map-a8bdccf353abe122f618dfbe824aa5d7">
+	</div>
+	<div class="grofile-hash-map-4f22d46b235fda12cbfb914f0b7d68b6">
+	</div>
+	</div>
+<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://apis.google.com/js/plusone.js?ver=3.3.2'></script>
+
+	<script src="http://stats.wordpress.com/e-201219.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:1.3',blog:'4037422',post:'542'});
+	var load_cmc = function(){linktracker_init(4037422,542,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script></body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 1340/1465 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:39:23 -->

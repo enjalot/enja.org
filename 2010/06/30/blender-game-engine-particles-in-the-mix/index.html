@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<title>Blender Game Engine: Particles in the Mix | enj</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/themes/twentyten-child/style.css" />
+<link rel="pingback" href="../../../../xmlrpc.php" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Feed" href="../../../../enjaorg" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+				
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.2.3 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-16564388-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	//]]></script>
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Blender Game Engine: Particles in the Mix Comments Feed" href="feed/index.html" />
+<link rel='stylesheet' id='tfg_style-css'  href='../../../../wp-content/plugins/twitter-facebook-google-plusone-share/tfg_style.css%3Fver=3.3.2.css' type='text/css' media='all' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc.php%3Frsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://enja.org/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Simple Particles with OpenCL and OpenGL' href='../../26/simple-particles-with-opencl-and-opengl/index.html' />
+<link rel='next' title='20 million particles in OpenCL on the GTX480' href='../../../07/09/20-million-particles-in-opencl-on-the-gtx480/index.html' />
+<meta name="generator" content="WordPress 3.3.2" />
+<link rel='shortlink' href='http://wp.me/pgWjI-3c' />
+
+<!-- All in One SEO Pack 1.6.14.2 by Michael Torbert of Semper Fi Web Design[82,136] -->
+<meta name="description" content="I think I can show you better than I can tell you check out the code This is the first major milestone in my journey! I've got a lot of work to do" />
+<meta name="keywords" content="blender,code,opencl" />
+<link rel="canonical" href="index.html" />
+<!-- /all in one seo pack -->
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+</head>
+
+<body class="single single-post postid-198 single-format-standard">
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="../../../../index.html" title="enj" rel="home">enj</a>
+					</span>
+				</div>
+				<div id="site-description">casin&#039; the joint since &#039;85</div>
+
+										<img src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/cropped-turtle_nom1.jpg" width="940" height="198" alt="" />
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="index.html#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu-header"><ul id="menu-navigation" class="menu"><li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../index.html" >Home</a></li>
+<li id="menu-item-318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../about/index.html" >About</a></li>
+<li id="menu-item-694" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../d3/index.html" >d3</a></li>
+<li id="menu-item-316" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../blender/index.html" >Blender</a></li>
+<li id="menu-item-315" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../opencl/index.html" >OpenCL</a></li>
+<li id="menu-item-317" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div>			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="../../26/simple-particles-with-opencl-and-opengl/index.html" rel="prev"><span class="meta-nav">&larr;</span> Simple Particles with OpenCL and OpenGL</a></div>
+					<div class="nav-next"><a href="../../../07/09/20-million-particles-in-opencl-on-the-gtx480/index.html" rel="next">20 million particles in OpenCL on the GTX480 <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-198" class="post-198 post type-post status-publish format-standard hentry category-blender category-code category-opencl">
+					<h1 class="entry-title">Blender Game Engine: Particles in the Mix</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="index.html" title="11:46 pm" rel="bookmark"><span class="entry-date">June 30, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<p>I think I can show you better than I can tell you</p>
+<p><object width="560" height="340"><param name="movie" value="http://www.youtube.com/v/lP6zfAVm7B0&amp;hl=en_US&amp;fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/lP6zfAVm7B0&amp;hl=en_US&amp;fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="560" height="340"></embed></object></p>
+<p><a href="http://github.com/enjalot/BGEnjaParticles" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">check out the code</a></p>
+<p>This is the first major milestone in my <a href="../../../05/20/blender-and-opencl-the-journey-begins/index.html" >journey</a>! I&#8217;ve got a lot of work to do before this is in any usable condition for artists, but none the less it feels good to see my OpenCL Particle System and interact with it through the Blender Game Engine. Right now I&#8217;ve linked to my <a href="http://github.com/enjalot/EnjaParticles" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">EnjaParticles</a> library from Blender, I create a system using a custom modifier (called Enja for now) on an object and if the modifier is present I divert rendering of that object to a custom function.</p>
+<p>My next step is to get a better understanding of all the OpenGL magic going on because my colors and alpha blending are not behaving as expected. At the same time I&#8217;m thinking I&#8217;ll rewrite the particle system code inside the BGE and start looking at how the existing particle system works. I&#8217;m going to start with a small subset of the existing functionality, so please let me know if you&#8217;re dying to have a certain particle effect in the game engine so I can prioritize better, otherwise I&#8217;ll just do what looks the most fun.</p>
+<p>I want to spend some more time thinking about handling the OpenCL context, perhaps loading it, building the programs and preparing the kernels when the game engine starts. Right now an entirely new context is created for each system which seems quite wasteful. I also need to clean up the build process, which should be helped by moving the code internal to blender, but making OpenCL available to the whole of blender might encourage other developers to try their hand at accelerating other areas.</p>
+<div class="bottomcontainerBox" style="background-color:#FFFFFF;">
+			<div style="float:left; width:85px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fenja.org%2F2010%2F06%2F30%2Fblender-game-engine-particles-in-the-mix%2F&amp;layout=button_count&amp;show_faces=false&amp;width=85&amp;action=like&amp;font=verdana&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:85px; height:21px;"></iframe></div>
+			<div style="float:left; width:80px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<g:plusone size="medium" href="http://enja.org/2010/06/30/blender-game-engine-particles-in-the-mix/"></g:plusone>
+			</div>
+			<div style="float:left; width:95px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<a href="http://twitter.com/share" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);" class="twitter-share-button" data-url="http://enja.org/2010/06/30/blender-game-engine-particles-in-the-mix/"  data-text="Blender Game Engine: Particles in the Mix" data-count="horizontal" data-via="enjalot"></a>
+			</div>			
+			</div><div style="clear:both"></div><div style="padding-bottom:4px;"></div>											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+						This entry was posted in <a href="../../../../category/blender/index.html" title="View all posts in blender" rel="category tag">blender</a>, <a href="../../../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../../category/opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>. Bookmark the <a href="index.html" title="Permalink to Blender Game Engine: Particles in the Mix" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="../../26/simple-particles-with-opencl-and-opengl/index.html" rel="prev"><span class="meta-nav">&larr;</span> Simple Particles with OpenCL and OpenGL</a></div>
+					<div class="nav-next"><a href="../../../07/09/20-million-particles-in-opencl-on-the-gtx480/index.html" rel="next">20 million particles in OpenCL on the GTX480 <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">8 Responses to <em>Blender Game Engine: Particles in the Mix</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-115">
+		<div id="comment-115">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/710364d1e4ed83dd1d8ed28639a84cdd?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Gordon</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-115">
+			July 1, 2010 at 12:03 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Consider that your advisor&#8217;s wishes have maximum priority. </p>
+<p>I am not sure that a modifier is the way to go. You will want new particles to be created as time goes on and old ones die. Read some articles on particle generators.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-117">
+		<div id="comment-117">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/aa03a524bd265d7941d22cf35e981f30?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Mal</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-117">
+			July 1, 2010 at 1:34 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Looks cool &#8211; when moving the emitter, the previous particles should stay in place ( if you fire a gun and rotate the gun, the bullet won&#8217;t rotate with the gun ).</p>
+<p>You should also contact Erwin at <a href="http://code.google.com/p/gamekit/" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','http://code.google.com']);" rel="nofollow">http://code.google.com/p/gamekit/</a>  or bulletphysics.com &#8211; if you use the right license, it can be used as part of GameKit ( an external open source Blender GE player, but with a license the same as Bullet &#8211; ie it can be used in Blender, but also commercially ).</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-118">
+		<div id="comment-118">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/f509f2ab127d35e2b94473463dde6134?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Blenderificus</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-118">
+			July 1, 2010 at 2:01 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Great work so far.  The modifier idea is intriguing.  The OpenCl is AWESOME!!! Looks solid in its early state.</p>
+<p>You mentioned requests, so I&#8217;ll throw some out:</p>
+<p>•I would enjoy the ability to have the individual particles interact with (other objects in)the bullet physics engine in blender. </p>
+<p>•The ability to animate particles with other modifiers that are AFTER the particle modifier in the modifier hierarchy, like an animated array modifier &amp; simple deform, would be cool too, but not sure if its feasible</p>
+<p>•The ability to &#8220;crossfade&#8221; between 2(or more) particle systems within the modifier. Something abstract like this could be VERY useful</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-127">
+		<div id="comment-127">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/49dccb54ca0a42a23f6998c5b2bf4c67?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Rhys</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-127">
+			July 4, 2010 at 10:15 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Sicko!<br />
+What is your end goal?<br />
+-For high res particle simulations in an interactive environment/game engine?<br />
+-Game engine particle system for ingame fx (explosions,fire etc)?</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-130">
+		<div id="comment-130">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/061dd199bd68c1ace83ff8f561ecfc8a?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Gustav</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-130">
+			July 6, 2010 at 5:04 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Looks very interesting! Lukas Tönne just started working on a redesign of blender’s particle system. I don&#8217;t know how much your work relate to each other but if the do it might be interesting to communicate and align your work. It would be sad to see two promising projects interfere with each other…</p>
+<p><a href="http://wiki.blender.org/index.php/User:Phonybone/ParticlesDesign" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','http://wiki.blender.org']);" rel="nofollow">http://wiki.blender.org/index.php/User:Phonybone/ParticlesDesign</a></p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="li-comment-132">
+		<div id="comment-132">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">enj</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-132">
+			July 6, 2010 at 3:31 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>@rhys: the official goal is to be able to do scientific visualizations in an interactive environment. Improved performance for other aspects (my project will hopefully make it easier to integrate opencl Bullet for example) and particle effects like fire/smoke are benefits that should come along the way.</p>
+<p>@gustav: thanks for the heads up! I&#8217;ll be sure to check out Lukas&#8217; work and get in contact with him so that energy isn&#8217;t wasted!</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-227">
+		<div id="comment-227">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/2106edc31a0d514d6645192b98df8ed4?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Anurag vohra</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-227">
+			August 10, 2010 at 2:39 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>That was really amazing.<br />
+Keep going. Thats because of pepole like you (and ofcourse Ton and all who contribute to Blender community) belnder gonna be the most powerful animation package.<br />
+Real Hat ups to you freind</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-333">
+		<div id="comment-333">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/ef991515952bacd18d0d86e506949fee?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="http://www.mygemologist.com" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.mygemologist.com']);"  rel='external nofollow' class='url'>Dominic</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-333">
+			October 1, 2010 at 2:54 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hello,</p>
+<p>I&#8217;m relatively new to blender, but I&#8217;m very impressed with what you&#8217;re doing here. Personally, I think the physics simulations (smoke, fluids, cloth, etc.) would benefit immensely from OpenCL acceleration. That combined with a GPU accelerated render engine like others are working on with the LuxRays project would revolutionize the speed of my work flow. Anyway, just wanted to say keep up the good work.</p>
+<p>Dominic</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+			</ol>
+
+
+
+								
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-3" class="widget-container widget_search"><form role="search" method="get" id="searchform" action="../../../../index.html" >
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" value="" name="s" id="s" />
+	<input type="submit" id="searchsubmit" value="Search" />
+	</div>
+	</form></li><li id="nav_menu-3" class="widget-container widget_nav_menu"><div class="menu-navigation-container"><ul id="menu-navigation-1" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../index.html" >Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../about/index.html" >About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../d3/index.html" >d3</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../blender/index.html" >Blender</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../opencl/index.html" >OpenCL</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div></li><li id="text-4" class="widget-container widget_text">			<div class="textwidget"><a href="https://twitter.com/#!/enjalot" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=twitter.com"> @enjalot</a>
+<br/>
+<a href="https://plus.google.com/112153365286725889851/posts" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://plus.google.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=plus.google.com"> +Ian Johnson</a></div>
+		</li><li id="categories-414549122" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-25"><a href="../../../../category/tutorial/advcl/index.html" title="Adventures in OpenCL">advcl</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="../../../../category/tutorial/advd3-tutorial/index.html" title="View all posts filed under advd3">advd3</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="../../../../category/android/index.html" title="View all posts filed under android">android</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="../../../../category/blender/index.html" title="View all posts filed under blender">blender</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="../../../../category/code/index.html" title="View all posts filed under code">code</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="../../../../category/community/index.html" title="View all posts filed under community">community</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="../../../../category/culture/index.html" title="View all posts filed under culture">culture</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="../../../../category/d3/index.html" title="View all posts filed under d3">d3</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="../../../../category/life/index.html" title="View all posts filed under life">life</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="../../../../category/math/index.html" title="View all posts filed under math">math</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="../../../../category/misc/index.html" title="View all posts filed under misc">misc</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="../../../../category/music/index.html" title="View all posts filed under music">music</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="../../../../category/news/index.html" title="View all posts filed under news">news</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="../../../../category/opencl/index.html" title="View all posts filed under opencl">opencl</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="../../../../category/processingjs/index.html" title="View all posts filed under processingjs">processingjs</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="../../../../category/python/index.html" title="View all posts filed under python">python</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="../../../../category/race/index.html" title="View all posts filed under race">race</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="../../../../category/school/index.html" title="View all posts filed under school">school</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="../../../../category/tech/index.html" title="View all posts filed under tech">tech</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="../../../../category/travel/index.html" title="View all posts filed under travel">travel</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="../../../../category/tutorial/index.html" title="View all posts filed under tutorial">tutorial</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="../../../../category/uncategorized/index.html" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="../../../../category/wtf/index.html" title="View all posts filed under wtf">wtf</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="../../../../category/中�%2596%2587/index.html" title="View all posts filed under 中文">中文</a>
+</li>
+		</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="../../../../index.html" title="enj" rel="home">
+					enj				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+<script type='text/javascript' src='http://d3a9pqeyre6pa0.cloudfront.net/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?aa&#038;ver=3.3.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/plugins/jetpack/modules/wpgroho.js%3Fver=3.3.2'></script>
+	<div style="display:none">
+	<div class="grofile-hash-map-710364d1e4ed83dd1d8ed28639a84cdd">
+	</div>
+	<div class="grofile-hash-map-aa03a524bd265d7941d22cf35e981f30">
+	</div>
+	<div class="grofile-hash-map-f509f2ab127d35e2b94473463dde6134">
+	</div>
+	<div class="grofile-hash-map-49dccb54ca0a42a23f6998c5b2bf4c67">
+	</div>
+	<div class="grofile-hash-map-061dd199bd68c1ace83ff8f561ecfc8a">
+	</div>
+	<div class="grofile-hash-map-89db4f3e0cfa7752306bede98888b898">
+	</div>
+	<div class="grofile-hash-map-2106edc31a0d514d6645192b98df8ed4">
+	</div>
+	<div class="grofile-hash-map-ef991515952bacd18d0d86e506949fee">
+	</div>
+	</div>
+<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://apis.google.com/js/plusone.js?ver=3.3.2'></script>
+
+	<script src="http://stats.wordpress.com/e-201219.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:1.3',blog:'4037422',post:'198'});
+	var load_cmc = function(){linktracker_init(4037422,198,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script></body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 1220/1332 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:45:59 -->

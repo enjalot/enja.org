@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+		>
+<channel>
+	<title>Comments on: the day the data stood still</title>
+	<atom:link href="http://enja.org/2010/04/09/the-day-the-data-stood-still/feed/" rel="self" type="application/rss+xml" />
+	<link>http://enja.org/2010/04/09/the-day-the-data-stood-still/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=the-day-the-data-stood-still</link>
+	<description>casin&#039; the joint since &#039;85</description>
+	<lastBuildDate>Wed, 09 May 2012 06:22:44 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.3.2</generator>
+	<item>
+		<title>By: Anthony</title>
+		<link>http://enja.org/2010/04/09/the-day-the-data-stood-still/comment-page-1/#comment-31</link>
+		<dc:creator>Anthony</dc:creator>
+		<pubDate>Fri, 16 Apr 2010 05:15:32 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=127#comment-31</guid>
+		<description>reading this reaffirmed that...i know nothing about programming...lol</description>
+		<content:encoded><![CDATA[<p>reading this reaffirmed that&#8230;i know nothing about programming&#8230;lol</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: SteveC</title>
+		<link>http://enja.org/2010/04/09/the-day-the-data-stood-still/comment-page-1/#comment-27</link>
+		<dc:creator>SteveC</dc:creator>
+		<pubDate>Fri, 09 Apr 2010 20:15:10 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=127#comment-27</guid>
+		<description>You mention storing native formats in files.  You didn&#039;t mention byte ordering.  For example, if you write a four-byte int out to a file on an x86 box, then transfer that file over to a PowerPC box, and read the int into a program, you&#039;re going to be hosed unless you take special precautions.  That&#039;s because x86 stores integers as &quot;little endian&quot; that is, the four bytes that make up the integer are ordered so that the least significant byte is first, and the most significant last, or &quot;little end first.&quot;  The PowerPC thinks that 4 byte integers are stored in the reverse order, with the first byte being the most significant, and the last byte being the least significant, or &quot;big end first&quot;, or, &quot;big endian&quot;.  The same problem occurs with networking. The solution to this is to define the file format such that it specifies a byte order.  Typically, big-endian (also known as &quot;network byte order&quot;) is used for external data formats.  There are functions in the C library like ntohl and htonl -- &quot;net to host long&quot; and &quot;host to net long&quot; for converting between &quot;host&quot; byte order (be that big or little endian or some weird mixture like DEC machines could do) and &quot;network&quot; byte order -- typically big endian.</description>
+		<content:encoded><![CDATA[<p>You mention storing native formats in files.  You didn&#8217;t mention byte ordering.  For example, if you write a four-byte int out to a file on an x86 box, then transfer that file over to a PowerPC box, and read the int into a program, you&#8217;re going to be hosed unless you take special precautions.  That&#8217;s because x86 stores integers as &#8220;little endian&#8221; that is, the four bytes that make up the integer are ordered so that the least significant byte is first, and the most significant last, or &#8220;little end first.&#8221;  The PowerPC thinks that 4 byte integers are stored in the reverse order, with the first byte being the most significant, and the last byte being the least significant, or &#8220;big end first&#8221;, or, &#8220;big endian&#8221;.  The same problem occurs with networking. The solution to this is to define the file format such that it specifies a byte order.  Typically, big-endian (also known as &#8220;network byte order&#8221;) is used for external data formats.  There are functions in the C library like ntohl and htonl &#8212; &#8220;net to host long&#8221; and &#8220;host to net long&#8221; for converting between &#8220;host&#8221; byte order (be that big or little endian or some weird mixture like DEC machines could do) and &#8220;network&#8221; byte order &#8212; typically big endian.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 234/255 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:59:01 -->

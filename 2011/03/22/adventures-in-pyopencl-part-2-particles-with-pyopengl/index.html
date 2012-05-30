@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<title>Adventures in PyOpenCL: Part 2, Particles with PyOpenGL | enj</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/themes/twentyten-child/style.css" />
+<link rel="pingback" href="../../../../xmlrpc.php" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Feed" href="../../../../enjaorg" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+				
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.2.3 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-16564388-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	//]]></script>
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Adventures in PyOpenCL: Part 2, Particles with PyOpenGL Comments Feed" href="feed/index.html" />
+<link rel='stylesheet' id='tfg_style-css'  href='../../../../wp-content/plugins/twitter-facebook-google-plusone-share/tfg_style.css%3Fver=3.3.2.css' type='text/css' media='all' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc.php%3Frsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://enja.org/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='pycon 2011' href='../../14/pycon-2011/index.html' />
+<link rel='next' title='Adventures in OpenCL Part 3: Constant Memory Structs' href='../../30/adventures-in-opencl-part-3-constant-memory-structs/index.html' />
+<meta name="generator" content="WordPress 3.3.2" />
+<link rel='shortlink' href='http://wp.me/pgWjI-7X' />
+
+<!-- All in One SEO Pack 1.6.14.2 by Michael Torbert of Semper Fi Web Design[82,150] -->
+<meta name="description" content="Today we journey as pythonauts into the world of particle systems and fast 3D graphics, manipulating thousands upon thousands of little dots in mere" />
+<meta name="keywords" content="advcl,code,opencl,python,tutorial" />
+<link rel="canonical" href="index.html" />
+<!-- /all in one seo pack -->
+
+
+<!-- Facebook Like Thumbnail -->
+<link rel="image_src" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/pypart2_small.png" />
+<!-- End Facebook Like Thumbnail -->
+
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+</head>
+
+<body class="single single-post postid-493 single-format-standard">
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="../../../../index.html" title="enj" rel="home">enj</a>
+					</span>
+				</div>
+				<div id="site-description">casin&#039; the joint since &#039;85</div>
+
+										<img src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/cropped-turtle_nom1.jpg" width="940" height="198" alt="" />
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="index.html#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu-header"><ul id="menu-navigation" class="menu"><li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../index.html" >Home</a></li>
+<li id="menu-item-318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../about/index.html" >About</a></li>
+<li id="menu-item-694" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../d3/index.html" >d3</a></li>
+<li id="menu-item-316" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../blender/index.html" >Blender</a></li>
+<li id="menu-item-315" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../opencl/index.html" >OpenCL</a></li>
+<li id="menu-item-317" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div>			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="../../14/pycon-2011/index.html" rel="prev"><span class="meta-nav">&larr;</span> pycon 2011</a></div>
+					<div class="nav-next"><a href="../../30/adventures-in-opencl-part-3-constant-memory-structs/index.html" rel="next">Adventures in OpenCL Part 3: Constant Memory Structs <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-493" class="post-493 post type-post status-publish format-standard hentry category-advcl category-code category-opencl category-python category-tutorial">
+					<h1 class="entry-title">Adventures in PyOpenCL: Part 2, Particles with PyOpenGL</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="index.html" title="5:23 pm" rel="bookmark"><span class="entry-date">March 22, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<p><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/pypart2_small.png" ><img class="alignright size-full wp-image-510" title="20,000 Particles" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/pypart2_small.png" alt="20,000 Particles" width="320" height="250" /></a>Today we journey as pythonauts into the world of particle systems and fast 3D graphics, manipulating thousands upon thousands of little dots in mere milliseconds! We accomplish this with two Python modules, PyOpenCL and PyOpenGL. This is a port of my <a href="../../../../2010/08/27/adventures-in-opencl-part-2-particles-with-opengl/index.html" >C++ OpenCL tutorial</a>, but with much less code and all the splendors of numpy.</p>
+<p>What you&#8217;ll need:</p>
+<ul>
+<li><a href="http://numpy.scipy.org/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://numpy.scipy.org']);">numpy</a> (at least version 1.4)</li>
+<li><a href="http://pyopengl.sourceforge.net/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://pyopengl.sourceforge.net']);">PyOpenGL</a></li>
+<li><a href="http://mathema.tician.de/software/pyopencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mathema.tician.de']);">PyOpenCL</a>(for now, Mac users will need to <a href="http://wiki.tiker.net/PyOpenCL/Installation/Mac#Optional:_OpenGL_Interop" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://wiki.tiker.net']);">build from git</a>)</li>
+<li><a href="https://github.com/enjalot/adventures_in_opencl/tree/pypt2/python/part2" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">the code</a></li>
+<li>A graphics card and driver that support <a href="http://www.khronos.org/opencl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">OpenCL</a></li>
+</ul>
+<h3>Let&#8217;s get started!</h3>
+<p>First lets take a look at the files we will be dissecting</p>
+<pre>- important files
+    main.py
+    part2.py
+    part2.cl
+    initialize.py
+- support files
+    glutil.py
+    vector.py
+    timing.py</pre>
+<p>You can go ahead and run <span class="simple_code">python main.py</span> to see the code in action.  The way our particle system works is that we have some collection of particles, really just 3D points in space, each with it&#8217;s own lifetime. Every time we loop we want to update the positions of our particles based on some set of rules (e.g. gravity, initial velocity) and decrease their lifetime a little. When the lifetime of a particle reaches 0 we set it back to its original position and reset its lifetime. So we want to structure our code so that we initialize the positions of the particles first, then every frame we update and render them.</p>
+<p><a href="https://github.com/enjalot/adventures_in_opencl/blob/pypt2/python/part2/main.py" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">main.py</a> is responsible for setting up the OpenGL environment using PyOpenGL and GLUT, providing mouse and keyboard interaction as well as a run loop for our program. So now we have some 3D space we can look around by clicking and dragging (left and right mouse buttons) or hit &#8216;q&#8217; to quit and &#8216;t&#8217; to print out timing of the update function.</p>
+<h3>The Setup</h3>
+<p>Once we have our environment we need to setup some particles, for this look in <a href="https://github.com/enjalot/adventures_in_opencl/blob/pypt2/python/part2/initialize.py" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">initialize.py</a>. The first function you will see is <span class="simple_code">function_np</span> which creates several numpy arrays and sets their values using numpy slice operators. If that&#8217;s a little confusing, it may be easier to follow the <span class="simple_code">fountain_loopy</span> function which does the same thing but with a (slower) for loop. Essentially we are randomly placing the particles on a flat donut in the x, y plane. They each start with an initial velocity in the same direction as their position and a random lifetime. We also make an RGBA color array so that each particle can have its own color.</p>
+<p>Notice the <span class="simple_code">fountain</span> function at the bottom, which just calls the <span class="simple_code">fountain_np</span> function and creates Vertex Buffer Objects (VBO) out of the numpy arrays. Presumably when you go on to make your own OpenCL/OpenGL code you will start with your own numpy arrays and this is a key point for setting up your memory on the GPU. If you want OpenCL to be able to act on OpenGL memory (without making copies) you will need to prepare VBOs (or render buffer objects with clImage which should be the subject of a later tutorial) before you go to OpenCL. Luckily its dead simple with PyOpenGL</p>
+<pre class="brush: python; title: ; notranslate" title="">
+    from OpenGL.arrays import vbo
+    pos_vbo = vbo.VBO(data=pos, usage=GL_DYNAMIC_DRAW, target=GL_ARRAY_BUFFER)
+    pos_vbo.bind()
+</pre>
+<p>Now lets look in <a href="https://github.com/enjalot/adventures_in_opencl/blob/pypt2/python/part2/main.py" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">main.py</a> to see how the initialize functions are called and the results are passed into OpenCL.</p>
+<pre class="brush: python; title: ; notranslate" title="">
+     #set up initial conditions
+     (pos_vbo, col_vbo, vel) = initialize.fountain(num)
+     #create our OpenCL instance
+     self.cle = part2.Part2(num, dt)
+     self.cle.loadData(pos_vbo, col_vbo, vel)
+</pre>
+<p>Here num and dt are defined at the top of main.py, which are user parameters for how many particles to make and essentially how much simulation time passes each frame. Now we get to the OpenCL, we&#8217;ve made an instance of a Part2 class. Then we call <span class="simple_code">loadData</span> with the vbos and velocity array.</p>
+<h3>Interfacing with OpenCL</h3>
+<p>Let&#8217;s take a look at what the constructor and loadData are doing in <a href="https://github.com/enjalot/adventures_in_opencl/blob/pypt2/python/part2/part2.py" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">part2.py</a></p>
+<pre class="brush: python; title: ; notranslate" title="">
+     self.clinit()
+     self.loadProgram(&quot;part2.cl&quot;);
+     self.num = num
+     self.dt = numpy.float32(dt)
+</pre>
+<p>Notice how we explicitly &#8220;cast&#8221; dt to a numpy float, this is required to pass variables (non-buffers) to a PyOpenCL kernel.</p>
+<p>Now let&#8217;s take a minute to look at what <span class="simple_code">clinit</span> is doing, for it is responsible for setting up our CL Context using the existing GL context.</p>
+<pre class="brush: python; title: ; notranslate" title="">
+    plats = cl.get_platforms()
+    from pyopencl.tools import get_gl_sharing_context_properties
+    import sys
+    if sys.platform == &quot;darwin&quot;:
+        self.ctx = cl.Context(properties=get_gl_sharing_context_properties(),
+                             devices=[])
+    else:
+        self.ctx = cl.Context(properties=[
+            (cl.context_properties.PLATFORM, plats[0])]
+            + get_gl_sharing_context_properties(), devices=None)
+
+    self.queue = cl.CommandQueue(self.ctx)
+</pre>
+<p>First we get a list of available OpenCL platforms on the machine and then import a handy function provided by PyOpenCL which abstracts the <a href="http://sa10.idav.ucdavis.edu/docs/sa10-dg-opencl-gl-interop.pdf " onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://sa10.idav.ucdavis.edu']);">messy business[pdf]</a> of setting up the right properties for sharing a GL context. Due to the eccentric whims of Apple (hey, they pretty much came up with OpenCL) the way you create the context on Mac OS X is slightly different, hence the if statement checking for &#8220;darwin&#8221;. After that its back to business as usual by creating a CommandQueue from the context. If you are using PyOpenCL .92 or beta2011 you will need to replace the contents of the <span class="simple_code">clinit</span> function with <a href="https://gist.github.com/885214" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://gist.github.com']);">this code</a>.</p>
+<p>So <span class="simple_code">loadProgram</span> is the same as in <a href="../../../02/22/adventures-in-pyopencl-part-1-getting-started-with-python/index.html" >Part 1</a> where we simply read in the file to instantiate and build a program object. So lets skip that and get straight into loading the data:</p>
+<pre class="brush: python; first-line: 25; gutter: true; title: ; notranslate" title="">
+def loadData(self, pos_vbo, col_vbo, vel):
+        import pyopencl as cl
+        mf = cl.mem_flags
+
+        #... cut out the saving of variables to self ...
+
+        #Setup vertex buffer objects and share them with OpenCL as GLBuffers
+        self.pos_vbo.bind()
+        self.pos_cl = cl.GLBuffer(self.ctx, mf.READ_WRITE, int(self.pos_vbo.buffers[0]))
+        self.col_vbo.bind()
+        self.col_cl = cl.GLBuffer(self.ctx, mf.READ_WRITE, int(self.col_vbo.buffers[0]))
+
+        #pure OpenCL arrays
+        self.vel_cl = cl.Buffer(self.ctx, mf.READ_ONLY | mf.COPY_HOST_PTR, hostbuf=vel)
+        self.pos_gen_cl = cl.Buffer(self.ctx, mf.READ_ONLY | mf.COPY_HOST_PTR, hostbuf=self.pos)
+        self.vel_gen_cl = cl.Buffer(self.ctx, mf.READ_ONLY | mf.COPY_HOST_PTR, hostbuf=self.vel)
+        self.queue.finish()
+
+        # set up the list of GL objects to share with opencl
+        self.gl_objects = [self.pos_cl, self.col_cl]
+</pre>
+<p>The key here is on line 33 in creating OpenCL buffers from the vbo objects using the <span class="simple_code">cl.GLBuffer</span> class. Notice how we do not pass in the vbo object itself, but the actual integer value of the buffer as it is represented by OpenGL. We create normal OpenCL buffers as we did in Part 1 simply by passing in numpy arrays (♥). The other significant change is defining the <span class="simple_code">gl_objects</span> list which we will use in execute!</p>
+<h3>Execute!</h3>
+<pre class="brush: python; first-line: 53; gutter: true; title: ; notranslate" title="">
+def execute(self, sub_intervals):
+        cl.enqueue_acquire_gl_objects(self.queue, self.gl_objects)
+
+        global_size = (self.num,)
+        local_size = None
+
+        kernelargs = (self.pos_cl,
+                      self.col_cl,
+                      self.vel_cl,
+                      self.pos_gen_cl,
+                      self.vel_gen_cl,
+                      self.dt)
+
+        for i in xrange(0, sub_intervals):
+            self.program.part2(self.queue, global_size, local_size, *(kernelargs))
+
+        cl.enqueue_release_gl_objects(self.queue, self.gl_objects)
+        self.queue.finish()
+</pre>
+<p>The first thing to point out is that we are acquiring the <span class="simple_code">gl_objects</span> before we pass them in as arguments to the kernel. This makes sure that OpenGL is not using the buffers for anything and allows us to read from and write to them. We are setting our global workgroup size to the length of our arrays, essentially saying that each thread global workitem will be one element of our original array.<br />
+We also introduce sub intervals, allowing us to perform a variable number of updates per frame. This means one could make dt smaller, generally making the simulation more accurate but not slow down the desired motion of the particles. For example if you decrease dt from .01 to .001 you will be making the particles move 10 times slower every iteration, so to keep the visual speed the same you would do 10 sub iterations.</p>
+<h3>The Kernel</h3>
+<p>So after all that setup we are ready to run our kernel, found in <a href="https://github.com/enjalot/adventures_in_opencl/blob/pypt2/python/part2/part2.cl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">part2.cl</a>.<br />
+<script src="https://gist.github.com/882003.js"> </script></p>
+<p>This is also the exact same kernel as used in my <a href="../../../../2010/08/27/adventures-in-opencl-part-2-particles-with-opengl/index.html" >C++ version</a>.</p>
+<p>So there you have it, the essentials of interoperating between OpenCL and OpenGL in Python! I didn&#8217;t cover what I did in my utility files but those are subjects of later posts. You should be able to poke around to see whats going on, and as far as rendering I&#8217;m using very basic GL calls for VBOs which there are <a href="http://www.songho.ca/opengl/gl_vbo.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.songho.ca']);">other</a> <a href="http://sdickinson.com/wordpress/?p=122" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://sdickinson.com']);">tutorials</a> <a href="http://www.siafoo.net/article/58" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.siafoo.net']);">for</a>.</p>
+<p>I&#8217;d like to shout out to Keith Brafford for helping test and refactor this code on Windows as well as the PyOpenCL patch I worked on to get GL interop working on the Mac. Of course this tutorial wouldn&#8217;t be possible without the valiant efforts of <a href="http://mathema.tician.de/software/pyopencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mathema.tician.de']);">Andreas Klöckner</a>!</p>
+<p>As a sample of what&#8217;s possible I <a href="https://github.com/enjalot/adventures_in_opencl/tree/master/experiments/wave" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">implemented</a> a solver for the 1D Wave equations as <a href="http://www.cs.sjsu.edu/~rucker/capow/paper/node5.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.cs.sjsu.edu']);">described here</a>.</p>
+<p><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/wave2.png" ><img class="alignright size-full wp-image-512" title="Wave equation with tracer particles" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/03/wave2.png" alt="" width="638" height="503" /></a></p>
+<div class="bottomcontainerBox" style="background-color:#FFFFFF;">
+			<div style="float:left; width:85px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fenja.org%2F2011%2F03%2F22%2Fadventures-in-pyopencl-part-2-particles-with-pyopengl%2F&amp;layout=button_count&amp;show_faces=false&amp;width=85&amp;action=like&amp;font=verdana&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:85px; height:21px;"></iframe></div>
+			<div style="float:left; width:80px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<g:plusone size="medium" href="http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/"></g:plusone>
+			</div>
+			<div style="float:left; width:95px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<a href="http://twitter.com/share" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);" class="twitter-share-button" data-url="http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/"  data-text="Adventures in PyOpenCL: Part 2, Particles with PyOpenGL" data-count="horizontal" data-via="enjalot"></a>
+			</div>			
+			</div><div style="clear:both"></div><div style="padding-bottom:4px;"></div>											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+						This entry was posted in <a href="../../../../category/tutorial/advcl/index.html" title="View all posts in advcl" rel="category tag">advcl</a>, <a href="../../../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../../category/opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>, <a href="../../../../category/python/index.html" title="View all posts in python" rel="category tag">python</a>, <a href="../../../../category/tutorial/index.html" title="View all posts in tutorial" rel="category tag">tutorial</a>. Bookmark the <a href="index.html" title="Permalink to Adventures in PyOpenCL: Part 2, Particles with PyOpenGL" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="../../14/pycon-2011/index.html" rel="prev"><span class="meta-nav">&larr;</span> pycon 2011</a></div>
+					<div class="nav-next"><a href="../../30/adventures-in-opencl-part-3-constant-memory-structs/index.html" rel="next">Adventures in OpenCL Part 3: Constant Memory Structs <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">21 Responses to <em>Adventures in PyOpenCL: Part 2, Particles with PyOpenGL</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-893">
+		<div id="comment-893">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/1d37f41a5316adc47ec8a58c774c63ac?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Aleksandar</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-893">
+			June 29, 2011 at 7:58 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I tried to execute main.py but i get this result:<br />
+<code>from pyopencl.tools import get_gl_sharing_context_properties<br />
+ImportError: cannot import name get_gl_sharing_context_properties</code><br />
+I&#8217;ve searched all over the Internet but couldn&#8217;t find anything?</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="li-comment-894">
+		<div id="comment-894">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-894">
+			June 29, 2011 at 3:23 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>@Aleksandar<br />
+What version of PyOpenCL are you running? It sounds to me like you have an older one, can you try again with 2011.1?<br />
+<a href="http://pypi.python.org/pypi/pyopencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','http://pypi.python.org']);" rel="nofollow">http://pypi.python.org/pypi/pyopencl</a></p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-895">
+		<div id="comment-895">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/1d37f41a5316adc47ec8a58c774c63ac?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Aleksandar</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-895">
+			June 30, 2011 at 10:34 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I use 0.92-1 that is the only one i have in repository(I&#8217;m using Ubuntu 11.04). I&#8217;m going to try to install 2011.1.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-896">
+		<div id="comment-896">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/1d37f41a5316adc47ec8a58c774c63ac?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Aleksandar</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-896">
+			June 30, 2011 at 11:18 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I&#8217;ve installed pyopencl 2011.1 and when i run main.py I get this error:<br />
+<code>AttributeError: type object 'context_properties' has no attribute 'GL_CONTEXT_KHR'</code></p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-897">
+		<div id="comment-897">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-897">
+			June 30, 2011 at 2:14 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I will have to try 2011.1 myself then, I was using pyopencl from source and haven&#8217;t updated in a few weeks. I&#8217;ll get it and see if I can replicate the issue.</p>
+<p>What OS are you on?</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-899">
+		<div id="comment-899">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/1d37f41a5316adc47ec8a58c774c63ac?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Aleksandar</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-899">
+			July 2, 2011 at 4:10 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Ubuntu 11.04</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-932">
+		<div id="comment-932">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/0a862f93bfc5a32fe30209277f11195c?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Jake</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-932">
+			July 4, 2011 at 6:48 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I&#8217;m seeing the same thing &#8211; Ubuntu 11.04</p>
+<p>The error is occurring in pyopencl/tools.py</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-933">
+		<div id="comment-933">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/0a862f93bfc5a32fe30209277f11195c?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Jake</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-933">
+			July 4, 2011 at 7:06 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Ah, the solution was rather simple. </p>
+<p>When configuring pyopencl, use:</p>
+<p>configure.py &#8211;no-cl-enable-gl</p>
+<p>Once done, pyopencl.context_properties now has:</p>
+<p>['CGL_SHAREGROUP_KHR', 'EGL_DISPLAY_KHR', 'GLX_DISPLAY_KHR', 'GL_CONTEXT_KHR', 'PLATFORM', 'WGL_HDC_KHR', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'to_string']</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-934">
+		<div id="comment-934">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/1d37f41a5316adc47ec8a58c774c63ac?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Aleksandar</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-934">
+			July 6, 2011 at 9:38 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thanks man, I resolve that problem but now I have another one:</p>
+<p>line 37, in loadData<br />
+    self.pos_cl = cl.GLBuffer(self.ctx, mf.READ_WRITE, int(self.pos_vbo.buffers[0]))<br />
+pyopencl.LogicError: clCreateFromGLBuffer failed: invalid gl object</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-937">
+		<div id="comment-937">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/9ace813e96c8f872c0c6e91b83f63428?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Radu</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-937">
+			July 8, 2011 at 10:05 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hello.<br />
+I followed the steps in the tutorial but failed to run the program.<br />
+I get this error:<br />
+  File &#8220;main.py&#8221;, line 135, in<br />
+    p2 = window()<br />
+  File &#8220;main.py&#8221;, line 56, in __init__<br />
+    (pos_vbo, col_vbo, vel) = initialize.fountain(num)<br />
+  File &#8220;/home/radu/Desktop/Python/adventures_in_opencl/python/part2/initialize.py&#8221;, line 84, in fountain<br />
+    pos_vbo.bind()<br />
+  File &#8220;vbo.pyx&#8221;, line 227, in OpenGL_accelerate.vbo.VBO.bind (src/vbo.c:2590)<br />
+  File &#8220;vbo.pyx&#8221;, line 181, in OpenGL_accelerate.vbo.VBO.create_buffers (src/vbo.c:1872)<br />
+  File &#8220;latebind.pyx&#8221;, line 32, in OpenGL_accelerate.latebind.LateBind.__call__ (src/latebind.c:559)<br />
+  File &#8220;wrapper.pyx&#8221;, line 308, in OpenGL_accelerate.wrapper.Wrapper.__call__ (src/wrapper.c:5059)<br />
+  File &#8220;/usr/lib/pymodules/python2.7/OpenGL/platform/baseplatform.py&#8221;, line 340, in __call__<br />
+    self.__name__, self.__name__,<br />
+OpenGL.error.NullFunctionError: Attempt to call an undefined function glGenBuffersARB, check for bool(glGenBuffersARB) before calling</p>
+<p>I also have Ubuntu 11.04.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-942">
+		<div id="comment-942">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-942">
+			July 10, 2011 at 1:43 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>@Jake, @Aleksander I don&#8217;t have Ubuntu available at the moment to test with you, but I just updated to the latest source and everything still works on my mac. Those may be problems with PyOpenGL, I&#8217;m trying to remember on a school Ubuntu 11.04 machine I had to build PyOpenGL from source. That might address your genbuffers stuff @Radu unless your graphic cards drivers aren&#8217;t up to date.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://omar.toomuchcookies.net/node/2011/08/visualizing-opencl-computations-within-opengl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://omar.toomuchcookies.net']);"  rel='external nofollow' class='url'>Visualizing OpenCL computations within OpenGL | Omar Abo-Namous</a></p>
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1023">
+		<div id="comment-1023">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/a8fc72d8ce9951e08952f746e9d781e6?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="http://omar.toomuchcookies.net" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://omar.toomuchcookies.net']);"  rel='external nofollow' class='url'>Omar</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-1023">
+			August 6, 2011 at 11:31 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thank you very much for the tutorial. It helped me further with learning the interaction between opengl and opencl. Here is my article: <a href="http://omar.toomuchcookies.net/node/2011/08/visualizing-opencl-computations-within-opengl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','http://omar.toomuchcookies.net']);" rel="nofollow">Visualizing OpenCL computations within OpenGL</a></p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-1028">
+		<div id="comment-1028">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/f41538327b8521b92ca351c3db0712a0?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Ali</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-1028">
+			August 7, 2011 at 7:57 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi,<br />
+I&#8217;m having this problem on my macbook pro. It has a built in graphics unit and &#8216;GeForce GT 330M&#8217;:</p>
+<p>Timings:<br />
+fountain_np | average: 4.44102287292 | total: 4.44102287292 | count: 1</p>
+<p>Traceback (most recent call last):<br />
+  File &#8220;main.py&#8221;, line 135, in<br />
+    p2 = window()<br />
+  File &#8220;main.py&#8221;, line 58, in __init__<br />
+    self.cle = part2.Part2(num, dt)<br />
+  File &#8220;/Users/aarslan/Documents/PYTHON_TOOLS/enjalot-adventures_in_opencl-a5bb2a1/python/part2/part2.py&#8221;, line 15, in __init__<br />
+    self.clinit()<br />
+  File &#8220;/Users/aarslan/Documents/PYTHON_TOOLS/enjalot-adventures_in_opencl-a5bb2a1/python/part2/part2.py&#8221;, line 78, in clinit<br />
+    self.ctx = cl.Context(properties=get_gl_sharing_context_properties(),<br />
+  File &#8220;/Library/Frameworks/EPD64.framework/Versions/7.0/lib/python2.7/site-packages/pyopencl-2011.1.2-py2.7-macosx-10.5-x86_64.egg/pyopencl/tools.py&#8221;, line 272, in get_gl_sharing_context_properties<br />
+    (ctx_props.CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE, cl.get_apple_cgl_share_group()))<br />
+AttributeError: type object &#8216;context_properties&#8217; has no attribute &#8216;CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE&#8217;</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1046">
+		<div id="comment-1046">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/0a2fd561106e8ddf67121df80e11d944?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Jonathan Lettvin</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-1046">
+			August 28, 2011 at 2:37 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I just installed ubuntu 11.04 and used synaptic package manager to install pyopencl.<br />
+When I try to run the example programs I get:</p>
+<p>Xlib:  extension &#8220;GLX&#8221; missing on display &#8220;:0.0&#8243;.<br />
+freeglut (main.py): OpenGL GLX extension not supported by display &#8216;:0.0&#8242;</p>
+<p>Please advise how to fix this.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-1051">
+		<div id="comment-1051">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/9cdd9654d378265f53cee27589256bc9?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Erik Edin</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-1051">
+			August 31, 2011 at 2:56 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi!</p>
+<p>I just bought a new laptop, with an NVIDIA GT555M card, running Windows 7 x64.<br />
+I initially had issues running the Python part2 particle demo, with an error similar to some above.<br />
+The actual error I got was:<br />
+pyopencl.LogicError: Context failed: invalid gl sharegroup reference khr</p>
+<p>I realized after a bit of worrying that the problem was in the Optimus device that the newer laptops have, that is the integrated powersaving graphics card, if I understand correctly.<br />
+I was however able to fix that by using the NVIDIA control panel and changing the Global settings to always use the NVIDIA GT555M card, instead of the integrated Optimus card. Then I was able to run the demo without the error message.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1582">
+		<div id="comment-1582">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/a7dcec908cdd18cb2e92ab34f0e8a938?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Matt</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-1582">
+			December 28, 2011 at 7:09 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I get this as well.  Google is short on solutions.</p>
+<p>python main.py<br />
+Timings:<br />
+fountain_np | average: 23.1220722198 | total: 23.1220722198 | count: 1</p>
+<p>Traceback (most recent call last):<br />
+  File &#8220;main.py&#8221;, line 135, in<br />
+    p2 = window()<br />
+  File &#8220;main.py&#8221;, line 58, in __init__<br />
+    self.cle = part2.Part2(num, dt)<br />
+  File &#8220;/Users/xxx/pyopencl/enjalot-adventures_in_opencl-94f53cf/python/part2/part2.py&#8221;, line 15, in __init__<br />
+    self.clinit()<br />
+  File &#8220;/Users/xxx/pyopencl/enjalot-adventures_in_opencl-94f53cf/python/part2/part2.py&#8221;, line 78, in clinit<br />
+    self.ctx = cl.Context(properties=get_gl_sharing_context_properties(),<br />
+  File &#8220;/Library/Python/2.7/site-packages/pyopencl-2011.2-py2.7-macosx-10.7-intel.egg/pyopencl/tools.py&#8221;, line 282, in get_gl_sharing_context_properties<br />
+    (ctx_props.CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE, cl.get_apple_cgl_share_group()))<br />
+AttributeError: type object &#8216;context_properties&#8217; has no attribute &#8216;CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE&#8217;</p>
+<p>OS X 10.7.2 &#8212; Build 11C74<br />
+Active Graphics Card:</p>
+<p>NVIDIA GeForce 9600M GT:</p>
+<p>  Chipset Model:	NVIDIA GeForce 9600M GT<br />
+  Type:	GPU<br />
+  Bus:	PCIe<br />
+  PCIe Lane Width:	x16<br />
+  VRAM (Total):	512 MB<br />
+  Vendor:	NVIDIA (0x10de)<br />
+  Device ID:	0&#215;0647<br />
+  Revision ID:	0x00a1<br />
+  ROM Revision:	3437<br />
+  gMux Version:	1.7.3<br />
+  Displays:<br />
+Color LCD:<br />
+  Resolution:	1440 x 900<br />
+  Pixel Depth:	32-Bit Color (ARGB8888)<br />
+  Main Display:	Yes<br />
+  Mirror:	Off<br />
+  Online:	Yes<br />
+  Built-In:	Yes</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-1716">
+		<div id="comment-1716">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/3fff25adb92842167018c407e5f69240?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Steve</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-1716">
+			February 14, 2012 at 12:22 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>@Aleksandar </p>
+<p>I&#8217;ve just spent aaaaaaaall afternoon trying to fix this problem:</p>
+<p>&#8220;I’ve installed pyopencl 2011.1 and when i run main.py I get this error:<br />
+AttributeError: type object &#8216;context_properties&#8217; has no attribute &#8216;GL_CONTEXT_KHR&#8217;&#8221;</p>
+<p>But I finally did it. It indicates that either your device doesn&#8217;t support OpenCL/OpenGL interoperability, or that PyOpenCL was compiled without it. To get it to work, I had to download cl_ext.h from the Khronos website and put it in /usr/include/CL/, then alter &#8220;siteconf.py&#8221; which was created by &#8220;configure.py&#8221; when building PyOpenCL and set CL_ENABLE_GL to True. </p>
+<p>Since I also spent the day installing various versions of NVidia drivers, it&#8217;s possible something else also helped, but I&#8217;m pretty sure that&#8217;s what fixed it.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1718">
+		<div id="comment-1718">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">tn</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-1718">
+			February 17, 2012 at 3:30 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi,<br />
+Thanks for your interesting tutorial.<br />
+However, I was wondering how you would do the following thing:<br />
+at the moment, you have a single kernel doing all the math, but for some other problems, you can not do that.<br />
+Say for example that at a given time you want to sum the speed of all particles (silly example, but you get the idea) and stop on a condition for that value.</p>
+<p>As you mention it in your code, we sometime need to keep the vectors in GPU memory, do some other computation and go back to the initial kernel.<br />
+How would you do that ?<br />
+Waiting for the next example :)</p>
+<p>Thanks</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-1846">
+		<div id="comment-1846">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/d37a2a8c466601eb5aca7d505f87a058?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">joost</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-1846">
+			March 25, 2012 at 4:54 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I also had the ImportError: cannot import name get_gl_sharing_context_properties first, so I built pyopencl-2011.2 from source.<br />
+Then I had the  &#8216;GL_CONTEXT_KHR&#8217; exception, which I tried to solve by following the advice above, but after some trial-and-error this worked for me:<br />
+./configure.py &#8211;cl-enable-gl</p>
+<p>i am on Kubuntu 11.10 (same as Ubuntu), using the most recent nvidia driver.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1913">
+		<div id="comment-1913">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/3d0fbb184520f49777cdbd315974e847?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Ryan</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="comment-page-1/index.html#comment-1913">
+			April 29, 2012 at 12:50 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thanks for this.  I hacked the nbody algo into the kernel.  It works fantastic on my gtx285 with around 10k particles.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+			</ol>
+
+
+
+								
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-3" class="widget-container widget_search"><form role="search" method="get" id="searchform" action="../../../../index.html" >
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" value="" name="s" id="s" />
+	<input type="submit" id="searchsubmit" value="Search" />
+	</div>
+	</form></li><li id="nav_menu-3" class="widget-container widget_nav_menu"><div class="menu-navigation-container"><ul id="menu-navigation-1" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../index.html" >Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../about/index.html" >About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../d3/index.html" >d3</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../blender/index.html" >Blender</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../opencl/index.html" >OpenCL</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div></li><li id="text-4" class="widget-container widget_text">			<div class="textwidget"><a href="https://twitter.com/#!/enjalot" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=twitter.com"> @enjalot</a>
+<br/>
+<a href="https://plus.google.com/112153365286725889851/posts" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://plus.google.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=plus.google.com"> +Ian Johnson</a></div>
+		</li><li id="categories-414549122" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-25"><a href="../../../../category/tutorial/advcl/index.html" title="Adventures in OpenCL">advcl</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="../../../../category/tutorial/advd3-tutorial/index.html" title="View all posts filed under advd3">advd3</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="../../../../category/android/index.html" title="View all posts filed under android">android</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="../../../../category/blender/index.html" title="View all posts filed under blender">blender</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="../../../../category/code/index.html" title="View all posts filed under code">code</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="../../../../category/community/index.html" title="View all posts filed under community">community</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="../../../../category/culture/index.html" title="View all posts filed under culture">culture</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="../../../../category/d3/index.html" title="View all posts filed under d3">d3</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="../../../../category/life/index.html" title="View all posts filed under life">life</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="../../../../category/math/index.html" title="View all posts filed under math">math</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="../../../../category/misc/index.html" title="View all posts filed under misc">misc</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="../../../../category/music/index.html" title="View all posts filed under music">music</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="../../../../category/news/index.html" title="View all posts filed under news">news</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="../../../../category/opencl/index.html" title="View all posts filed under opencl">opencl</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="../../../../category/processingjs/index.html" title="View all posts filed under processingjs">processingjs</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="../../../../category/python/index.html" title="View all posts filed under python">python</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="../../../../category/race/index.html" title="View all posts filed under race">race</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="../../../../category/school/index.html" title="View all posts filed under school">school</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="../../../../category/tech/index.html" title="View all posts filed under tech">tech</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="../../../../category/travel/index.html" title="View all posts filed under travel">travel</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="../../../../category/tutorial/index.html" title="View all posts filed under tutorial">tutorial</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="../../../../category/uncategorized/index.html" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="../../../../category/wtf/index.html" title="View all posts filed under wtf">wtf</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="../../../../category/中�%2596%2587/index.html" title="View all posts filed under 中文">中文</a>
+</li>
+		</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="../../../../index.html" title="enj" rel="home">
+					enj				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+<script type='text/javascript' src='http://d3a9pqeyre6pa0.cloudfront.net/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?aa&#038;ver=3.3.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/plugins/jetpack/modules/wpgroho.js%3Fver=3.3.2'></script>
+	<div style="display:none">
+	<div class="grofile-hash-map-1d37f41a5316adc47ec8a58c774c63ac">
+	</div>
+	<div class="grofile-hash-map-89db4f3e0cfa7752306bede98888b898">
+	</div>
+	<div class="grofile-hash-map-0a862f93bfc5a32fe30209277f11195c">
+	</div>
+	<div class="grofile-hash-map-9ace813e96c8f872c0c6e91b83f63428">
+	</div>
+	<div class="grofile-hash-map-a8fc72d8ce9951e08952f746e9d781e6">
+	</div>
+	<div class="grofile-hash-map-f41538327b8521b92ca351c3db0712a0">
+	</div>
+	<div class="grofile-hash-map-0a2fd561106e8ddf67121df80e11d944">
+	</div>
+	<div class="grofile-hash-map-9cdd9654d378265f53cee27589256bc9">
+	</div>
+	<div class="grofile-hash-map-a7dcec908cdd18cb2e92ab34f0e8a938">
+	</div>
+	<div class="grofile-hash-map-3fff25adb92842167018c407e5f69240">
+	</div>
+	<div class="grofile-hash-map-f3ada405ce890b6f8204094deb12d8a8">
+	</div>
+	<div class="grofile-hash-map-d37a2a8c466601eb5aca7d505f87a058">
+	</div>
+	<div class="grofile-hash-map-3d0fbb184520f49777cdbd315974e847">
+	</div>
+	</div>
+<script type='text/javascript' src='../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js%3Fver=3.0.83c'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPython.js%3Fver=3.0.83c'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://enja.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://enja.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['gutter'] = false;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = true;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://apis.google.com/js/plusone.js?ver=3.3.2'></script>
+
+	<script src="http://stats.wordpress.com/e-201219.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:1.3',blog:'4037422',post:'493'});
+	var load_cmc = function(){linktracker_init(4037422,493,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script></body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 1743/1873 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:42:41 -->

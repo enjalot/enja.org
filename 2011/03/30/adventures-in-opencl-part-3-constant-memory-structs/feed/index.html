@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+		>
+<channel>
+	<title>Comments on: Adventures in OpenCL Part 3: Constant Memory Structs</title>
+	<atom:link href="http://enja.org/2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/feed/" rel="self" type="application/rss+xml" />
+	<link>http://enja.org/2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=adventures-in-opencl-part-3-constant-memory-structs</link>
+	<description>casin&#039; the joint since &#039;85</description>
+	<lastBuildDate>Wed, 09 May 2012 06:22:44 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.3.2</generator>
+	<item>
+		<title>By: Emanuel Ey</title>
+		<link>http://enja.org/2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/comment-page-1/#comment-1893</link>
+		<dc:creator>Emanuel Ey</dc:creator>
+		<pubDate>Tue, 17 Apr 2012 10:26:16 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=521#comment-1893</guid>
+		<description>So i have been playing around with passing structures to OpenCL kernels as well, and I&#039;ve actually been able to pass structs directly (i.e., without a pointer).
+I did this in C, but it should be easy to adapt for C++.
+
+Here are the most relevant points from the host code:
+&lt;code&gt;
+typedef struct{
+    cl_uchar    cDist;
+    cl_uchar    cClass
+    float       y[N_POINTS_DEPTH];
+    float       x[N_POINTS_RANGE];
+    float       c1D[N_POINTS_DEPTH];
+}myStruct_t;
+&lt;/code&gt;
+
+The test kernel takes only 2 arguments, the struct as for input, and another struct of the same type to hold some test data computed from the input. Here&#039;s the host-side memory allocation:
+&lt;code&gt;
+//instantiate a struct for input:
+myStruct_t a;
+a.y[0] = 1.4;
+a.y[1] = 2.5;
+
+//allocate memory for output:
+cl_mem out = clCreateBuffer(context, CL_MEM_READ_WRITE, sizeof(myStruct_t), NULL, &amp;errNum);
+    if(errNum != CL_SUCCESS){
+        fatal(clError(errNum));
+    }else{
+        DEBUG(2, &quot;Successfully allocated memory for output.\n&quot;);
+    }
+&lt;/code&gt;
+
+Then, set the kernel args:
+&lt;code&gt;
+    errNum = clSetKernelArg(kernel, 0, sizeof(myStruct_t), &amp;a);
+    errNum &#124;= clSetKernelArg(kernel, 1, sizeof(cl_mem), &amp;out);
+    if (errNum != CL_SUCCESS){
+        fprintf(stderr, &quot;Error setting kernel arguments.\n&quot;);
+        fatal(clError(errNum));
+        exit(EXIT_FAILURE);
+    }else{
+        DEBUG(2, &quot;Successfully defined kernel arguments.\n&quot;);
+    }
+&lt;/code&gt;
+
+The kernel:
+&lt;code&gt;
+__kernel void testStructs( private myStruct_t soundIn,
+                                               global myStruct_t *result){
+    local myStruct_t      ssp;
+   
+    ssp.y[0] = 2*soundIn.y[0];
+    ssp.y[1] = 2*soundIn.y[1];
+    
+    *result = ssp;
+}
+&lt;/code&gt;
+
+So from my tests i figured out that apparently you cannot actually use the &#039;constant&#039; qualifier when passing in a struct, it has to be &#039;private&#039;. This is ok for me, since &#039;constant&#039; is a special type of &#039;global&#039; and reading it comes at a performance penalty anyway. To me it makes sense to have a settings struct in the fastest available memory.
+I tested this on an Nvidia GPU with OpenCL 1.1 and on a Intel Ivy Bridge CPU also with a OpenCL 1.1 implementation.</description>
+		<content:encoded><![CDATA[<p>So i have been playing around with passing structures to OpenCL kernels as well, and I&#8217;ve actually been able to pass structs directly (i.e., without a pointer).<br />
+I did this in C, but it should be easy to adapt for C++.</p>
+<p>Here are the most relevant points from the host code:<br />
+<code><br />
+typedef struct{<br />
+    cl_uchar    cDist;<br />
+    cl_uchar    cClass<br />
+    float       y[N_POINTS_DEPTH];<br />
+    float       x[N_POINTS_RANGE];<br />
+    float       c1D[N_POINTS_DEPTH];<br />
+}myStruct_t;<br />
+</code></p>
+<p>The test kernel takes only 2 arguments, the struct as for input, and another struct of the same type to hold some test data computed from the input. Here&#8217;s the host-side memory allocation:<br />
+<code><br />
+//instantiate a struct for input:<br />
+myStruct_t a;<br />
+a.y[0] = 1.4;<br />
+a.y[1] = 2.5;</p>
+<p>//allocate memory for output:<br />
+cl_mem out = clCreateBuffer(context, CL_MEM_READ_WRITE, sizeof(myStruct_t), NULL, &amp;errNum);<br />
+    if(errNum != CL_SUCCESS){<br />
+        fatal(clError(errNum));<br />
+    }else{<br />
+        DEBUG(2, "Successfully allocated memory for output.\n");<br />
+    }<br />
+</code></p>
+<p>Then, set the kernel args:<br />
+<code><br />
+    errNum = clSetKernelArg(kernel, 0, sizeof(myStruct_t), &amp;a);<br />
+    errNum |= clSetKernelArg(kernel, 1, sizeof(cl_mem), &amp;out);<br />
+    if (errNum != CL_SUCCESS){<br />
+        fprintf(stderr, "Error setting kernel arguments.\n");<br />
+        fatal(clError(errNum));<br />
+        exit(EXIT_FAILURE);<br />
+    }else{<br />
+        DEBUG(2, "Successfully defined kernel arguments.\n");<br />
+    }<br />
+</code></p>
+<p>The kernel:<br />
+<code><br />
+__kernel void testStructs( private myStruct_t soundIn,<br />
+                                               global myStruct_t *result){<br />
+    local myStruct_t      ssp;</p>
+<p>    ssp.y[0] = 2*soundIn.y[0];<br />
+    ssp.y[1] = 2*soundIn.y[1];</p>
+<p>    *result = ssp;<br />
+}<br />
+</code></p>
+<p>So from my tests i figured out that apparently you cannot actually use the &#8216;constant&#8217; qualifier when passing in a struct, it has to be &#8216;private&#8217;. This is ok for me, since &#8216;constant&#8217; is a special type of &#8216;global&#8217; and reading it comes at a performance penalty anyway. To me it makes sense to have a settings struct in the fastest available memory.<br />
+I tested this on an Nvidia GPU with OpenCL 1.1 and on a Intel Ivy Bridge CPU also with a OpenCL 1.1 implementation.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: David Garcia</title>
+		<link>http://enja.org/2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/comment-page-1/#comment-770</link>
+		<dc:creator>David Garcia</dc:creator>
+		<pubDate>Fri, 01 Apr 2011 23:21:56 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=521#comment-770</guid>
+		<description>&lt;cite&gt;As far as passing in a struct not as an array, I have tried many different combinations to no avail.&lt;/cite&gt;
+
+I looked at the OpenCL conformance tests and couldn&#039;t find any place that tests that feature. It&#039;s possible that it&#039;s broken in some implementations :(</description>
+		<content:encoded><![CDATA[<p><cite>As far as passing in a struct not as an array, I have tried many different combinations to no avail.</cite></p>
+<p>I looked at the OpenCL conformance tests and couldn&#8217;t find any place that tests that feature. It&#8217;s possible that it&#8217;s broken in some implementations :(</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: enj</title>
+		<link>http://enja.org/2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/comment-page-1/#comment-767</link>
+		<dc:creator>enj</dc:creator>
+		<pubDate>Fri, 01 Apr 2011 21:38:49 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=521#comment-767</guid>
+		<description>@David
+I just did a quick test, if I don&#039;t have padding it works whether I specify the alignment or not, so I will remove that part from the post until I find a use for it.</description>
+		<content:encoded><![CDATA[<p>@David<br />
+I just did a quick test, if I don&#8217;t have padding it works whether I specify the alignment or not, so I will remove that part from the post until I find a use for it.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: enj</title>
+		<link>http://enja.org/2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/comment-page-1/#comment-766</link>
+		<dc:creator>enj</dc:creator>
+		<pubDate>Fri, 01 Apr 2011 21:07:56 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=521#comment-766</guid>
+		<description>Hello David,
+Thank&#039;s for pointing these out, I will revise my post with some of your corrections, after making sure I have a grasp on my misunderstandings.
+The alignment issue is certainly a case of me not having the whole story, I have been telling the compiler to align the structs in my project&#039;s code to 16 bytes (with __attribute__(alligned(16)) keyword, or #pragma pack(16) on windows). I read because of the fact that compilers can arbitrarily add padding it was a good idea to specify. I left that out of the tutorial, but perhaps I should put it back after double checking this. It helps me to try it out for myself.
+
+As far as passing in a struct not as an array, I have tried many different combinations to no avail. If someone can give me an example which works I will gladly update the tutorial but we&#039;ve had to play this trick finding no alternative.
+
+Also thanks for pointing out the constant args device info, that&#039;s good to know. 9 still seems rather small.
+
+Thanks again
+Ian</description>
+		<content:encoded><![CDATA[<p>Hello David,<br />
+Thank&#8217;s for pointing these out, I will revise my post with some of your corrections, after making sure I have a grasp on my misunderstandings.<br />
+The alignment issue is certainly a case of me not having the whole story, I have been telling the compiler to align the structs in my project&#8217;s code to 16 bytes (with __attribute__(alligned(16)) keyword, or #pragma pack(16) on windows). I read because of the fact that compilers can arbitrarily add padding it was a good idea to specify. I left that out of the tutorial, but perhaps I should put it back after double checking this. It helps me to try it out for myself.</p>
+<p>As far as passing in a struct not as an array, I have tried many different combinations to no avail. If someone can give me an example which works I will gladly update the tutorial but we&#8217;ve had to play this trick finding no alternative.</p>
+<p>Also thanks for pointing out the constant args device info, that&#8217;s good to know. 9 still seems rather small.</p>
+<p>Thanks again<br />
+Ian</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: David Garcia</title>
+		<link>http://enja.org/2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/comment-page-1/#comment-761</link>
+		<dc:creator>David Garcia</dc:creator>
+		<pubDate>Fri, 01 Apr 2011 02:20:12 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=521#comment-761</guid>
+		<description>I believe there are some inaccuracies in the article.
+
+&lt;cite&gt;Even though we only want one structure, we still need to pass it in as a buffer to appease OpenCL.&lt;/cite&gt;
+
+I don&#039;t think there&#039;s anything in the OpenCL spec preventing you to pass a struct as a kernel argument. For instance, section 5.7.2 lists how to pass different types of arguments to clSetKernelArg. After listing all built-in types and pointers, it says &lt;i&gt;&quot;For all other kernel arguments, the arg_value entry must be a pointer to the actual data to be used as argument value.&quot;&lt;/i&gt; Additionally, section 6.8-p reads &lt;i&gt;&quot;Arguments to __kernel functions that are declared to be a struct do not allow OpenCL objects to be passed as elements of the struct&quot;&lt;/i&gt;, which implies that it&#039;s okay to pass structs as kernel arguments.
+
+&lt;cite&gt;When interpreting a struct, OpenCL accesses the memory in blocks of 16 bytes, which is the same as 4 floats (each 4 bytes).&lt;/cite&gt;
+
+That is not correct either. What OpenCL requires is that each struct member must be naturally aligned. For example, a float variable, since it has a size of 4 bytes, must be aligned to a 4-byte boundary. Your example struct could be defined just fine as
+
+&lt;blockquote&gt;
+typedef struct Params
+{
+    float A;
+    float B;
+    int C;
+} Params;
+&lt;/blockquote&gt;
+
+Keep in mind that, in accordance to C99 rules (of which OpenCL C is a derivative), compilers are free to insert padding between struct members and at the end of the struct. It wouldn&#039;t be surprising at all if the particular compiler you are using has decided to pad the struct size to 16 bytes.
+
+If you want to pass structs to kernels it makes sense to specify alignment attributes, as explained in section 6.10.1 rather than attempting to guess what the particular OpenCL compiler you have installed is doing. Inserting hand-crafted padding members means that your program may not work correctly in a different computer.
+
+&lt;cite&gt;Additionally, at least on some implementations there seems to be an arbitrary limit of 9 constant (non-buffer) parameters, which using a struct will help you avoid.&lt;/cite&gt;
+
+This limit is not arbitrary. It can be queried through clGetDeviceInfo() and CL_DEVICE_MAX_CONSTANT_ARGS.
+
+If you have any other doubts or questions about the OpenCL standard, please refer to the &lt;a href=&quot;http://www.khronos.org/message_boards/&quot; rel=&quot;nofollow&quot;&gt;Khronos message boards&lt;/a&gt; where people will be happy to help.</description>
+		<content:encoded><![CDATA[<p>I believe there are some inaccuracies in the article.</p>
+<p><cite>Even though we only want one structure, we still need to pass it in as a buffer to appease OpenCL.</cite></p>
+<p>I don&#8217;t think there&#8217;s anything in the OpenCL spec preventing you to pass a struct as a kernel argument. For instance, section 5.7.2 lists how to pass different types of arguments to clSetKernelArg. After listing all built-in types and pointers, it says <i>&#8220;For all other kernel arguments, the arg_value entry must be a pointer to the actual data to be used as argument value.&#8221;</i> Additionally, section 6.8-p reads <i>&#8220;Arguments to __kernel functions that are declared to be a struct do not allow OpenCL objects to be passed as elements of the struct&#8221;</i>, which implies that it&#8217;s okay to pass structs as kernel arguments.</p>
+<p><cite>When interpreting a struct, OpenCL accesses the memory in blocks of 16 bytes, which is the same as 4 floats (each 4 bytes).</cite></p>
+<p>That is not correct either. What OpenCL requires is that each struct member must be naturally aligned. For example, a float variable, since it has a size of 4 bytes, must be aligned to a 4-byte boundary. Your example struct could be defined just fine as</p>
+<blockquote><p>
+typedef struct Params<br />
+{<br />
+    float A;<br />
+    float B;<br />
+    int C;<br />
+} Params;
+</p></blockquote>
+<p>Keep in mind that, in accordance to C99 rules (of which OpenCL C is a derivative), compilers are free to insert padding between struct members and at the end of the struct. It wouldn&#8217;t be surprising at all if the particular compiler you are using has decided to pad the struct size to 16 bytes.</p>
+<p>If you want to pass structs to kernels it makes sense to specify alignment attributes, as explained in section 6.10.1 rather than attempting to guess what the particular OpenCL compiler you have installed is doing. Inserting hand-crafted padding members means that your program may not work correctly in a different computer.</p>
+<p><cite>Additionally, at least on some implementations there seems to be an arbitrary limit of 9 constant (non-buffer) parameters, which using a struct will help you avoid.</cite></p>
+<p>This limit is not arbitrary. It can be queried through clGetDeviceInfo() and CL_DEVICE_MAX_CONSTANT_ARGS.</p>
+<p>If you have any other doubts or questions about the OpenCL standard, please refer to the <a href="http://www.khronos.org/message_boards/" rel="nofollow">Khronos message boards</a> where people will be happy to help.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: enj</title>
+		<link>http://enja.org/2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/comment-page-1/#comment-754</link>
+		<dc:creator>enj</dc:creator>
+		<pubDate>Thu, 31 Mar 2011 02:38:18 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=521#comment-754</guid>
+		<description>Hey Bunt, I didn&#039;t switch, this one has the same code in both languages. My main project is still in C++ so I will have to focus on it. I still prefer PyOpenCL for development though, and I&#039;ve been playing in it recently. From now on I will probably be doing my tutorials in both languages.</description>
+		<content:encoded><![CDATA[<p>Hey Bunt, I didn&#8217;t switch, this one has the same code in both languages. My main project is still in C++ so I will have to focus on it. I still prefer PyOpenCL for development though, and I&#8217;ve been playing in it recently. From now on I will probably be doing my tutorials in both languages.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Bunt</title>
+		<link>http://enja.org/2011/03/30/adventures-in-opencl-part-3-constant-memory-structs/comment-page-1/#comment-753</link>
+		<dc:creator>Bunt</dc:creator>
+		<pubDate>Thu, 31 Mar 2011 02:14:42 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=521#comment-753</guid>
+		<description>Hey enja great tutorials.  Is there any reason why you switched from Python back to C++ though, did you find any particular drawbacks in working with Python and PyOpenCL?  Cheers, Bunt, BVI</description>
+		<content:encoded><![CDATA[<p>Hey enja great tutorials.  Is there any reason why you switched from Python back to C++ though, did you find any particular drawbacks in working with Python and PyOpenCL?  Cheers, Bunt, BVI</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 309/330 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:55:41 -->

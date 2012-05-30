@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+		>
+<channel>
+	<title>Comments on: Simple Particles with OpenCL and OpenGL</title>
+	<atom:link href="http://enja.org/2010/06/26/simple-particles-with-opencl-and-opengl/feed/" rel="self" type="application/rss+xml" />
+	<link>http://enja.org/2010/06/26/simple-particles-with-opencl-and-opengl/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=simple-particles-with-opencl-and-opengl</link>
+	<description>casin&#039; the joint since &#039;85</description>
+	<lastBuildDate>Wed, 09 May 2012 06:22:44 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.3.2</generator>
+	<item>
+		<title>By: enj</title>
+		<link>http://enja.org/2010/06/26/simple-particles-with-opencl-and-opengl/comment-page-1/#comment-135</link>
+		<dc:creator>enj</dc:creator>
+		<pubDate>Thu, 08 Jul 2010 02:24:44 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=183#comment-135</guid>
+		<description>Turns out that it was glFinish() taking up the time that made us think there was memory copying. Changing the timings we get much more expected results: rendering takes up the most time, followed by kernel execution (both are dependent on size) while acquiring and releasing OpenGL objects is cheap and does not appear to depend on the size of the arrays!</description>
+		<content:encoded><![CDATA[<p>Turns out that it was glFinish() taking up the time that made us think there was memory copying. Changing the timings we get much more expected results: rendering takes up the most time, followed by kernel execution (both are dependent on size) while acquiring and releasing OpenGL objects is cheap and does not appear to depend on the size of the arrays!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: enj</title>
+		<link>http://enja.org/2010/06/26/simple-particles-with-opencl-and-opengl/comment-page-1/#comment-112</link>
+		<dc:creator>enj</dc:creator>
+		<pubDate>Tue, 29 Jun 2010 13:58:54 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=183#comment-112</guid>
+		<description>@Brian: that makes sense, thanks!
+
+@Andrew: thank you for pointing that out! I have the 9400M which a quick googling reveals does use shared memory (all 256mb =\ ). It&#039;s kind of a let down, but it&#039;s a reality check!
+OpenCL reports that the card supports OpenGL interop, and the code still works but I guess the memory is being transfered by the underlying system. When I get good timings I should be able to confirm this.</description>
+		<content:encoded><![CDATA[<p>@Brian: that makes sense, thanks!</p>
+<p>@Andrew: thank you for pointing that out! I have the 9400M which a quick googling reveals does use shared memory (all 256mb =\ ). It&#8217;s kind of a let down, but it&#8217;s a reality check!<br />
+OpenCL reports that the card supports OpenGL interop, and the code still works but I guess the memory is being transfered by the underlying system. When I get good timings I should be able to confirm this.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Andrew</title>
+		<link>http://enja.org/2010/06/26/simple-particles-with-opencl-and-opengl/comment-page-1/#comment-111</link>
+		<dc:creator>Andrew</dc:creator>
+		<pubDate>Mon, 28 Jun 2010 18:57:24 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=183#comment-111</guid>
+		<description>You mentioned you didn&#039;t get any performance increase on your MBP. One cause of this may be that your video card is using shared memory. It is not uncommon for laptop video cards to use part of main memory as video memory. Typically they will have about half dedicated and half shared. You may want to check your MBP&#039;s specifications to find out the details and whether or not it uses shared memory.</description>
+		<content:encoded><![CDATA[<p>You mentioned you didn&#8217;t get any performance increase on your MBP. One cause of this may be that your video card is using shared memory. It is not uncommon for laptop video cards to use part of main memory as video memory. Typically they will have about half dedicated and half shared. You may want to check your MBP&#8217;s specifications to find out the details and whether or not it uses shared memory.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Brian</title>
+		<link>http://enja.org/2010/06/26/simple-particles-with-opencl-and-opengl/comment-page-1/#comment-110</link>
+		<dc:creator>Brian</dc:creator>
+		<pubDate>Sun, 27 Jun 2010 22:39:58 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=183#comment-110</guid>
+		<description>@enj: Yeah, you want to avoid conditionals for GPU targets since the compilers usually have all of the workgroups execute the computation for both branches and only end up using the conditional expression to decide which results get written back to memory.</description>
+		<content:encoded><![CDATA[<p>@enj: Yeah, you want to avoid conditionals for GPU targets since the compilers usually have all of the workgroups execute the computation for both branches and only end up using the conditional expression to decide which results get written back to memory.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: enj</title>
+		<link>http://enja.org/2010/06/26/simple-particles-with-opencl-and-opengl/comment-page-1/#comment-108</link>
+		<dc:creator>enj</dc:creator>
+		<pubDate>Sun, 27 Jun 2010 01:13:40 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=183#comment-108</guid>
+		<description>@Nathan: It&#039;s a safe bet that OpenCL will make it to phones eventually!
+
+@Brian: Thanks for the tip! I definitely want to try some more fun stuff with the system, I know there is a more clever way to deal with the lifetime but I was too busy getting things to work properly. From my preliminary understanding one wants to avoid conditionals if possible right?</description>
+		<content:encoded><![CDATA[<p>@Nathan: It&#8217;s a safe bet that OpenCL will make it to phones eventually!</p>
+<p>@Brian: Thanks for the tip! I definitely want to try some more fun stuff with the system, I know there is a more clever way to deal with the lifetime but I was too busy getting things to work properly. From my preliminary understanding one wants to avoid conditionals if possible right?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Blenderificus</title>
+		<link>http://enja.org/2010/06/26/simple-particles-with-opencl-and-opengl/comment-page-1/#comment-107</link>
+		<dc:creator>Blenderificus</dc:creator>
+		<pubDate>Sat, 26 Jun 2010 23:41:52 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=183#comment-107</guid>
+		<description>awesome!!! cant wait to see it in Blender.  Thank you for your hard work</description>
+		<content:encoded><![CDATA[<p>awesome!!! cant wait to see it in Blender.  Thank you for your hard work</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tweets that mention Simple Particles with OpenCL and OpenGL &#124; enj -- Topsy.com</title>
+		<link>http://enja.org/2010/06/26/simple-particles-with-opencl-and-opengl/comment-page-1/#comment-106</link>
+		<dc:creator>Tweets that mention Simple Particles with OpenCL and OpenGL &#124; enj -- Topsy.com</dc:creator>
+		<pubDate>Sat, 26 Jun 2010 20:55:37 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=183#comment-106</guid>
+		<description>[...] This post was mentioned on Twitter by Tech news (BOT), Stream Computing. Stream Computing said: Learn #OpenCL by example. Particles, OpenGL and OpenCL: http://bit.ly/9b45Fy Author is working on OpenCL + #Blender - check out his site! [...]</description>
+		<content:encoded><![CDATA[<p>[...] This post was mentioned on Twitter by Tech news (BOT), Stream Computing. Stream Computing said: Learn #OpenCL by example. Particles, OpenGL and OpenCL: <a href="http://bit.ly/9b45Fy" rel="nofollow">http://bit.ly/9b45Fy</a> Author is working on OpenCL + #Blender &#8211; check out his site! [...]</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Brian</title>
+		<link>http://enja.org/2010/06/26/simple-particles-with-opencl-and-opengl/comment-page-1/#comment-105</link>
+		<dc:creator>Brian</dc:creator>
+		<pubDate>Sat, 26 Jun 2010 19:38:16 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=183#comment-105</guid>
+		<description>if(life[i] &lt;= 0.)
+
+You might be able to generalize this code (maybe shuffling some code to/from the host) to omit this conditional, and it would probably perform better.</description>
+		<content:encoded><![CDATA[<p>if(life[i] &lt;= 0.)</p>
+<p>You might be able to generalize this code (maybe shuffling some code to/from the host) to omit this conditional, and it would probably perform better.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nathan Crock</title>
+		<link>http://enja.org/2010/06/26/simple-particles-with-opencl-and-opengl/comment-page-1/#comment-103</link>
+		<dc:creator>Nathan Crock</dc:creator>
+		<pubDate>Sat, 26 Jun 2010 18:07:18 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=183#comment-103</guid>
+		<description>Sick... Now you&#039;re going to port this to the Android right?</description>
+		<content:encoded><![CDATA[<p>Sick&#8230; Now you&#8217;re going to port this to the Android right?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 339/360 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:59:36 -->

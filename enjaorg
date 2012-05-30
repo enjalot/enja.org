@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" media="screen" href="/~d/styles/rss2full.xsl"?><?xml-stylesheet type="text/css" media="screen" href="http://feeds.feedburner.com/~d/styles/itemcontent.css"?><rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" version="2.0">
+
+<channel>
+	<title>enj</title>
+	
+	<link>http://enja.org</link>
+	<description>casin' the joint since '85</description>
+	<lastBuildDate>Tue, 08 May 2012 15:37:35 +0000</lastBuildDate>
+	<language>en</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.3.2</generator>
+		<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://feeds.feedburner.com/enjaorg" /><feedburner:info uri="enjaorg" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /><item>
+		<title>Floating down a Tributary</title>
+		<link>http://feedproxy.google.com/~r/enjaorg/~3/5rtKkjlPZqE/</link>
+		<comments>http://enja.org/2012/05/07/floating-down-a-tributary/#comments</comments>
+		<pubDate>Mon, 07 May 2012 10:00:00 +0000</pubDate>
+		<dc:creator>enj</dc:creator>
+				<category><![CDATA[code]]></category>
+		<category><![CDATA[d3]]></category>
+		<category><![CDATA[tech]]></category>
+
+		<guid isPermaLink="false">http://enja.org/?p=767</guid>
+		<description><![CDATA[All aboard! Prepare yourself for a voyage through parameter space as we embark on project Tributary! Tributary is a web interface for live and responsive visual coding. It includes a code editor and provides some popular javascript libraries for visual &#8230; <a href="http://enja.org/2012/05/07/floating-down-a-tributary/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+			<content:encoded><![CDATA[<p>All aboard! Prepare yourself for a voyage through parameter space as we embark on project Tributary!</p>
+<p><a href="http://enjalot.com"><img class="aligncenter size-full wp-image-775" title="banner" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2012/05/banner.png" alt="" width="600" height="149" /></a></p>
+<p><a href="http://enjalot.com">Tributary</a> is a web interface for live and responsive visual coding. It includes a code editor and provides some popular javascript libraries for visual programming. The core concept of tributary comes from the inspirational <a href="https://vimeo.com/36579366">Bret Victor video</a> and the implementation is derived from Gabriel Florit&#8217;s <a href="http://water.gabrielflor.it/">water project</a>.</p>
+<p><iframe src="http://player.vimeo.com/video/41668900" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></p>
+<p>Tributary as a project is aimed at being a learning tool and a playground for visual programming. It has already been useful to me as a rapid prototyping tool for data visualization, and I also enjoy using it to come up with unexpected visual effects and optical illusions. I hope that it can also serve as a great learning tool for those who are new to interactive visual programming in javascript as well.</p>
+<p>Now for some technical details!</p>
+<p>Tributary uses <a href="http://d3js.org/">d3.js</a> and <a href="http://alignedleft.com/tutorials/d3/an-svg-primer/">SVG</a> to provide graphics rendering capabilities. All tributary really does is provide an svg element. When the code in the editor is changed, the svg element is emptied and the code is evaluated. The assumption here is that the code will draw something in the svg element. The editor has been modified so that whenever you click on a number or a color string an interactive slider or color picker will pop up. Moving the slider will modify the number and redraw (by re-executing the code for each number change) automatically, allowing you to quickly see how a certain value affects your visualization.</p>
+<p>Besides d3, tributary code snippets have access to <a href="http://documentcloud.github.com/underscore/">Underscore.js</a> and <a href="http://documentcloud.github.com/backbone/">Backbone.js</a> as well as <a href="http://jquery.com/">jQuery</a>. The code editor is powered by CodeMirror, with the color picker powered by <a href="http://mudcu.be/journal/2012/04/color-picker/">Color Picker</a> and the sliders powered by <a href="http://jqueryui.com/">jQuery UI</a>.</p>
+<p>This project excites me everyday, mostly because it makes coding a much more interactive experience which also makes it much easier to code with other people. Because you get instant visual feedback it&#8217;s also possible to code live in front of other people in a way that wasn&#8217;t exciting before. As a teaching tool your words come alive as you type out the code and as a rapid prototyping tool you can iterate quickly with a domain expert as they suggest changes or ask interesting questions.</p>
+<p>I&#8217;d like to thank <a href="http://ejfox.com">EJ Fox </a>and <a href="http://exposedata.com">Kai Chang</a> for their help with this project. If you have a difficult data visualization problem I can&#8217;t think of two better people to ask for help!</p>
+<p><a href="http://enjalot.com/tributary/2272533/squarecircle.js"><img class="size-full wp-image-770 aligncenter" style="line-height: 18px;" title="Color Tubes" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2012/05/color_tubes.png" alt="Color Tubes" width="637" height="605" /></a></p>
+<img src="http://feeds.feedburner.com/~r/enjaorg/~4/5rtKkjlPZqE" height="1" width="1"/>]]></content:encoded>
+			<wfw:commentRss>http://enja.org/2012/05/07/floating-down-a-tributary/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		<feedburner:origLink>http://enja.org/2012/05/07/floating-down-a-tributary/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=floating-down-a-tributary</feedburner:origLink></item>
+		<item>
+		<title>[dd3] d3.js selection tutorial</title>
+		<link>http://feedproxy.google.com/~r/enjaorg/~3/eM2F3gjZdoY/</link>
+		<comments>http://enja.org/2011/12/05/dd3-d3-js-selection-tutorial/#comments</comments>
+		<pubDate>Mon, 05 Dec 2011 18:41:17 +0000</pubDate>
+		<dc:creator>enj</dc:creator>
+				<category><![CDATA[advd3]]></category>
+		<category><![CDATA[code]]></category>
+		<category><![CDATA[d3]]></category>
+		<category><![CDATA[tutorial]]></category>
+
+		<guid isPermaLink="false">http://enja.org/?p=727</guid>
+		<description><![CDATA[This weekend I made a video aimed at people just getting into d3. I use a super simple bar graph to illustrate the fundamental principle of selections with d3. At 13 minutes it&#8217;s a little over the 10 minute goal &#8230; <a href="http://enja.org/2011/12/05/dd3-d3-js-selection-tutorial/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+			<content:encoded><![CDATA[<p>This weekend I made a <a href="http://bl.ocks.org/1425402">video</a> aimed at people just getting into d3. I use a super simple bar graph to illustrate the fundamental principle of selections with d3. At 13 minutes it&#8217;s a little over the 10 minute goal I had, but significantly shorter than my last video!</p>
+<p><a href="http://bl.ocks.org/1425402"><img class="aligncenter size-full wp-image-728" title="d3.js selection tutorial video" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/12/Screen-Shot-2011-12-05-at-10.31.02-AM.png" alt="" width="100%" /></a></p>
+<p>I hope this is helpful to some. My plan is to make more of these so if you have any requests I&#8217;ll try to make a video to address confusing topics. The code is <a href="https://gist.github.com/1425402">available here</a>. :)</p>
+<img src="http://feeds.feedburner.com/~r/enjaorg/~4/eM2F3gjZdoY" height="1" width="1"/>]]></content:encoded>
+			<wfw:commentRss>http://enja.org/2011/12/05/dd3-d3-js-selection-tutorial/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		<feedburner:origLink>http://enja.org/2011/12/05/dd3-d3-js-selection-tutorial/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=dd3-d3-js-selection-tutorial</feedburner:origLink></item>
+		<item>
+		<title>[RTPS] Fluid and Rigid body interaction</title>
+		<link>http://feedproxy.google.com/~r/enjaorg/~3/EmlPFer_S1E/</link>
+		<comments>http://enja.org/2011/12/01/rtps-fluid-and-rigid-body-interaction/#comments</comments>
+		<pubDate>Thu, 01 Dec 2011 19:01:46 +0000</pubDate>
+		<dc:creator>enj</dc:creator>
+				<category><![CDATA[blender]]></category>
+		<category><![CDATA[opencl]]></category>
+
+		<guid isPermaLink="false">http://enja.org/?p=722</guid>
+		<description><![CDATA[My buddy Andrew Young at FSU DSC has made some serious progress with RTPS! He&#8217;s implemented rigid bodies with particles and they can interact with the fluid. Watch the video and be amazed as a block of particles splashes, floats &#8230; <a href="http://enja.org/2011/12/01/rtps-fluid-and-rigid-body-interaction/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+			<content:encoded><![CDATA[<p>My buddy <a href="http://andrewfsu.blogspot.com/">Andrew Young</a> at <a href="http://www.facebook.com/FSUSciComp">FSU DSC</a> has made some <a href="http://andrewfsu.blogspot.com/2011/11/systems-now-have-interaction.html">serious progress </a>with RTPS! He&#8217;s implemented rigid bodies with particles and they can interact with the fluid. Watch the video and be amazed as a block of particles splashes, floats and is tossed around by the fluid!</p>
+<p>&nbsp;</p>
+<p><iframe src="http://player.vimeo.com/video/32679396?title=0&amp;byline=0&amp;portrait=0" width="600" height="450" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+<p><a href="http://vimeo.com/32679396">Rigid-body and Fluid interaction with velocity vectors</a> from <a href="http://vimeo.com/user5996991">Andrew Young</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+<img src="http://feeds.feedburner.com/~r/enjaorg/~4/EmlPFer_S1E" height="1" width="1"/>]]></content:encoded>
+			<wfw:commentRss>http://enja.org/2011/12/01/rtps-fluid-and-rigid-body-interaction/feed/</wfw:commentRss>
+		<slash:comments>5</slash:comments>
+		<feedburner:origLink>http://enja.org/2011/12/01/rtps-fluid-and-rigid-body-interaction/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=rtps-fluid-and-rigid-body-interaction</feedburner:origLink></item>
+		<item>
+		<title>Square Circle Spiral Illusion in d3.js</title>
+		<link>http://feedproxy.google.com/~r/enjaorg/~3/e6vhgj5ueVM/</link>
+		<comments>http://enja.org/2011/11/21/square-circle-spiral-illusion-in-d3-js/#comments</comments>
+		<pubDate>Tue, 22 Nov 2011 02:48:14 +0000</pubDate>
+		<dc:creator>enj</dc:creator>
+				<category><![CDATA[code]]></category>
+		<category><![CDATA[d3]]></category>
+		<category><![CDATA[wtf]]></category>
+
+		<guid isPermaLink="false">http://enja.org/?p=695</guid>
+		<description><![CDATA[Things have been pretty intense at work the last couple weeks, we are writing hella code (you can see I&#8217;ve begun acclimating to the west coast) and a lucky few people have begun using what we&#8217;re making! This weekend was &#8230; <a href="http://enja.org/2011/11/21/square-circle-spiral-illusion-in-d3-js/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+			<content:encoded><![CDATA[<p>Things have been pretty intense at work the last couple weeks, we are writing hella code (you can see I&#8217;ve begun acclimating to the west coast) and a lucky few people have begun using what we&#8217;re making! This weekend was a much needed break from programming all day, so what did I do? Code all night.</p>
+<p><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/11/squarecirclespiral.png"><img class="aligncenter size-full wp-image-708" title="squarecirclespiral" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/11/squarecirclespiral.png" alt="" width="521" height="519" /></a></p>
+<p>What you see here is the square circle spiral optical illusion first made <a href="http://richardwiseman.wordpress.com/2009/08/11/which-will-you-vote-for/">popular on the internets</a> by a <a href="https://twitter.com/#!/richardwiseman">Dr. Richard Wiseman</a>. What I&#8217;ve done is implemented the illusion using <a href="http://mbostock.github.com/d3/">d3.js</a>, a powerful javascript library for data visualization. I took it a step further and animated it:<br />
+<script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script><br />
+<script type="text/javascript" src="http://enja.org/code/tuts/d3/spiral/spiral_move.js"></script></p>
+<p>You can get the <a href="https://gist.github.com/1379934">code</a> for the original illusion as well as a <a href="http://bl.ocks.org/1379934">live demo</a>. Here is the <a href="https://gist.github.com/1379988">code</a> for the animated version and a <a href="http://bl.ocks.org/1379988">standalone demo here</a>. Feel free to fork and come up with your own variations. Hint: there are several variables we can play with, and a little phase shift is all it takes ;)</p>
+<p><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/11/sqssizevaries.png"><img class="alignleft size-full wp-image-709" title="sqssizevaries" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/11/sqssizevaries.png" alt="" width="512" height="517" /></a></p>
+<p><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/11/sqsbigger.png"><img class="alignleft size-full wp-image-710" title="sqsbigger" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/11/sqsbigger.png" alt="" width="524" height="518" /></a></p>
+<img src="http://feeds.feedburner.com/~r/enjaorg/~4/e6vhgj5ueVM" height="1" width="1"/>]]></content:encoded>
+			<wfw:commentRss>http://enja.org/2011/11/21/square-circle-spiral-illusion-in-d3-js/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		<feedburner:origLink>http://enja.org/2011/11/21/square-circle-spiral-illusion-in-d3-js/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=square-circle-spiral-illusion-in-d3-js</feedburner:origLink></item>
+		<item>
+		<title>Simple D3.js Bar Chart Webcast</title>
+		<link>http://feedproxy.google.com/~r/enjaorg/~3/YcBWXihAtWw/</link>
+		<comments>http://enja.org/2011/09/15/simple-d3-js-pie-chart-webcast/#comments</comments>
+		<pubDate>Thu, 15 Sep 2011 05:38:10 +0000</pubDate>
+		<dc:creator>enj</dc:creator>
+				<category><![CDATA[advd3]]></category>
+		<category><![CDATA[code]]></category>
+		<category><![CDATA[d3]]></category>
+		<category><![CDATA[tutorial]]></category>
+
+		<guid isPermaLink="false">http://enja.org/?p=660</guid>
+		<description><![CDATA[So I&#8217;ve been diving head first into d3.js and I must say its a mighty fine library! I do feel like getting up to speed with it can take quite a bit of reading and playing, and now that I&#8217;ve &#8230; <a href="http://enja.org/2011/09/15/simple-d3-js-pie-chart-webcast/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+			<content:encoded><![CDATA[<p>So I&#8217;ve been diving head first into <a href="http://mbostock.github.com/d3/">d3.js</a> and I must say its a mighty fine library! I do feel like getting up to speed with it can take quite a bit of reading and playing, and now that I&#8217;ve figured out how to do a couple of things with it I wanted to share how I go about using it. So I made a screencast of myself building a bar chart.</p>
+<p>The video is a little long at 40 minutes, and it&#8217;s just me, my terminal and the browser, but I do hope it helps people who are just starting get into a d3 frame of mind.</p>
+<p><iframe src="http://player.vimeo.com/video/29080884?title=0&amp;byline=0&amp;portrait=0" frameborder="0" width="640" height="480"></iframe></p>
+<p><a href="http://vimeo.com/29080884">[d3cast] Simple Bar Chart Walkthrough</a> from <a href="http://vimeo.com/user4640702">Ian Johnson</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+<p>You can follow along with <a href="http://enja.org/code/tuts/d3/bar">annotated (commented) javascript</a> or just look at the resulting <a href="https://gist.github.com/1218567">html/css/javascript</a> while I talk.</p>
+<p>As an aside, the annotated javascript was generated with the awesome <a href="http://jashkenas.github.com/docco/">docco</a> project.</p>
+<p>Hope this was helpful, I plan to do more screencasts in the future as I get deeper into d3. Any feedback or suggestions are welcomed!</p>
+<p><script type="text/javascript" src="http://enja.org/code/d3/d3.min.js"></script><br />
+<script type="text/javascript" src="http://enja.org/code/d3/d3.geom.min.js"></script><br />
+<script type="text/javascript" src="http://enja.org/code/d3/d3.layout.min.js"></script><br />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script><br />
+<script type="text/javascript" src="http://enja.org/code/tuts/d3/bar/bar.js"></script><br />
+<script type="text/javascript">// <![CDATA[
+//<svg id="#svg"></svg>
+dobarchart();
+// ]]&gt;</script></p>
+<img src="http://feeds.feedburner.com/~r/enjaorg/~4/YcBWXihAtWw" height="1" width="1"/>]]></content:encoded>
+			<wfw:commentRss>http://enja.org/2011/09/15/simple-d3-js-pie-chart-webcast/feed/</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		<feedburner:origLink>http://enja.org/2011/09/15/simple-d3-js-pie-chart-webcast/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=simple-d3-js-pie-chart-webcast</feedburner:origLink></item>
+		<item>
+		<title>Go west, young man</title>
+		<link>http://feedproxy.google.com/~r/enjaorg/~3/1jWCodwCrss/</link>
+		<comments>http://enja.org/2011/09/08/go-west-young-man/#comments</comments>
+		<pubDate>Thu, 08 Sep 2011 04:56:05 +0000</pubDate>
+		<dc:creator>enj</dc:creator>
+				<category><![CDATA[life]]></category>
+		<category><![CDATA[tech]]></category>
+
+		<guid isPermaLink="false">http://enja.org/?p=652</guid>
+		<description><![CDATA[Now what I want you to do is visualize yourself&#8230; visualizing your data. Can you see it? Maybe you need some help? Fret not, I&#8217;m working on it! This week I moved from Florida to California to start work at &#8230; <a href="http://enja.org/2011/09/08/go-west-young-man/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+			<content:encoded><![CDATA[<p>Now what I want you to do is visualize yourself&#8230; visualizing your data.</p>
+<p><img class="size-full wp-image-654 alignnone" style="border-style: initial; border-color: initial;" title="visually" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/09/visually.png" alt="" width="181" height="184" /></p>
+<p>Can you see it? Maybe you need some help? Fret not, I&#8217;m working on it!</p>
+<p>This week I moved from Florida to California to start work at <a href="http://visual.ly">visual.ly</a> where we are building some awesome tools to help you <a href="http://visual.ly/labs">visualize your data</a>. I&#8217;m super excited to be in the mix with some of the most talented (and somehow humble) designers and hackers that I&#8217;ve ever met. I&#8217;m still struggling to accept the reality of a dream come true, after all those years of reading <a href="http://news.ycombinator.com/">Hacker News</a> I&#8217;ve actually gone two full work days hardly browsing it at all! I&#8217;ve been learning a lot, both technology and startup wise and it&#8217;s way cooler than I imagined.</p>
+<p>To top it off, the office is a quaint old brick building in downtown San Francisco, with open space inside and Sushi Burritos right around the corner outside, it&#8217;s like I&#8217;m in office heaven.</p>
+<p>So you wont see as many OpenCL posts out of me in the near future (c&#8217;mon <a href="http://www.khronos.org/webcl/">WebCL</a>!) but you will see more tutorials and thoughts on the latest in web technologies related to visualization! Right now I&#8217;m learning <a href="http://mbostock.github.com/d3/">d3.js</a> and <a href="http://documentcloud.github.com/backbone/">backbone.js</a> and all of the curly braces are making me itch for <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a>.</p>
+<p>Well, time to get back to coding!</p>
+<img src="http://feeds.feedburner.com/~r/enjaorg/~4/1jWCodwCrss" height="1" width="1"/>]]></content:encoded>
+			<wfw:commentRss>http://enja.org/2011/09/08/go-west-young-man/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		<feedburner:origLink>http://enja.org/2011/09/08/go-west-young-man/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=go-west-young-man</feedburner:origLink></item>
+		<item>
+		<title>[RTPS] Master’s Thesis Defense Presentation</title>
+		<link>http://feedproxy.google.com/~r/enjaorg/~3/lh59rT6tll0/</link>
+		<comments>http://enja.org/2011/08/24/rtps-masters-thesis-defense-presentation/#comments</comments>
+		<pubDate>Wed, 24 Aug 2011 19:15:55 +0000</pubDate>
+		<dc:creator>enj</dc:creator>
+				<category><![CDATA[blender]]></category>
+		<category><![CDATA[code]]></category>
+		<category><![CDATA[life]]></category>
+		<category><![CDATA[opencl]]></category>
+		<category><![CDATA[school]]></category>
+
+		<guid isPermaLink="false">http://enja.org/?p=644</guid>
+		<description><![CDATA[Hello World! Today I became a computational science ninja master! Well, maybe not so much the ninja part, but my vim skills are starting to feel like Jedi powers. This morning I gave an hour long presentation on my work &#8230; <a href="http://enja.org/2011/08/24/rtps-masters-thesis-defense-presentation/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+			<content:encoded><![CDATA[<p>Hello World!</p>
+<p>Today I became a computational science ninja master! Well, maybe not so much the ninja part, but my vim skills are starting to feel like Jedi powers. </p>
+<p>This morning I gave an hour long presentation on my work putting a real-time fluid simulator and particle systems into <a href="http://enja.org/blender/">Blender</a> with <a href="http://enja.org/opencl/">OpenCL</a>. It&#8217;s a pretty high level overview of the whole project, but I do dive into a little bit of math and CS for a few minutes so hopefully there is something for everyone who is interested in the project.</p>
+<p><iframe src="http://player.vimeo.com/video/28112833?title=0&amp;byline=0&amp;portrait=0" width="640" height="480" frameborder="0"></iframe>
+<p><a href="http://vimeo.com/28112833">[RTPS] Master&#8217;s Defense Presentation</a> from <a href="http://vimeo.com/user4640702">Ian Johnson</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+<p>Here are the slides I used (not so great out of context, and I have demos that go with them in the video)<br />
+<iframe src="https://docs.google.com/present/embed?id=dfmx9hbx_192cvg3ffds&#038;size=m" frameborder="0" width="555" height="451"></iframe></p>
+<p>As I&#8217;ve now graduated and moving to a sweet new job (more on that in the next post) my Blender and OpenCL dev will have to take a back seat and be more of a hobby. Luckily there are other <a href="http://andrewfsu.blogspot.com/">talented students</a> working with the project and it will be used in the third installment of the <a href="http://fsugd.blogspot.com/">Game Design class</a> at <a href="http://www.sc.fsu.edu/">Florida State University</a> (where Blender and the Blender Game Engine are used as the primary tool).</p>
+<p>Much love to the whole Blender community for all the help and support throughout this project! I can&#8217;t thank my advisor, Gordon Erlebacher enough for everything he&#8217;s taught me, including how to think like a scientist. It&#8217;s the end of an era for me, in one week school will not be starting for me like it has my whole life. I&#8217;m excited by what&#8217;s in front of me and I feel like I&#8217;ve been slingshotted into the future!</p>
+<img src="http://feeds.feedburner.com/~r/enjaorg/~4/lh59rT6tll0" height="1" width="1"/>]]></content:encoded>
+			<wfw:commentRss>http://enja.org/2011/08/24/rtps-masters-thesis-defense-presentation/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		<feedburner:origLink>http://enja.org/2011/08/24/rtps-masters-thesis-defense-presentation/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=rtps-masters-thesis-defense-presentation</feedburner:origLink></item>
+		<item>
+		<title>LBL Summer Research: Final Report</title>
+		<link>http://feedproxy.google.com/~r/enjaorg/~3/x2nFEedHzE0/</link>
+		<comments>http://enja.org/2011/08/02/lbl-summer-research-final-report/#comments</comments>
+		<pubDate>Tue, 02 Aug 2011 18:33:27 +0000</pubDate>
+		<dc:creator>enj</dc:creator>
+				<category><![CDATA[code]]></category>
+		<category><![CDATA[opencl]]></category>
+
+		<guid isPermaLink="false">http://enja.org/?p=634</guid>
+		<description><![CDATA[The summer months certainly fly by, especially when you are running in parallel&#8230; Anyway, the project has culminated in some working code and interesting test runs on the Longhorn visualization cluster. We are using some actual flow data sets, for &#8230; <a href="http://enja.org/2011/08/02/lbl-summer-research-final-report/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+			<content:encoded><![CDATA[<p>The summer months certainly fly by, especially when you are running in parallel&#8230;</p>
+<p>Anyway, the project has culminated in some working code and interesting test runs on the <a href="http://www.tacc.utexas.edu/user-services/user-guides/longhorn-user-guide">Longhorn visualization cluster</a>. We are using some actual flow data sets, for example this fishtank:</p>
+<table style="width: auto;">
+<tbody>
+<tr>
+<td><a href="https://picasaweb.google.com/lh/photo/0V7NQPzzcwxEOygyvowg1w?feat=embedwebsite"><img src="https://lh3.googleusercontent.com/-G_pKnQE6aKE/Tjg6_i4QdMI/AAAAAAAAA1w/Zgk97EzB4Ic/s640/tank1.jpg" alt="" width="640" height="601" /></a></td>
+</tr>
+<tr>
+<td style="font-family: arial,sans-serif; font-size: 11px; text-align: right;">From <a href="https://picasaweb.google.com/enjalot/LBNLFTLE?authuser=0&amp;feat=embedwebsite">LBNL FTLE</a></td>
+</tr>
+</tbody>
+</table>
+<p>or this &#8220;nimrod&#8221; simulation</p>
+<table style="width: auto;">
+<tbody>
+<tr>
+<td><a href="https://picasaweb.google.com/lh/photo/PsP1DX6zpn4giry9HRFpXQ?feat=embedwebsite"><img src="https://lh3.googleusercontent.com/-DT_YbZdiP1s/Tjg7AKFa0hI/AAAAAAAAA10/PyZXOj_q89E/s640/nimrod1.jpg" alt="" width="640" height="601" /></a></td>
+</tr>
+<tr>
+<td style="font-family: arial,sans-serif; font-size: 11px; text-align: right;">From <a href="https://picasaweb.google.com/enjalot/LBNLFTLE?authuser=0&amp;feat=embedwebsite">LBNL FTLE</a></td>
+</tr>
+</tbody>
+</table>
+<p>The algorithm was implemented as described in <a href="http://enja.org/2011/06/13/lbl-summer-research-report-1/">previous</a> <a href="http://enja.org/2011/07/08/lbl-summer-research-report-2/">blog posts</a>, and will be written up in a paper with the performance results and conclusions we draw. <a href="http://vis.lbl.gov/staff/">Hank Childs and David Camp</a> made this project possible, helping with everything from design, data handling and constructing an MPI framework. I was also able to use code from my <a href="http://enja.org/2011/03/31/particles-in-bge-improved-code-collisions-and-hose/">RTPS</a> project to which <a href="http://people.sc.fsu.edu/~gerlebacher/">Gordon Erlebacher</a> is a major contributor.</p>
+<p>We have run studies where we fill most of the 4GB of available GPU memory, which we can scale up to more nodes with big enough data sets. One thing I really like from this project which Hank introduced me to is <a href="http://en.wikipedia.org/wiki/Gantt_chart">Gantt charts</a>.</p>
+<table style="width: auto;">
+<tbody>
+<tr>
+<td><a href="https://picasaweb.google.com/lh/photo/JryNLfgo7-AXFup2vFIxTA?feat=embedwebsite"><img src="https://lh5.googleusercontent.com/-Q8DEQK_cPpQ/Tjg6-54VQOI/AAAAAAAAA1o/GxyId8RAMH0/s640/gantt.jpg" alt="" width="640" height="325" /></a></td>
+</tr>
+<tr>
+<td style="font-family: arial,sans-serif; font-size: 11px; text-align: right;">From <a href="https://picasaweb.google.com/enjalot/LBNLFTLE?authuser=0&amp;feat=embedwebsite">LBNL FTLE</a></td>
+</tr>
+</tbody>
+</table>
+<p>They are a way of showing how much time each process spends on different parts of the algorithm. This one isn&#8217;t labeled, I just like the way it looks. I think I will need to do a whole separate blog post on Gantt charts.</p>
+<p>I&#8217;d like to thank everyone in the <a href="http://vis.lbl.gov/">Vis group at LBL</a> for a fun and very educational summer! I&#8217;m back at <a href="http://www.sc.fsu.edu/vislab">DSC</a> ready to put some lessons to good use in the particle code :D</p>
+<img src="http://feeds.feedburner.com/~r/enjaorg/~4/x2nFEedHzE0" height="1" width="1"/>]]></content:encoded>
+			<wfw:commentRss>http://enja.org/2011/08/02/lbl-summer-research-final-report/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		<feedburner:origLink>http://enja.org/2011/08/02/lbl-summer-research-final-report/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=lbl-summer-research-final-report</feedburner:origLink></item>
+		<item>
+		<title>The Software Patent Racket: What do we do?</title>
+		<link>http://feedproxy.google.com/~r/enjaorg/~3/M8OcflCOcOM/</link>
+		<comments>http://enja.org/2011/07/09/the-software-patent-racket-what-do-we-do/#comments</comments>
+		<pubDate>Sat, 09 Jul 2011 19:30:53 +0000</pubDate>
+		<dc:creator>enj</dc:creator>
+				<category><![CDATA[misc]]></category>
+
+		<guid isPermaLink="false">http://enja.org/?p=628</guid>
+		<description><![CDATA[This is an essay addressed to my colleagues, those who make software for fun and profit and those who enjoy all the benefits technology brings to our lives. A recent Forbes article contained an amazingly illustrative anecdote revealing the corruption &#8230; <a href="http://enja.org/2011/07/09/the-software-patent-racket-what-do-we-do/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+			<content:encoded><![CDATA[<p>This is an essay addressed to my colleagues, those who make software for fun and profit and those who enjoy all the benefits technology brings to our lives. A <a href="http://blogs.forbes.com/timothylee/2011/07/07/microsofts-android-shakedown/">recent Forbes article</a> contained an amazingly illustrative anecdote revealing the corruption inherent in software patents, a dialogue between IBM lawyers visiting the then small company Sun Microsystems:</p>
+<blockquote><p>An awkward silence ensued. The blue suits did not even confer among themselves. They just sat there, stonelike. Finally, the chief suit responded. “OK,” he said, “maybe you don’t infringe these seven patents. But we have 10,000 U.S. patents. Do you really want us to go back to Armonk [IBM headquarters in New York] and find seven patents you do infringe? Or do you want to make this easy and just pay us $20 million?” After a modest bit of negotiation, Sun cut IBM a check, and the blue suits went to the next company on their hit list.</p></blockquote>
+<p>This is practically a scene from every mob movie and crime drama ever produced, except the numbers usually aren&#8217;t this big. I feel this anecdote speaks for itself and is a call to action for geeks like me who will be next on the current big boy&#8217;s hitlist, those of us who develop and distribute open source software, those of us who create and innovate in small businesses or consulting and those of us who feel blessed to live in a time where we can make a living with our minds. This is a real threat to our livelihoods, because it shows that the status quo has finally started understanding our turbulent times and are actively using their muscle to &#8220;protect&#8221; our neighborhood. So what do we do? My personal answer to this question is rooted in pop culture.</p>
+<p><a href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/07/godfather.jpg"><img class="aligncenter size-full wp-image-630" title="godfather" src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2011/07/godfather.jpg" alt="" width="600" height="242" /></a></p>
+<p>I have been extorted with threats of physical violence in my past, but in that case the balance of power was much less complicated than the situation we collectively find ourselves in, so I reach for the source of understanding I am most familiar with: pop culture. Whether its The Wire, the Godfather series, Sons of Anarchy, Brotherhood, Carlito&#8217;s Way, or any number of other criminal dramas the pattern is always the same. The &#8220;bad guys&#8221; use their power (money, guns or muscle) to control and extort members of their community for their own profit. Inevitably some of the small businesses fight back in desperation and are wiped out, other powers compete with the central characters and either destroy and replace them or negotiate power deals to maintain the status quo within some &#8220;reasonable&#8221; bounds. This always goes to show that the power wielded by the gangsters is real, and not playing by their rules has real consequences.</p>
+<p>So if we have to play by their rules, how do we fight back? We don&#8217;t have the money, lawyers or violent inclinations to revolt, and even the mighty Google is <a href="http://news.ycombinator.com/item?id=2745623">besieged</a> on all sides. There is one weapon that the gangsters have no defense against, the power behind the pen being mightier than the sword: pubic opinion. In all of these dramas, and in history too, the actions and crimes perpetrated by gangsters are tempered by public opinion. There are unspoken as well as spoken rules, codes of &#8220;honor&#8221; keeping thugs in line so that their actions do not bring attention and scrutiny on their organizations. A critical mass of public hatred for an organization is often the only way to remove their power and influence.</p>
+<p>Why is this so? I&#8217;m no psychologist and I hope other&#8217;s will chime in, but it makes sense that a government of men (rather than laws) is vulnerable to the humanity of it&#8217;s rulers. Those humans have pride, ego, vanity and morals. They do not do unscrupulous deeds out of some sick pleasure, but rather to further their goals inside the world they have created for themselves with the resources at their disposal. We need to appeal to those human tendencies, or at the very least target their weaknesses.</p>
+<p>I propose a new crime drama, one who&#8217;s context is the 21st century, the information age. The humanity of our generation has not changed, only the tools and environments in which we find ourselves. How do we convince people who care nothing about software that there is a threat to their way of life? By making them care about the characters who compose the story. How many people such as myself will never be the victim of small town violence yet eat up any compelling power drama? How thankful am I that the rule of law has progressed so I can feel secure in my station most places I go, and how thankful will the next generation be that we shined light on a mounting story of human greed and freed technological innovation from it&#8217;s shackles.</p>
+<p>Let&#8217;s make them care, let&#8217;s tell a story.</p>
+<p>&nbsp;</p>
+<img src="http://feeds.feedburner.com/~r/enjaorg/~4/M8OcflCOcOM" height="1" width="1"/>]]></content:encoded>
+			<wfw:commentRss>http://enja.org/2011/07/09/the-software-patent-racket-what-do-we-do/feed/</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		<feedburner:origLink>http://enja.org/2011/07/09/the-software-patent-racket-what-do-we-do/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=the-software-patent-racket-what-do-we-do</feedburner:origLink></item>
+		<item>
+		<title>LBL Summer Research: Report 2</title>
+		<link>http://feedproxy.google.com/~r/enjaorg/~3/zi2oFuz4DrY/</link>
+		<comments>http://enja.org/2011/07/08/lbl-summer-research-report-2/#comments</comments>
+		<pubDate>Fri, 08 Jul 2011 23:29:47 +0000</pubDate>
+		<dc:creator>enj</dc:creator>
+				<category><![CDATA[code]]></category>
+		<category><![CDATA[opencl]]></category>
+
+		<guid isPermaLink="false">http://enja.org/?p=610</guid>
+		<description><![CDATA[So I&#8217;ve been up in the Berkeley hills for a few weeks now, coding by day and hacking by night. I&#8217;ve made some progress at work which I will detail here, which includes some things I&#8217;ve been wanting to do &#8230; <a href="http://enja.org/2011/07/08/lbl-summer-research-report-2/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+			<content:encoded><![CDATA[<p>So I&#8217;ve been up in the Berkeley hills for a few weeks now, coding by day and hacking by night. I&#8217;ve made some progress at work which I will detail here, which includes some things I&#8217;ve been wanting to do for my RTPS project (to be detailed in a post coming soon!).</p>
+<table style="width:auto;">
+<tr>
+<td><a href="https://picasaweb.google.com/lh/photo/gcy2MGMYTH-1kmNEy0p2Ig?feat=embedwebsite"><img src="https://lh4.googleusercontent.com/-q_IWBMMbUd8/TheRsKzQzRI/AAAAAAAAANg/7Ung4rWPgVI/s400/visit0010.jpg" height="376" width="400" /></a></td>
+</tr>
+<tr>
+<td style="font-family:arial,sans-serif; font-size:11px; text-align:right">From <a href="https://picasaweb.google.com/enjalot/LBNLFTLE?authuser=0&#038;feat=embedwebsite">LBNL FTLE</a></td>
+</tr>
+</table>
+<p>A good bit of my time was spent on cleaning up my code, getting everything into (relatively) simple to interface with classes so that next week I can integrate with a coworker&#8217;s MPI framework for communication. I finally ported NVIDIA&#8217;s OpenCL Radix sort to use my C++ wrappers as well as give key-value sorting functionality (their demo only had sorting of keys). This should mean a nice little speedup for RTPS when I plug it in!</p>
+<p>In my <a href="http://enja.org/2011/06/13/lbl-summer-research-report-1/">last report</a> I had already implemented particle advection and FTLE computation in OpenCL for one GPU. Since then I&#8217;ve been developing my code so that each GPU (let&#8217;s call it a process) will load a subset of the domain and advects its own set of &#8220;seed&#8221; particles in that domain. The major issue here is what happens when a particle goes outside of the process&#8217; domain (lets call it subdomain)? Each particle needs to be advected for the same amount of time, and we need to advect them over the entire domain. So when a particle crosses the boundary from one subdomain to another, we need to send it over to the other process so it can continue being advected.</p>
+<table style="width:auto;">
+<tr>
+<td><a href="https://picasaweb.google.com/lh/photo/NFbz7ZUQlWU7NKYw3qF92Q?feat=embedwebsite"><img src="https://lh5.googleusercontent.com/-3CeQOpfBdfI/TheRt5V6ztI/AAAAAAAAANk/0hIpCCTEpR8/s400/visit0008.jpg" height="376" width="400" /></a></td>
+</tr>
+<tr>
+<td style="font-family:arial,sans-serif; font-size:11px; text-align:right">From <a href="https://picasaweb.google.com/enjalot/LBNLFTLE?authuser=0&#038;feat=embedwebsite">LBNL FTLE</a></td>
+</tr>
+</table>
+<p>Additionally, once a particle is done being advected, it needs to go back to its original process so that the FTLE can be computed (each process will do FTLE calculations using their original set of seed particles).</p>
+<p>What I&#8217;ve implemented so far is a relatively efficient way of determining which particles need to go to which subdomains on the GPU. This is important because copying memory from the GPU to the CPU is expensive (takes a while) and since we want to run a whole helluva lot of particles we don&#8217;t want to burden the CPU with checking which particle goes where. If we can do all of our bookkeeping on the GPU (and in parallel) then we only need to copy the particles needed when we want to send them to another process. </p>
+<p>I do this by using a technique called spatial hashing, which is when you overlay a (regular) grid onto your domain, and each cell of this grid has a one dimensional index which will be our hash. The simplest way to do this is with cartesian indexing, a topic I intend to make a tutorial post on.</p>
+<p>So if each of our subdomains is one of these big grid cells, we can go through and calculate a hash for each of the particles. Then we sort our particles based on their hash values, which puts them into contiguous (next to each other) blocks by subdomain. Now we run a quick kernel that tells us the start and end indices into the particle array for each subdomain (so if the first 150 particles are in cell 0, the start index would be 0, the end index would be 150, or we might have start index 300 end index 1000 for cell 7). Now we can quickly check how many particles moved into each subdomain and copy them out directly using the start and end indices.</p>
+<p>Besides moving into other subdomains, particles can also go totally out of bounds which means they wont go anywhere for the rest of the simulation. We can consider them finished, and speaking of finished we also need a way to deal with particles that have run their course. So the same hashing routine that labels the particles by their subdomain also sticks any finished or completely out of bounds particles in an extra hash (its just one more than the total number of subdomains) that our cell indices kernel will recognize. Then we copy those finished particles into a new buffer and sort it by each particle&#8217;s original index (a value we keep with each particle). This way we can send finished particles back to their original processes for the FTLE computations.</p>
+<p>Next week we start sending the particles around and stomping out the inevitable bugs in my design, it&#8217;s like parallel in parallel baby!</p>
+<table style="width:194px;">
+<tr>
+<td align="center" style="height:194px;background:url(https://picasaweb.google.com/s/c/transparent_album_background.gif) no-repeat left"><a href="https://picasaweb.google.com/enjalot/LBNLFTLE?authuser=0&#038;feat=embedwebsite"><img src="https://lh5.googleusercontent.com/-PmZvONsX_9E/TheRox1HufE/AAAAAAAAAN0/pYQ6Hu_XyW0/s160-c/LBNLFTLE.jpg" width="160" height="160" style="margin:1px 0 0 4px;"></a></td>
+</tr>
+<tr>
+<td style="text-align:center;font-family:arial,sans-serif;font-size:11px"><a href="https://picasaweb.google.com/enjalot/LBNLFTLE?authuser=0&#038;feat=embedwebsite" style="color:#4D4D4D;font-weight:bold;text-decoration:none;">LBNL FTLE</a></td>
+</tr>
+</table>
+<img src="http://feeds.feedburner.com/~r/enjaorg/~4/zi2oFuz4DrY" height="1" width="1"/>]]></content:encoded>
+			<wfw:commentRss>http://enja.org/2011/07/08/lbl-summer-research-report-2/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		<feedburner:origLink>http://enja.org/2011/07/08/lbl-summer-research-report-2/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=lbl-summer-research-report-2</feedburner:origLink></item>
+	</channel>
+</rss><!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 741/872 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-08 23:19:50 -->

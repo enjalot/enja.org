@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<title>Adventures in OpenCL: Part 1, Getting Started | enj</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/themes/twentyten-child/style.css" />
+<link rel="pingback" href="../../../../../xmlrpc.php" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Feed" href="../../../../../enjaorg" />
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Comments Feed" href="../../../../../comments/feed/index.html" />
+				
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.2.3 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-16564388-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	//]]></script>
+<link rel="alternate" type="application/rss+xml" title="enj &raquo; Adventures in OpenCL: Part 1, Getting Started Comments Feed" href="../feed/index.html" />
+<link rel='stylesheet' id='tfg_style-css'  href='../../../../../wp-content/plugins/twitter-facebook-google-plusone-share/tfg_style.css%3Fver=3.3.2.css' type='text/css' media='all' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../../xmlrpc.php%3Frsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://enja.org/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='20 million particles in OpenCL on the GTX480' href='../../../09/20-million-particles-in-opencl-on-the-gtx480/index.html' />
+<link rel='next' title='Adventures in OpenCL: Part 1.5, C++ Bindings' href='../../../20/adventures-in-opencl-part-1-5-cpp-bindings/index.html' />
+<meta name="generator" content="WordPress 3.3.2" />
+<link rel='shortlink' href='http://wp.me/pgWjI-3w' />
+
+<!-- All in One SEO Pack 1.6.14.2 by Michael Torbert of Semper Fi Web Design[82,140] -->
+<meta name="description" content="This tutorial series is aimed at developers trying to learn OpenCL from the bottom up, with a focus on practicality (i.e. I'm still learning, I'm sharing what" />
+<meta name="keywords" content="advcl,code,opencl,tutorial" />
+<link rel="canonical" href="../index.html" />
+<!-- /all in one seo pack -->
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+</head>
+
+<body class="single single-post postid-218 single-format-standard">
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="../../../../../index.html" title="enj" rel="home">enj</a>
+					</span>
+				</div>
+				<div id="site-description">casin&#039; the joint since &#039;85</div>
+
+										<img src="http://d3a9pqeyre6pa0.cloudfront.net/wp-content/uploads/2010/07/cropped-turtle_nom1.jpg" width="940" height="198" alt="" />
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="index.html#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu-header"><ul id="menu-navigation" class="menu"><li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../../index.html" >Home</a></li>
+<li id="menu-item-318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../../about/index.html" >About</a></li>
+<li id="menu-item-694" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../../d3/index.html" >d3</a></li>
+<li id="menu-item-316" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../../blender/index.html" >Blender</a></li>
+<li id="menu-item-315" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../../opencl/index.html" >OpenCL</a></li>
+<li id="menu-item-317" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div>			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="../../../09/20-million-particles-in-opencl-on-the-gtx480/index.html" rel="prev"><span class="meta-nav">&larr;</span> 20 million particles in OpenCL on the GTX480</a></div>
+					<div class="nav-next"><a href="../../../20/adventures-in-opencl-part-1-5-cpp-bindings/index.html" rel="next">Adventures in OpenCL: Part 1.5, C++ Bindings <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-218" class="post-218 post type-post status-publish format-standard hentry category-advcl category-code category-opencl category-tutorial">
+					<h1 class="entry-title">Adventures in OpenCL: Part 1, Getting Started</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="../index.html" title="4:31 am" rel="bookmark"><span class="entry-date">July 13, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../../../../author/admin/index.html" title="View all posts by enj">enj</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<p>This tutorial series is aimed at developers trying to learn <a href="http://www.khronos.org/opencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">OpenCL</a> from the bottom up, with a focus on practicality (i.e. I&#8217;m still learning, I&#8217;m sharing what I&#8217;ve found to work). Learning by example works best for me so make sure to <a href="http://github.com/enjalot/adventures_in_opencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">get the code</a>! It can only help you to have a copy of the <a href="http://www.khronos.org/registry/cl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">OpenCL specification handy</a>, and it doesn&#8217;t hurt (too bad) to read it!</p>
+<p>NOTE: If you are interested in using the C++ Bindings, I recommend you check out my <a href="../../../20/adventures-in-opencl-part-1-5-cpp-bindings/index.html" >revision of this tutorial</a>.</p>
+<p>My code works for me on my Macbook Pro (with Geforce 9400M) running Snow Leopard with the <a href="http://developer.nvidia.com/object/cuda_3_1_downloads.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://developer.nvidia.com']);">NVIDIA GPU SDK</a> as well as on the Ubuntu 10.4 workstations (with GTX 480 or Geforce 8800GTX). Unfortunately I haven&#8217;t spent any time developing on Windows so for now my tutorials will be UNIX centric (I would LOVE any help in setting up a windows environment, I&#8217;ll need to eventually for my <a href="../../../../05/20/blender-and-opencl-the-journey-begins/index.html" >Blender project</a>). Also the code should build against the ATI Stream SDK and run on the runtime, you can assume I&#8217;m complying with OpenCL 1.0 (1.1 may be covered in the more advanced topics, and I&#8217;ll point it out). Please let me know if you have build problems or device issues! Throughout the tutorial I will refer to device and GPU interchangeably, OpenCL can run on CPUs already and is targeting many other devices, but for now I&#8217;m assuming a <a href="http://gpgpu.org/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://gpgpu.org']);">GPGPU</a> bias.</p>
+<h2>Let&#8217;s get started!</h2>
+<p>You&#8217;ll need to have installed:</p>
+<p><a href="http://developer.nvidia.com/object/cuda_3_1_downloads.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://developer.nvidia.com']);">NVIDIA</a> or <a href="http://developer.amd.com/gpu/atistreamsdk/pages/default.aspx" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://developer.amd.com']);">ATI</a> GPU SDK and OpenCL enabled drivers<br />
+<span style="font-size: 15.6px;">(Ubuntu ATI users might like <a href="http://mathnathan.com/2010/08/30/opencl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mathnathan.com']);">extra guidance</a>)</span><br />
+<a href="http://www.cmake.org/cmake/resources/software.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.cmake.org']);"> CMake</a> (<a href="http://mathnathan.com/2010/07/11/getting-started-with-cmake/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mathnathan.com']);">introduction</a> and <a href="http://www.elpauer.org/stuff/learning_cmake.pdf" onclick="javascript:_gaq.push(['_trackEvent','download','http://www.elpauer.org/stuff/learning_cmake.pdf']);">in-depth tutorial [pdf]</a>)<br />
+and it helps to have <a href="http://git-scm.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://git-scm.com']);">Git</a> (<a href="http://mathnathan.com/2010/07/09/git/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://mathnathan.com']);">introduction</a> and <a href="http://progit.org/book/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://progit.org']);">nice book</a>)</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">Download the code</a> and for the rest of the tutorial I will refer to the directory it&#8217;s in as <span class="simple_code">advcl</span></p>
+<p>In the advcl directory you should have the following directories:</p>
+<pre>part1/       //the source code files for this tutorial
+part1.5/     //the source code for the part1.5 (C++ bindings)
+cmake/       //CMake scripts that help locate necessary libraries
+opencl10/    //OpenCL 1.0 header files (downloaded from <a href="http://www.khronos.org/registry/cl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">Khronos.org</a>)
+opencl11/    //OpenCL 1.1 header files (downloaded from <a href="http://www.khronos.org/registry/cl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">Khronos.org</a>)</pre>
+<p>First we will build the code to make sure it works, I like to do an &#8220;out of source&#8221; build like so:</p>
+<pre class="brush: bash; title: ; notranslate" title="">cd part1
+mkdir build
+cd build
+cmake ..
+make
+</pre>
+<p>This will generate all of the build files, the Makefile, the library and executable in the build directory which avoids cluttering up your source code directory. You can run the example like so:</p>
+<pre class="brush: bash; title: ; notranslate" title="">./part1.x</pre>
+<h2>The Source Code Files</h2>
+<p>Let&#8217;s first have a broad overview of each of the source files and then we can dive in and look at what the code is doing. I&#8217;ve the code up to be a library with a CL class that can be instantiated and utilized anywhere. For this tutorial it is not very generalized so that it&#8217;s easier to see what&#8217;s going on behind the scenes. In future tutorials we will refactor and make our library more powerful!</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/main.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">main.cpp</a><br />
+This is where we test out our CL class. We instantiate it, give it an opencl program to compile and run, then execute the kernel.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/cll.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">cll.h</a><br />
+The main header file for our CL class definition, also handles including the OpenCL libraries on both Linux and Mac.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/cll.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">cll.cpp</a><br />
+The core implementation of our CL class, including functions for initializing the OpenCL context, loading and building an OpenCL program and cleaning up the GPU memory we used.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/part1.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">part1.cpp</a><br />
+Implementation of the functions that setup and run the OpenCL kernel. This is where we actually see OpenCL in action.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/part1.cl" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">part1.cl</a><br />
+The actual OpenCL code to be executed. Right now it&#8217;s a simple kernel that adds two arrays and stores the result in a third.</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/util.h" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">util.h</a> and <a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/util.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">util.cpp</a><br />
+Utility functions that make things like reading files or printing out OpenCL error messages easier</p>
+<p><a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/CMakeLists.txt" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">CMakeLists.txt</a><br />
+The configuration and build script used to build the project. This makes it easier to be portable, and building our code as a library makes it easier to contribute to other projects.</p>
+<h2>The Source Code Contents</h2>
+<p>Let&#8217;s follow the execution of the main function to see what order things need to be done in. Of course we need to include our library&#8217;s definitions:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">#include &quot;cll.h&quot;</pre>
+<p>This includes the OpenCL headers as well as defines our CL class. If you look there you will see a few public members of type <span class="simple_code">cl_mem</span> which will point to arrays on our device. The private <span class="simple_code">cl_*</span> members are handles to key OpenCL objects which we will use in the constructor to setup OpenCL for execution.<br />
+The constructor is defined in cll.cpp where it does a few things: sets the platform, sets the device to use, creates the OpenCL context and a command queue. Let&#8217;s see how its done:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">err = oclGetPlatformID(&amp;platform);
+printf(&quot;oclGetPlatformID: %s\n&quot;, oclErrorString(err));</pre>
+<p>The <span class="simple_code">oclGetPlatformID</span> function is a helper function defined in util.cpp I lifted from the NVIDIA SDK (I figure they won&#8217;t mind for educational purposes but it&#8217;s not under a free license so be careful!). This function looks for the NVIDIA platform and defaults to the first available one if its not found (&#8220;Apple&#8221; is the only platform on my Mac). The 2nd line is something you will see peppered throughout the code, <span class="simple_code">oclErrorString(err)</span> is another useful NVIDIA helper function that gives you a little more info about what went wrong if you have a problem. You can get some more explanation of the different error types if you go to the khronos specification for the function that errored, for example <a href="http://www.khronos.org/registry/cl/sdk/1.0/docs/man/xhtml/clGetDeviceIDs.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">clGetDeviceIDs</a> (a quick google search for the function name generally returns the khronos page first).</p>
+<p>After we set the platform, we use it to select a device. In this code we get a list of the available devices but we end up just choosing the first in the list. This could of course become more sophisticated with multiple graphics cards, and in another tutorial we will discuss checking for device capabilities.</p>
+<pre class="brush: cpp; title: ; notranslate" title="">
+err = clGetDeviceIDs(platform, CL_DEVICE_TYPE_GPU, 0, NULL, &amp;numDevices);
+devices = new cl_device_id [numDevices];
+err = clGetDeviceIDs(platform, CL_DEVICE_TYPE_GPU, numDevices, devices, NULL);
+deviceUsed = 0;</pre>
+<p>Note that we hardcoded the device type to be GPU, you can check the specification for the others but I&#8217;ll give you a hint that one of them starts with CL and ends with CPU ;)<br />
+Now we can make an <a href="http://www.khronos.org/registry/cl/sdk/1.0/docs/man/xhtml/clCreateContext.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.khronos.org']);">OpenCL context</a> using our device (the more advanced options like sharing an OpenGL context will come in a following tutorial):</p>
+<pre class="brush: cpp; title: ; notranslate" title="">context = clCreateContext(0, 1, &amp;devices[deviceUsed], NULL, NULL, &amp;err);</pre>
+<p>and the last action of the constructor is to create the command queue</p>
+<pre class="brush: cpp; title: ; notranslate" title="">command_queue = clCreateCommandQueue(context, devices[deviceUsed], 0, &amp;err);</pre>
+<p>Once the constructor is finished, we want to load our OpenCL program, so in main.cpp we call</p>
+<pre class="brush: cpp; title: ; notranslate" title="">example.loadProgram(&quot;part1.cl&quot;);</pre>
+<p><span class="simple_code">loadProgram</span> is defined in cll.cpp, it simply reads in the .cl file as a string and passes the string to</p>
+<pre class="brush: cpp; title: ; notranslate" title="">program = clCreateProgramWithSource(context, 1, (const char **) &amp;cSourceCL, &amp;program_length, &amp;err);</pre>
+<p>Here we load only one string of <span class="simple_code">program_length</span> characters, but you could do more at once.<br />
+Once the program is created, it must also be compiled so we call the private function <span class="simple_code">buildExecutable</span> to do that. It has some nice error checking that will output the build log if you have syntax errors in your OpenCL code. I won&#8217;t detail it here but check out the <a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/cll.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">bottom of the cll.cpp</a> file.</p>
+<p>Once the program is loaded and built we are ready to pass the data to our device and do some computing! Let&#8217;s take a quick look at our simple kernel in part1.cl so we have an idea of what we are trying to do:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">__kernel void part1(__global float* a, __global float* b, __global float* c)
+{
+    unsigned int i = get_global_id(0);
+    c[i] = a[i] + b[i];
+}</pre>
+<p>Since I&#8217;m still forming my understanding of OpenCL I&#8217;ll avoid explaining the details (you and me both gotta read the spec! or check out some of NVIDIA&#8217;s nice webinars). This serves as a practical starting point for you to write your own kernels, so lets see what I&#8217;m doing here.<br />
+I define my kernel as <span class="simple_code">part1</span> and it takes in three paramaters. The <span class="simple_code">__global</span> keyword says what kind of device memory our input is stored in, and besides that we should already be familiar with passing arrays to functions as a pointer.</p>
+<p>One way to think of the kernel is as a replacement for a for loop (you can do much cooler things, but we gotta start somewhere). We get the index in the for loop from the get_global_id built in function, and then we do our operation on the arrays at that index. We let OpenCL split up the arrays into work-units  and it will try to do as many of them as possible in parallel.</p>
+<p>So how do we give OpenCL our arrays and tell it to do the work? That&#8217;s all in <a href="http://github.com/enjalot/adventures_in_opencl/blob/master/part1/part1.cpp" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">part1.cpp</a><br />
+We setup our kernel with the <span class="simple_code">popCorn</span> function (hehe)<br />
+First we go ahead and call</p>
+<pre class="brush: cpp; title: ; notranslate" title="">kernel = clCreateKernel(program, &quot;part1&quot;, &amp;err);</pre>
+<p>Then we setup the arrays we want to work on, I created a trivial example as you can see in the file. The important part is creating the OpenCL array buffers and pushing the data to the device:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">//our input arrays
+cl_a = clCreateBuffer(context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, sizeof(float) * num, a, &amp;err);
+cl_b = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(float) * num, NULL, &amp;err);
+//our output array
+cl_c = clCreateBuffer(context, CL_MEM_WRITE_ONLY, sizeof(float) * num, NULL, &amp;err);
+</pre>
+<p>Note that our input are defined as read buffers, and our output is a write, there is also CL_MEM_READ_WRITE, and these are suggestions to the device on how you will use the buffers so it can optimize for performance. For the a array the clCreateBuffer function copies the data from the CPU to the GPU for us. If you want to separate creating the buffer from pushing the data you can do the data push as a separate call:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">err = clEnqueueWriteBuffer(command_queue, cl_b, CL_TRUE, 0, sizeof(float) * num, b, 0, NULL, &amp;event);</pre>
+<p>Then we tell the kernel which buffers correspond to which arguments</p>
+<pre class="brush: cpp; title: ; notranslate" title="">err  = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void *) &amp;cl_a);
+err  = clSetKernelArg(kernel, 1, sizeof(cl_mem), (void *) &amp;cl_b);
+err  = clSetKernelArg(kernel, 2, sizeof(cl_mem), (void *) &amp;cl_c);
+</pre>
+<p>You can also pass in other types of arguments, but we should see that in the next example.<br />
+We introduce</p>
+<pre class="brush: cpp; title: ; notranslate" title="">clFinish(command_queue);</pre>
+<p>Which makes sure that all commands in the queue are done executing before the program continues. This will be more important in later tutorials where we run our kernel in a loop as fast as possible.<br />
+For now we just run it once in the <span class="simple_code">runKernel()</span> function:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">err = clEnqueueNDRangeKernel(command_queue, kernel, 1, NULL, workGroupSize, NULL, 0, NULL, &amp;event);</pre>
+<p>The workGroupSize is defined to be the same size as our data arrays, and so it is 1 dimensional. This will be much more interesting with more complex kernels, but for now we just make them the same.<br />
+Finally, we read from our device memory to see if the c array got updated the way we expected!</p>
+<pre class="brush: cpp; title: ; notranslate" title="">float *c_done;
+err = clEnqueueReadBuffer(command_queue, cl_c, CL_TRUE, 0, sizeof(float) * num, c_done, 0, NULL, &amp;event);</pre>
+<p>now we can simply print out the contents of the c_done array!</p>
+<pre class="brush: cpp; title: ; notranslate" title="">for(int i=0; i &lt; num; i++)
+{
+    printf(&quot;c_done[%d] = %g\n&quot;, i, c_done[i]);
+}</pre>
+<p>Hopefully the code and this walk-through give you a good starting point to learn more. Expect more tutorials, with the next one involving the OpenCL Profiler and determining device information, followed by OpenCL/OpenGL context sharing.<br />
+I definitely appreciate any feedback!</p>
+<div class="bottomcontainerBox" style="background-color:#FFFFFF;">
+			<div style="float:left; width:85px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fenja.org%2F2010%2F07%2F13%2Fadventures-in-opencl-part-1-getting-started%2F&amp;layout=button_count&amp;show_faces=false&amp;width=85&amp;action=like&amp;font=verdana&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:85px; height:21px;"></iframe></div>
+			<div style="float:left; width:80px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<g:plusone size="medium" href="http://enja.org/2010/07/13/adventures-in-opencl-part-1-getting-started/"></g:plusone>
+			</div>
+			<div style="float:left; width:95px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<a href="http://twitter.com/share" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);" class="twitter-share-button" data-url="http://enja.org/2010/07/13/adventures-in-opencl-part-1-getting-started/"  data-text="Adventures in OpenCL: Part 1, Getting Started" data-count="horizontal" data-via="enjalot"></a>
+			</div>			
+			</div><div style="clear:both"></div><div style="padding-bottom:4px;"></div>											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+						This entry was posted in <a href="../../../../../category/tutorial/advcl/index.html" title="View all posts in advcl" rel="category tag">advcl</a>, <a href="../../../../../category/code/index.html" title="View all posts in code" rel="category tag">code</a>, <a href="../../../../../category/opencl/index.html" title="View all posts in opencl" rel="category tag">opencl</a>, <a href="../../../../../category/tutorial/index.html" title="View all posts in tutorial" rel="category tag">tutorial</a>. Bookmark the <a href="../index.html" title="Permalink to Adventures in OpenCL: Part 1, Getting Started" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="../../../09/20-million-particles-in-opencl-on-the-gtx480/index.html" rel="prev"><span class="meta-nav">&larr;</span> 20 million particles in OpenCL on the GTX480</a></div>
+					<div class="nav-next"><a href="../../../20/adventures-in-opencl-part-1-5-cpp-bindings/index.html" rel="next">Adventures in OpenCL: Part 1.5, C++ Bindings <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">36 Responses to <em>Adventures in OpenCL: Part 1, Getting Started</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-174">
+		<div id="comment-174">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/9f07fd4e0ad0602b71e7d49ff4200250?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">soufiane</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-174">
+			July 15, 2010 at 6:44 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>very good tutorial , waiting for your next tutos hope it&#8217;s going to be soon.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-175">
+		<div id="comment-175">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/5cb916d3c8abc9f45a093209e72489fb?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Paul Richards</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-175">
+			July 15, 2010 at 10:28 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I can highly recommend using the C++ bindings instead of the plain C ones for OpenCL.  They are much friendlier IMHO.  You can find them here:</p>
+<p><a href="http://www.khronos.org/registry/cl/" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','http://www.khronos.org']);" rel="nofollow">http://www.khronos.org/registry/cl/</a></p>
+<p>(it&#8217;s a single header file only)</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="../../../20/adventures-in-opencl-part-1-5-cpp-bindings/index.html"   rel='external nofollow' class='url'>Adventures in OpenCL: Part 1.5, C++ Bindingsenj | enj</a></p>
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-184">
+		<div id="comment-184">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-184">
+			July 20, 2010 at 12:15 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thanks for the suggestion Paul!<br />
+I&#8217;ve tried it out and re-written this tutorial using the C++ bindings, and you&#8217;re right I find them much cleaner as well.</p>
+<p><a href="../../../20/adventures-in-opencl-part-1-5-cpp-bindings/index.html"  rel="nofollow">http://enja.org/2010/07/20/adventures-in-opencl-part-1-5-cpp-bindings/</a></p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-187">
+		<div id="comment-187">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/b2e4cbf4f8fddaab7260658a480ad4d2?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Cedric</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-187">
+			July 20, 2010 at 1:39 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi,</p>
+<p>I am a beginner using cuda and opencl and I&#8217;ve tried to setup correctly cmake on my computer, but I am getting an error<br />
+&#8220;CMake Error: The following variables are used in this project, but they are set<br />
+to NOTFOUND.<br />
+Please set them or make sure they are set and tested correctly in the CMake file<br />
+s:<br />
+OPENCL_LIBRARIES<br />
+    linked by target &#8220;part1.x&#8221; in directory C:/Dev/advcl/part1&#8243;<br />
+I have a quadro FX 3800M with Notebook Developer Drivers 257.21.<br />
+I rebooted after the installation.</p>
+<p>Do I need to set something special? Is OPENCL_LIBRARIES not set correctly by cmake?</p>
+<p>Thanks</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-188">
+		<div id="comment-188">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-188">
+			July 20, 2010 at 5:33 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hey Cedric,</p>
+<p>Unfortunately I don&#8217;t have windows handy to test right now. You can look in the cmake/FindOPENC.cmake file to see how it is searching for OPENCL_LIBRARIES</p>
+<p>You could try finding out where OpenCL.lib or OpenCL.dll is on your system and adding a LINK_LIBARIES(C:/path/to/OpenCL.lib) into the CMakeLists.txt in part1/</p>
+<p>wish I could be more help<br />
+Ian</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="../../../../08/27/adventures-in-opencl-part-2-particles-with-opengl/index.html"   rel='external nofollow' class='url'>Adventures in OpenCL Part 2: Particles with OpenGL | enj</a></p>
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-284">
+		<div id="comment-284">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/900f7c152ac710109cc9a258aa6d4859?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Andrew Myers</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-284">
+			September 9, 2010 at 7:41 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Just FYI the code in part1 will not compile on my system without including stdlib.h in cll.cpp because of the reference to free.</p>
+<p>korthan% nvcc &#8211;version<br />
+nvcc: NVIDIA (R) Cuda compiler driver<br />
+Copyright (c) 2005-2010 NVIDIA Corporation<br />
+Built on Mon_Jun__7_18:10:28_PDT_2010<br />
+Cuda compilation tools, release 3.1, V0.2.1221<br />
+korthan% gcc &#8211;version<br />
+gcc (GCC) 4.4.4<br />
+Copyright (C) 2010 Free Software Foundation, Inc.<br />
+This is free software; see the source for copying conditions.  There is NO<br />
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-285">
+		<div id="comment-285">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/e3a060e28f0bc6a545d10efa8c9d7a09?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">shantanu</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-285">
+			September 10, 2010 at 8:15 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hey Ian,<br />
+Great post, just what I wanted :)</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-295">
+		<div id="comment-295">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/1fe72909ece26b9085b1dfe5c43c63aa?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Rich</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-295">
+			September 16, 2010 at 6:57 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>@Cedric:  I ran into a similar problem.  On my linux box, I found I had to change the CMakeLists.txt file line 20 from<br />
+ADD_DEFINITIONS(-DCL_SOURCE_DIR=&#8221;${part1_SOURCE_DIR}&#8221;)<br />
+to<br />
+ADD_DEFINITIONS(-DCL_SOURCE_DIR=&#8221;\\&#8221;${part1_SOURCE_DIR}\\&#8221;")</p>
+<p>The macro is being expanded without proper quotations.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-297">
+		<div id="comment-297">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/a7d1ce94000265f964f2c7b32b2fb042?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">dragon</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-297">
+			September 17, 2010 at 7:24 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi, just trying your tutorial (and opencl for the first time). I am using a similar environment (snow leopard). First thing is that &#8220;cmake ..&#8221; barfs with environment variables &#8220;not set&#8221; : CMAKE_C_COMPILER, CMAKE_C_COMPILER_ENV_VAR, etc.<br />
+probably should cover that in the README at least.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-298">
+		<div id="comment-298">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/a7d1ce94000265f964f2c7b32b2fb042?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">dragon</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-298">
+			September 17, 2010 at 8:18 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>cmake fails for me with messages like: Missing variable is:<br />
+CMAKE_C_COMPILER_ENV_VAR</p>
+<p>-seems there is no &#8220;make&#8221; on my system, even tho I have xcode installed. System sounds similar to yours: snow leopard 10.6.4. I find it infernally difficult to get clear advice thru searches on where to get make  for OSX.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-299">
+		<div id="comment-299">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-299">
+			September 17, 2010 at 5:40 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>@dragon<br />
+Have you tried macports? maybe port install gcc44 and gmake? I just did a list of my installed ports, I can&#8217;t remember what exactly I&#8217;ve installed since I&#8217;ve tried so many things&#8230;<br />
+<a href="http://www.macports.org/" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','http://www.macports.org']);" rel="nofollow">http://www.macports.org/</a></p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-302">
+		<div id="comment-302">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/a7d1ce94000265f964f2c7b32b2fb042?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">dragon</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-302">
+			September 19, 2010 at 2:07 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi enj,<br />
+make was in the developer directory as gnumake and there was a symlink to it, in Developer/usr/bin but that is not in my path. So I created a symlink to it in usr/bin.<br />
+still fails with the environment variable error messages. Are you saying they are setup by macports?</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-303">
+		<div id="comment-303">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/a7d1ce94000265f964f2c7b32b2fb042?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">dragon</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-303">
+			September 19, 2010 at 2:10 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Also macports does not install &#8211; complains about the OS being 10.5+</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-304">
+		<div id="comment-304">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/a7d1ce94000265f964f2c7b32b2fb042?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">dragon</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-304">
+			September 19, 2010 at 5:34 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>this was the macports error:<br />
+&#8220;Xcode is not installed, or was installed with UNIX Development (10.5+) or Command Line Support (10.4) deselected.&#8221;<br />
+well xcode was installed and it was the latest &#8230; *but*:<br />
+ deleting xcode and reinstalling from a new download (version number of the new install from apple developer connection was:3.2.2, previous installed xcode was 3.2.3!) and macports installs&#8230;, go figure<br />
+so &#8220;xcode ..&#8221; now works!</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-305">
+		<div id="comment-305">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-305">
+			September 19, 2010 at 3:57 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>hey dragon,<br />
+So does everything compile for you now? Getting a development environment set up nice is always a pain!</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-332">
+		<div id="comment-332">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/77dee0f3c98a9a61b8a4d9f9efbad293?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Christian</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-332">
+			September 30, 2010 at 3:14 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi,</p>
+<p>I would like to recommend you to rewrite the C-Tutorial. From my point of view, the C-bindings are quite important &#8230; lot of NVIDIA-Devs use them. AND since OpenCL IDC, the context initialization requires a platform as first parameter, somehow as seen in C++ -bindings. If anybody has them working for NV and ATI, please post it here &#8230; or a link to the source. I am working since the first OpenCL release, but until now, I was only able to write seperated programs, either NV or ATI.</p>
+<p>Little hint to the line to fix (as I&#8217;ve said, I&#8217;ve done it, but only as seperate lines, either working on AMD/ATI OR NV):</p>
+<p>context = clCreateContext(0, 1, &amp;devices[deviceUsed], NULL, NULL, &amp;err);</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-346">
+		<div id="comment-346">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/f4d096a6ed975c2785661c76af578f3c?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Raj</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-346">
+			October 23, 2010 at 1:09 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Everyone,<br />
+I want to execute OpenCL program in xcode.<br />
+Please, someone help me&#8230;<br />
+Its very urgent for me, if anybody know how to run it, please send me steps to follow on my Email ID: <a href="mailto:kishoreraj05@gmail.com">kishoreraj05@gmail.com</a></p>
+<p>I will be very very thankful for you!!!</p>
+<p>Thank You!<br />
+Raj<br />
+IIIT-Allahabad, INDIA.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-371">
+		<div id="comment-371">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/25c711bd61682b93eab44f6d303d1a0c?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="http://N/A" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://N']);"  rel='external nofollow' class='url'>Sergey L.</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-371">
+			November 8, 2010 at 3:49 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi,</p>
+<p>Thanks for the tutorial. It was useful!</p>
+<p>The following lines should be inserted into the CL class constructor:<br />
+<code><br />
+cl_a = 0;<br />
+cl_b = 0;<br />
+cl_c = 0;<br />
+</code></p>
+<p>Otherwise segmentation fault may occur if popCorn() method was not called during the program execution.</p>
+<p>&#8211;<br />
+Best regards,<br />
+Sergey L.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-377">
+		<div id="comment-377">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/3903258a65aa7c4dcaaf25857ea23ed3?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">JB</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-377">
+			November 17, 2010 at 7:53 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I was having the same problem as Cedric (above) except I’m using Ubuntu 10.04. Looking in cmake/FindOPENCL.cmake I found that the LD_LIBRARY_PATH environment variable was referenced when cmake used “FIND_LIBRARY” on the OPENCL_LIBRARIES variable (I’m not a cmake expert). I used:<b>$echo $LD_LIBRARY_PATH</b>and found that it wasn’t set…(strange but beside the point). So I set it to the path of my OpenCL .so files (similar to windows .dll files) for me this command was:<b>$LD_LIBRARY_PATH=$/home/jb/ati-stream-sdk-v2.2-lnx64/lib/x86_64</b>Then I followed the instructions in the tute and it worked. Hope this helps someone!</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-571">
+		<div id="comment-571">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/36feb7e4e9df556fe702da5654607e88?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Konrad</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-571">
+			January 3, 2011 at 4:47 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi,</p>
+<p>thank you for this great tutorial!</p>
+<p>I had the same problem and solution to the &#8220;free()&#8221; problem. #include  is definitively needed.</p>
+<p>Anyway, I&#8217;m new to OpenCL but have done some CUDA coding on my older laptop. My old laptop had a GPU that was to old to run the CUDA code on the GPU but at least I was able to debug my CUDA code in emulation mode. I was wondering if there is a way to emulate an OpenCL capable GPU just like with CUDA. I&#8217;m on Ubuntu 10.10 32 Bit.</p>
+<p>Thanks in advance<br />
+-Konrad-</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-599">
+		<div id="comment-599">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/6bd4a6e80c7c52685a465ef6fd4ebde3?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">elect</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-599">
+			January 24, 2011 at 6:48 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Jb, i suggest instead a simple:</p>
+<p>export LD_LIBRARY_PATH=/atistream/lib/x86/</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-611">
+		<div id="comment-611">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/cf211787cef1b9403c28bf7a1a3a1117?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Iarei</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-611">
+			February 2, 2011 at 1:15 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I&#8217;m having some trouble getting the Makefile to recognize the correct path. I am completely new to using them, and I think some of the syntax changes for Windows systems. I&#8217;ve tried variations of<br />
+ $LD_LIBRARY_PATH = $ENV{ProgramFiles(x86)}\ATIStream\lib<br />
+to no avail. Any assistance would be appreciated.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-614">
+		<div id="comment-614">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/143f62330e07232b0310cd7479bdd759?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="http://drugdiscoveryathome.com" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://drugdiscoveryathome.com']);"  rel='external nofollow' class='url'>Jack</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-614">
+			February 3, 2011 at 11:31 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Nice tutorial. I was wondering how large an array my GPU could handle. It produces errors when I make them 10 million long. I was wondering how would people process larger arrays.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="li-comment-615">
+		<div id="comment-615">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/89db4f3e0cfa7752306bede98888b898?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="../../../../../index.html"   rel='external nofollow' class='url'>enj</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-615">
+			February 3, 2011 at 1:49 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>@Iarei: Unfortunately I can&#8217;t tell you exactly what to do, but the first thing I would try would be to put the entire path to ATIStream in your LD_LIBRARY_PATH,<br />
+something like C:\Program Files\&#8230;\ATIStream\lib</p>
+<p>@Jack: Glad you like it, so you can find out the memory limit of your GPU with OpenCL calls, both NVIDIA and ATI have good example programs in their SDKs of how to do this. From there you can calculate the memory your array would take (10 million * 4bytes for floats usually) and see if it would fit. For arrays that are too large, usually people will break up the problem into several smaller problems and run those one at a time (or use multiple GPUs)<br />
+When you start doing that you want to pay attention to other limits, like how fast the card can copy memory back and forth to the CPU, and how long each sub array takes to process.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-616">
+		<div id="comment-616">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/143f62330e07232b0310cd7479bdd759?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href="http://drugdiscoveryathome.com" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://drugdiscoveryathome.com']);"  rel='external nofollow' class='url'>Jack</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-616">
+			February 3, 2011 at 8:34 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Yesterday I had success with the Mac mini running Snow Leopard and a NVIDIA GeForce 320M.</p>
+<p>Today I am testing it on Windows 7 64-bit with an ATI Radeon HD 5700 Series. I have installed ati-stream-sdk-v2.3-vista-win7-64.exe<br />
+Visual Studio C++ 2008 Express Edition, I compiled the sample code OpenCLSamples.sln<br />
+All but SimpleDX10 compiled, I tested several of the sample opencl programs</p>
+<p>Now I am experiencing some difficulty trying Adventures in OpenCL: Part 1, Getting Started in this environment and I know I have not tried everything yet.  I tried the cmake GUI native compiler visual studio 9 2008. I put the source and build as parent and child directories just as the terminal example on the mac.<br />
+CMake module path: C:/Users/jshultz/Documents/Visual Studio 2008/Projects/adventures_in_opencl.git/part1/../cmake</p>
+<p>include directories: </p>
+<p>C:/Users/jshultz/Documents/Visual Studio 2008/Projects/adventures_in_opencl.git/part1/../opencl10</p>
+<p>Configuring done<br />
+WARNING: Target &#8220;part1.x&#8221; requests linking to directory &#8220;C:\Users\jshultz\Documents\ATI Stream\lib\x86_64&#8243;.  Targets may link only to libraries.  CMake is dropping the item.<br />
+WARNING: Target &#8220;part1.x&#8221; requests linking to directory &#8220;C:\Users\jshultz\Documents\ATI Stream\lib\x86_64&#8243;.  Targets may link only to libraries.  CMake is dropping the item.<br />
+WARNING: Target &#8220;part1.x&#8221; requests linking to directory &#8220;C:\Users\jshultz\Documents\ATI Stream\lib\x86_64&#8243;.  Targets may link only to libraries.  CMake is dropping the item.<br />
+WARNING: Target &#8220;part1.x&#8221; requests linking to directory &#8220;C:\Users\jshultz\Documents\ATI Stream\lib\x86_64&#8243;.  Targets may link only to libraries.  CMake is dropping the item.<br />
+Generating done</p>
+<p>Build solution file in VS C++<br />
+1&gt;&#8212;&#8212; Build started: Project: part1, Configuration: Release Win32 &#8212;&#8212;<br />
+1&gt;Compiling&#8230;<br />
+1&gt;cl : Command line warning D9002 : ignoring unknown option &#8216;-g&#8217;<br />
+1&gt;cll.cpp<br />
+1&gt;util.cpp<br />
+1&gt;..\util.cpp(13) : warning C4996: &#8216;fopen&#8217;: This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.<br />
+1&gt;        C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(237) : see declaration of &#8216;fopen&#8217;<br />
+1&gt;part1.cpp<br />
+1&gt;..\part1.cpp(69) : error C2057: expected constant expression<br />
+1&gt;..\part1.cpp(69) : error C2466: cannot allocate an array of constant size 0<br />
+1&gt;..\part1.cpp(69) : error C2133: &#8216;c_done&#8217; : unknown size<br />
+1&gt;Generating Code&#8230;<br />
+1&gt;Build log was saved at &#8220;file://c:\Users\jshultz\Documents\Visual Studio 2008\Projects\adventures_in_opencl.git\part1\build\part1.dir\Release\BuildLog.htm&#8221;<br />
+1&gt;part1 &#8211; 3 error(s), 2 warning(s)<br />
+2&gt;&#8212;&#8212; Build started: Project: part1.x, Configuration: Release Win32 &#8212;&#8212;<br />
+2&gt;Compiling&#8230;<br />
+2&gt;cl : Command line warning D9002 : ignoring unknown option &#8216;-g&#8217;<br />
+2&gt;main.cpp<br />
+2&gt;Linking&#8230;<br />
+2&gt;LINK : fatal error LNK1181: cannot open input file &#8216;Release\part1.lib&#8217;<br />
+2&gt;Build log was saved at &#8220;file://c:\Users\jshultz\Documents\Visual Studio 2008\Projects\adventures_in_opencl.git\part1\build\part1.x.dir\Release\BuildLog.htm&#8221;<br />
+2&gt;part1.x &#8211; 1 error(s), 1 warning(s)<br />
+3&gt;&#8212;&#8212; Skipped Build: Project: ALL_BUILD, Configuration: Release Win32 &#8212;&#8212;<br />
+3&gt;Project not selected to build for this solution configuration<br />
+========== Build: 0 succeeded, 2 failed, 1 up-to-date, 1 skipped ==========</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-619">
+		<div id="comment-619">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/cf211787cef1b9403c28bf7a1a3a1117?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Iarei</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-619">
+			February 7, 2011 at 10:07 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>@Jack: I&#8217;m about where you are in figuring this out. According to what I&#8217;m reading -<br />
+&#8221; Statically allocated arrays need to have a known length at compile-time. &#8221; GCC apparently has some inherent way of handling this that VS lacks.  So I guess you need to define NUM as a vector? It&#8217;s probably better if someone who knows what their talking about explains this.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="../../../../../2011/02/22/adventures-in-pyopencl-part-1-getting-started-with-python/index.html"   rel='external nofollow' class='url'>Adventures in PyOpenCL: Part 1 Getting Started with Python | enj</a></p>
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-747">
+		<div id="comment-747">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/0a117b3c137307a9c66eddaaa7ef2d91?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Krish</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-747">
+			March 30, 2011 at 2:23 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi<br />
+i just started learning openCL<br />
+my m/c is HP Z600 Workstation with Nvidia Quadro FX 3800<br />
+i have installed nvida drivers &amp; cuda computing sdk&#8230;..<br />
+&amp; all environmental vars. set&#8230;&#8230;.<br />
+OS: Fedora14 _ 64 Bit gcc: 4.5.2<br />
+but wen i am compiling opencl progs it gives me error<br />
+CL/cl_platform.h : No such file or directory &#8230;. </p>
+<p>pls guide me on how to rectify this&#8230;&#8230;&#8230;..</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://litaos.com/litaos_wordpress/?p=63" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://litaos.com']);"  rel='external nofollow' class='url'>Intel&#8217;s OpenCL (Linux How-To) | http://litaos.com/</a></p>
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-957">
+		<div id="comment-957">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/2413af3823da9db33072e1b79a5ccc96?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Ben</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-957">
+			July 13, 2011 at 7:36 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>It is not working on my system, and I don&#8217;t know why. Can anyone help me please?<br />
+This is the output I have seen.</p>
+<p>build$ ./part1.x<br />
+Hello, OpenCL<br />
+Initialize OpenCL object and context<br />
+Available platforms:<br />
+platform 0: ATI Stream<br />
+selected platform: 0<br />
+oclGetPlatformID: CL_SUCCESS<br />
+clGetDeviceIDs (get number of devices): CL_DEVICE_NOT_FOUND<br />
+clGetDeviceIDs (create device list): CL_INVALID_VALUE<br />
+load the program<br />
+path: /home/benjamin/workspace/enjalot-adventures_in_opencl-a5bb2a1/part1/part1.cl<br />
+clCreateProgramWithSource: CL_INVALID_CONTEXT<br />
+building the program<br />
+clBuildProgram: CL_INVALID_PROGRAM<br />
+BUILD LOG:<br />
+ program built<br />
+in popCorn<br />
+clCreateKernel: CL_INVALID_PROGRAM<br />
+Creating OpenCL arrays<br />
+Pushing data to the GPU<br />
+Segmentation fault</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-1037">
+		<div id="comment-1037">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/631c357538c3fc116bbe40ba82d843fd?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">John</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-1037">
+			August 12, 2011 at 3:33 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thanks for the introduction. Part 1 works well on my windows system, with one minor change, as noted by Iarei you cannot use variable array sizes in MS Visual C. This is a C99 feature that MSVC does not implement. Replace these lines :<br />
+   float c_done[num];<br />
+   err = clEnqueueReadBuffer(command_queue, cl_c, CL_TRUE, 0, sizeof(float) *<br />
+num, &amp;c_done, 0, NULL, &amp;event);<br />
+with these<br />
+   std::vector c_done(num);<br />
+   err = clEnqueueReadBuffer(command_queue, cl_c, CL_TRUE, 0, sizeof(float) *<br />
+num, &amp;(c_done[0]), 0, NULL, &amp;event);<br />
+and add #include<br />
+[Ugly but it works]<br />
+I&#8217;m using Visual studio 2010, with CUDA 4.0.<br />
+The -g compile flag is also not available &#8211; but only generates a compile time warning. You could consider wrapping it in IF(NOT MSVC).</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1094">
+		<div id="comment-1094">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/2c559fadd855422b7a1a19276cbc5f64?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">tester</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-1094">
+			September 29, 2011 at 11:06 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Help needed</p>
+<p>Just downloaded the example onto ubuntu system</p>
+<p>2.6.32-33-generic #72-Ubuntu SMP Fri Jul 29 21:07:13 UTC 2011 x86_64 GNU/Linux<br />
+NVIDIA Quadro FX 3800<br />
+Intel(R) Xeon(R) CPU<br />
+gcc version 4.4.3</p>
+<p>Inside  adventures_in_opencl/part1/build/ , after<br />
+cmake ..<br />
+make </p>
+<p>I get<br />
+./part1.x<br />
+Hello, OpenCL<br />
+Initialize OpenCL object and context<br />
+ Error -1001 in clGetPlatformIDs Call !!!</p>
+<p>oclGetPlatformID:<br />
+clGetDeviceIDs (get number of devices): CL_INVALID_PLATFORM<br />
+clGetDeviceIDs (create device list): CL_INVALID_PLATFORM<br />
+load the program<br />
+path: /home/dbanks/www-home/src/adventures_in_opencl/part1/part1.cl<br />
+clCreateProgramWithSource: CL_INVALID_CONTEXT<br />
+building the program<br />
+clBuildProgram: CL_INVALID_PROGRAM<br />
+BUILD LOG:<br />
+ ?program built<br />
+in popCorn<br />
+clCreateKernel: CL_INVALID_PROGRAM<br />
+Creating OpenCL arrays<br />
+Pushing data to the GPU<br />
+zsh: segmentation fault  ./part1.x</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-1607">
+		<div id="comment-1607">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/0ca16abea6076f05fd12421e88dde168?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Harini</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-1607">
+			January 11, 2012 at 12:46 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>hey ,<br />
+ can u please help me out. am a student , and very new to openCL. my pc is having AMD processor with ATI graphic card , i have installed visual studio 10 and AMD APP KernelAnalyzer 1.9 , n included 10 header files given in kronous group into my include folder of vc. i am noting getting next steps to compile it , please tell me how should i debug, build ,compile n run my example programs. im using windows vista os. pls do reply need help badly</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1609">
+		<div id="comment-1609">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/d60fb8517a16dfcbfe35a90dc36c1e57?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Nicholas Cain</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-1609">
+			January 11, 2012 at 11:44 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thanks Ian!</p>
+<p>Worked right out of the box, great job!</p>
+<p>I am learning it all as fast as I can!</p>
+<p>-n</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+			</ol>
+
+
+
+								
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-3" class="widget-container widget_search"><form role="search" method="get" id="searchform" action="../../../../../index.html" >
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" value="" name="s" id="s" />
+	<input type="submit" id="searchsubmit" value="Search" />
+	</div>
+	</form></li><li id="nav_menu-3" class="widget-container widget_nav_menu"><div class="menu-navigation-container"><ul id="menu-navigation-1" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-319"><a href="../../../../../index.html" >Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="../../../../../about/index.html" >About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-694"><a href="../../../../../d3/index.html" >d3</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-316"><a href="../../../../../blender/index.html" >Blender</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="../../../../../opencl/index.html" >OpenCL</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-317"><a href="../../../../../side-projects/index.html" >Side Projects</a></li>
+</ul></div></li><li id="text-4" class="widget-container widget_text">			<div class="textwidget"><a href="https://twitter.com/#!/enjalot" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=twitter.com"> @enjalot</a>
+<br/>
+<a href="https://plus.google.com/112153365286725889851/posts" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://plus.google.com']);"><img src="https://s2.googleusercontent.com/s2/favicons?alt=p&domain=plus.google.com"> +Ian Johnson</a></div>
+		</li><li id="categories-414549122" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-25"><a href="../../../../../category/tutorial/advcl/index.html" title="Adventures in OpenCL">advcl</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="../../../../../category/tutorial/advd3-tutorial/index.html" title="View all posts filed under advd3">advd3</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="../../../../../category/android/index.html" title="View all posts filed under android">android</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="../../../../../category/blender/index.html" title="View all posts filed under blender">blender</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="../../../../../category/code/index.html" title="View all posts filed under code">code</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="../../../../../category/community/index.html" title="View all posts filed under community">community</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="../../../../../category/culture/index.html" title="View all posts filed under culture">culture</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="../../../../../category/d3/index.html" title="View all posts filed under d3">d3</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="../../../../../category/life/index.html" title="View all posts filed under life">life</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="../../../../../category/math/index.html" title="View all posts filed under math">math</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="../../../../../category/misc/index.html" title="View all posts filed under misc">misc</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="../../../../../category/music/index.html" title="View all posts filed under music">music</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="../../../../../category/news/index.html" title="View all posts filed under news">news</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="../../../../../category/opencl/index.html" title="View all posts filed under opencl">opencl</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="../../../../../category/processingjs/index.html" title="View all posts filed under processingjs">processingjs</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="../../../../../category/python/index.html" title="View all posts filed under python">python</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="../../../../../category/race/index.html" title="View all posts filed under race">race</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="../../../../../category/school/index.html" title="View all posts filed under school">school</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="../../../../../category/tech/index.html" title="View all posts filed under tech">tech</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="../../../../../category/travel/index.html" title="View all posts filed under travel">travel</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="../../../../../category/tutorial/index.html" title="View all posts filed under tutorial">tutorial</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="../../../../../category/uncategorized/index.html" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="../../../../../category/wtf/index.html" title="View all posts filed under wtf">wtf</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="../../../../../category/中�%2596%2587/index.html" title="View all posts filed under 中文">中文</a>
+</li>
+		</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="../../../../../index.html" title="enj" rel="home">
+					enj				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+<script type='text/javascript' src='http://d3a9pqeyre6pa0.cloudfront.net/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?aa&#038;ver=3.3.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../wp-content/plugins/jetpack/modules/wpgroho.js%3Fver=3.3.2'></script>
+	<div style="display:none">
+	<div class="grofile-hash-map-9f07fd4e0ad0602b71e7d49ff4200250">
+	</div>
+	<div class="grofile-hash-map-5cb916d3c8abc9f45a093209e72489fb">
+	</div>
+	<div class="grofile-hash-map-89db4f3e0cfa7752306bede98888b898">
+	</div>
+	<div class="grofile-hash-map-b2e4cbf4f8fddaab7260658a480ad4d2">
+	</div>
+	<div class="grofile-hash-map-900f7c152ac710109cc9a258aa6d4859">
+	</div>
+	<div class="grofile-hash-map-e3a060e28f0bc6a545d10efa8c9d7a09">
+	</div>
+	<div class="grofile-hash-map-1fe72909ece26b9085b1dfe5c43c63aa">
+	</div>
+	<div class="grofile-hash-map-a7d1ce94000265f964f2c7b32b2fb042">
+	</div>
+	<div class="grofile-hash-map-77dee0f3c98a9a61b8a4d9f9efbad293">
+	</div>
+	<div class="grofile-hash-map-f4d096a6ed975c2785661c76af578f3c">
+	</div>
+	<div class="grofile-hash-map-25c711bd61682b93eab44f6d303d1a0c">
+	</div>
+	<div class="grofile-hash-map-3903258a65aa7c4dcaaf25857ea23ed3">
+	</div>
+	<div class="grofile-hash-map-36feb7e4e9df556fe702da5654607e88">
+	</div>
+	<div class="grofile-hash-map-6bd4a6e80c7c52685a465ef6fd4ebde3">
+	</div>
+	<div class="grofile-hash-map-195902c66de486890328abed91dfe79c">
+	</div>
+	<div class="grofile-hash-map-143f62330e07232b0310cd7479bdd759">
+	</div>
+	<div class="grofile-hash-map-0a117b3c137307a9c66eddaaa7ef2d91">
+	</div>
+	<div class="grofile-hash-map-2413af3823da9db33072e1b79a5ccc96">
+	</div>
+	<div class="grofile-hash-map-631c357538c3fc116bbe40ba82d843fd">
+	</div>
+	<div class="grofile-hash-map-2c559fadd855422b7a1a19276cbc5f64">
+	</div>
+	<div class="grofile-hash-map-0ca16abea6076f05fd12421e88dde168">
+	</div>
+	<div class="grofile-hash-map-d60fb8517a16dfcbfe35a90dc36c1e57">
+	</div>
+	</div>
+<script type='text/javascript' src='../../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js%3Fver=3.0.83c'></script>
+<script type='text/javascript' src='../../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushBash.js%3Fver=3.0.83c'></script>
+<script type='text/javascript' src='../../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js%3Fver=3.0.83c'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://enja.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://enja.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['gutter'] = false;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = true;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://apis.google.com/js/plusone.js?ver=3.3.2'></script>
+
+	<script src="http://stats.wordpress.com/e-201219.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:1.3',blog:'4037422',post:'218'});
+	var load_cmc = function(){linktracker_init(4037422,218,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script></body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 2131/2271 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:56:09 -->

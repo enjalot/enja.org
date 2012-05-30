@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+		>
+<channel>
+	<title>Comments on: Adventures in PyOpenCL: Part 2, Particles with PyOpenGL</title>
+	<atom:link href="http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/feed/" rel="self" type="application/rss+xml" />
+	<link>http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=adventures-in-pyopencl-part-2-particles-with-pyopengl</link>
+	<description>casin&#039; the joint since &#039;85</description>
+	<lastBuildDate>Wed, 09 May 2012 06:22:44 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.3.2</generator>
+	<item>
+		<title>By: Ryan</title>
+		<link>http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/comment-page-1/#comment-1913</link>
+		<dc:creator>Ryan</dc:creator>
+		<pubDate>Sun, 29 Apr 2012 16:50:01 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=493#comment-1913</guid>
+		<description>Thanks for this.  I hacked the nbody algo into the kernel.  It works fantastic on my gtx285 with around 10k particles.</description>
+		<content:encoded><![CDATA[<p>Thanks for this.  I hacked the nbody algo into the kernel.  It works fantastic on my gtx285 with around 10k particles.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: joost</title>
+		<link>http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/comment-page-1/#comment-1846</link>
+		<dc:creator>joost</dc:creator>
+		<pubDate>Sun, 25 Mar 2012 20:54:42 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=493#comment-1846</guid>
+		<description>I also had the ImportError: cannot import name get_gl_sharing_context_properties first, so I built pyopencl-2011.2 from source.
+Then I had the  &#039;GL_CONTEXT_KHR&#039; exception, which I tried to solve by following the advice above, but after some trial-and-error this worked for me: 
+./configure.py --cl-enable-gl
+
+i am on Kubuntu 11.10 (same as Ubuntu), using the most recent nvidia driver.</description>
+		<content:encoded><![CDATA[<p>I also had the ImportError: cannot import name get_gl_sharing_context_properties first, so I built pyopencl-2011.2 from source.<br />
+Then I had the  &#8216;GL_CONTEXT_KHR&#8217; exception, which I tried to solve by following the advice above, but after some trial-and-error this worked for me:<br />
+./configure.py &#8211;cl-enable-gl</p>
+<p>i am on Kubuntu 11.10 (same as Ubuntu), using the most recent nvidia driver.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tn</title>
+		<link>http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/comment-page-1/#comment-1718</link>
+		<dc:creator>tn</dc:creator>
+		<pubDate>Fri, 17 Feb 2012 20:30:29 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=493#comment-1718</guid>
+		<description>Hi,
+Thanks for your interesting tutorial.
+However, I was wondering how you would do the following thing:
+at the moment, you have a single kernel doing all the math, but for some other problems, you can not do that.
+Say for example that at a given time you want to sum the speed of all particles (silly example, but you get the idea) and stop on a condition for that value.
+
+As you mention it in your code, we sometime need to keep the vectors in GPU memory, do some other computation and go back to the initial kernel.
+How would you do that ?
+Waiting for the next example :)
+
+Thanks</description>
+		<content:encoded><![CDATA[<p>Hi,<br />
+Thanks for your interesting tutorial.<br />
+However, I was wondering how you would do the following thing:<br />
+at the moment, you have a single kernel doing all the math, but for some other problems, you can not do that.<br />
+Say for example that at a given time you want to sum the speed of all particles (silly example, but you get the idea) and stop on a condition for that value.</p>
+<p>As you mention it in your code, we sometime need to keep the vectors in GPU memory, do some other computation and go back to the initial kernel.<br />
+How would you do that ?<br />
+Waiting for the next example :)</p>
+<p>Thanks</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Steve</title>
+		<link>http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/comment-page-1/#comment-1716</link>
+		<dc:creator>Steve</dc:creator>
+		<pubDate>Tue, 14 Feb 2012 17:22:49 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=493#comment-1716</guid>
+		<description>@Aleksandar 
+
+I&#039;ve just spent aaaaaaaall afternoon trying to fix this problem:
+
+&quot;I’ve installed pyopencl 2011.1 and when i run main.py I get this error:
+AttributeError: type object &#039;context_properties&#039; has no attribute &#039;GL_CONTEXT_KHR&#039;&quot;
+
+But I finally did it. It indicates that either your device doesn&#039;t support OpenCL/OpenGL interoperability, or that PyOpenCL was compiled without it. To get it to work, I had to download cl_ext.h from the Khronos website and put it in /usr/include/CL/, then alter &quot;siteconf.py&quot; which was created by &quot;configure.py&quot; when building PyOpenCL and set CL_ENABLE_GL to True. 
+
+Since I also spent the day installing various versions of NVidia drivers, it&#039;s possible something else also helped, but I&#039;m pretty sure that&#039;s what fixed it.</description>
+		<content:encoded><![CDATA[<p>@Aleksandar </p>
+<p>I&#8217;ve just spent aaaaaaaall afternoon trying to fix this problem:</p>
+<p>&#8220;I’ve installed pyopencl 2011.1 and when i run main.py I get this error:<br />
+AttributeError: type object &#8216;context_properties&#8217; has no attribute &#8216;GL_CONTEXT_KHR&#8217;&#8221;</p>
+<p>But I finally did it. It indicates that either your device doesn&#8217;t support OpenCL/OpenGL interoperability, or that PyOpenCL was compiled without it. To get it to work, I had to download cl_ext.h from the Khronos website and put it in /usr/include/CL/, then alter &#8220;siteconf.py&#8221; which was created by &#8220;configure.py&#8221; when building PyOpenCL and set CL_ENABLE_GL to True. </p>
+<p>Since I also spent the day installing various versions of NVidia drivers, it&#8217;s possible something else also helped, but I&#8217;m pretty sure that&#8217;s what fixed it.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Matt</title>
+		<link>http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/comment-page-1/#comment-1582</link>
+		<dc:creator>Matt</dc:creator>
+		<pubDate>Thu, 29 Dec 2011 00:09:11 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=493#comment-1582</guid>
+		<description>I get this as well.  Google is short on solutions.
+
+python main.py 
+Timings:
+fountain_np &#124; average: 23.1220722198 &#124; total: 23.1220722198 &#124; count: 1
+
+Traceback (most recent call last):
+  File &quot;main.py&quot;, line 135, in 
+    p2 = window()
+  File &quot;main.py&quot;, line 58, in __init__
+    self.cle = part2.Part2(num, dt)
+  File &quot;/Users/xxx/pyopencl/enjalot-adventures_in_opencl-94f53cf/python/part2/part2.py&quot;, line 15, in __init__
+    self.clinit()
+  File &quot;/Users/xxx/pyopencl/enjalot-adventures_in_opencl-94f53cf/python/part2/part2.py&quot;, line 78, in clinit
+    self.ctx = cl.Context(properties=get_gl_sharing_context_properties(),
+  File &quot;/Library/Python/2.7/site-packages/pyopencl-2011.2-py2.7-macosx-10.7-intel.egg/pyopencl/tools.py&quot;, line 282, in get_gl_sharing_context_properties
+    (ctx_props.CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE, cl.get_apple_cgl_share_group()))
+AttributeError: type object &#039;context_properties&#039; has no attribute &#039;CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE&#039;
+
+
+OS X 10.7.2 -- Build 11C74
+Active Graphics Card:
+
+NVIDIA GeForce 9600M GT:
+
+  Chipset Model:	NVIDIA GeForce 9600M GT
+  Type:	GPU
+  Bus:	PCIe
+  PCIe Lane Width:	x16
+  VRAM (Total):	512 MB
+  Vendor:	NVIDIA (0x10de)
+  Device ID:	0x0647
+  Revision ID:	0x00a1
+  ROM Revision:	3437
+  gMux Version:	1.7.3
+  Displays:
+Color LCD:
+  Resolution:	1440 x 900
+  Pixel Depth:	32-Bit Color (ARGB8888)
+  Main Display:	Yes
+  Mirror:	Off
+  Online:	Yes
+  Built-In:	Yes</description>
+		<content:encoded><![CDATA[<p>I get this as well.  Google is short on solutions.</p>
+<p>python main.py<br />
+Timings:<br />
+fountain_np | average: 23.1220722198 | total: 23.1220722198 | count: 1</p>
+<p>Traceback (most recent call last):<br />
+  File &#8220;main.py&#8221;, line 135, in<br />
+    p2 = window()<br />
+  File &#8220;main.py&#8221;, line 58, in __init__<br />
+    self.cle = part2.Part2(num, dt)<br />
+  File &#8220;/Users/xxx/pyopencl/enjalot-adventures_in_opencl-94f53cf/python/part2/part2.py&#8221;, line 15, in __init__<br />
+    self.clinit()<br />
+  File &#8220;/Users/xxx/pyopencl/enjalot-adventures_in_opencl-94f53cf/python/part2/part2.py&#8221;, line 78, in clinit<br />
+    self.ctx = cl.Context(properties=get_gl_sharing_context_properties(),<br />
+  File &#8220;/Library/Python/2.7/site-packages/pyopencl-2011.2-py2.7-macosx-10.7-intel.egg/pyopencl/tools.py&#8221;, line 282, in get_gl_sharing_context_properties<br />
+    (ctx_props.CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE, cl.get_apple_cgl_share_group()))<br />
+AttributeError: type object &#8216;context_properties&#8217; has no attribute &#8216;CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE&#8217;</p>
+<p>OS X 10.7.2 &#8212; Build 11C74<br />
+Active Graphics Card:</p>
+<p>NVIDIA GeForce 9600M GT:</p>
+<p>  Chipset Model:	NVIDIA GeForce 9600M GT<br />
+  Type:	GPU<br />
+  Bus:	PCIe<br />
+  PCIe Lane Width:	x16<br />
+  VRAM (Total):	512 MB<br />
+  Vendor:	NVIDIA (0x10de)<br />
+  Device ID:	0&#215;0647<br />
+  Revision ID:	0x00a1<br />
+  ROM Revision:	3437<br />
+  gMux Version:	1.7.3<br />
+  Displays:<br />
+Color LCD:<br />
+  Resolution:	1440 x 900<br />
+  Pixel Depth:	32-Bit Color (ARGB8888)<br />
+  Main Display:	Yes<br />
+  Mirror:	Off<br />
+  Online:	Yes<br />
+  Built-In:	Yes</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Erik Edin</title>
+		<link>http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/comment-page-1/#comment-1051</link>
+		<dc:creator>Erik Edin</dc:creator>
+		<pubDate>Wed, 31 Aug 2011 18:56:47 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=493#comment-1051</guid>
+		<description>Hi!
+
+I just bought a new laptop, with an NVIDIA GT555M card, running Windows 7 x64.
+I initially had issues running the Python part2 particle demo, with an error similar to some above.
+The actual error I got was:
+pyopencl.LogicError: Context failed: invalid gl sharegroup reference khr
+
+I realized after a bit of worrying that the problem was in the Optimus device that the newer laptops have, that is the integrated powersaving graphics card, if I understand correctly.
+I was however able to fix that by using the NVIDIA control panel and changing the Global settings to always use the NVIDIA GT555M card, instead of the integrated Optimus card. Then I was able to run the demo without the error message.</description>
+		<content:encoded><![CDATA[<p>Hi!</p>
+<p>I just bought a new laptop, with an NVIDIA GT555M card, running Windows 7 x64.<br />
+I initially had issues running the Python part2 particle demo, with an error similar to some above.<br />
+The actual error I got was:<br />
+pyopencl.LogicError: Context failed: invalid gl sharegroup reference khr</p>
+<p>I realized after a bit of worrying that the problem was in the Optimus device that the newer laptops have, that is the integrated powersaving graphics card, if I understand correctly.<br />
+I was however able to fix that by using the NVIDIA control panel and changing the Global settings to always use the NVIDIA GT555M card, instead of the integrated Optimus card. Then I was able to run the demo without the error message.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jonathan Lettvin</title>
+		<link>http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/comment-page-1/#comment-1046</link>
+		<dc:creator>Jonathan Lettvin</dc:creator>
+		<pubDate>Sun, 28 Aug 2011 06:37:31 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=493#comment-1046</guid>
+		<description>I just installed ubuntu 11.04 and used synaptic package manager to install pyopencl.
+When I try to run the example programs I get:
+
+Xlib:  extension &quot;GLX&quot; missing on display &quot;:0.0&quot;.
+freeglut (main.py): OpenGL GLX extension not supported by display &#039;:0.0&#039;
+
+Please advise how to fix this.</description>
+		<content:encoded><![CDATA[<p>I just installed ubuntu 11.04 and used synaptic package manager to install pyopencl.<br />
+When I try to run the example programs I get:</p>
+<p>Xlib:  extension &#8220;GLX&#8221; missing on display &#8220;:0.0&#8243;.<br />
+freeglut (main.py): OpenGL GLX extension not supported by display &#8216;:0.0&#8242;</p>
+<p>Please advise how to fix this.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ali</title>
+		<link>http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/comment-page-1/#comment-1028</link>
+		<dc:creator>Ali</dc:creator>
+		<pubDate>Sun, 07 Aug 2011 23:57:47 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=493#comment-1028</guid>
+		<description>Hi,
+I&#039;m having this problem on my macbook pro. It has a built in graphics unit and &#039;GeForce GT 330M&#039;:
+
+
+Timings:
+fountain_np &#124; average: 4.44102287292 &#124; total: 4.44102287292 &#124; count: 1
+
+Traceback (most recent call last):
+  File &quot;main.py&quot;, line 135, in 
+    p2 = window()
+  File &quot;main.py&quot;, line 58, in __init__
+    self.cle = part2.Part2(num, dt)
+  File &quot;/Users/aarslan/Documents/PYTHON_TOOLS/enjalot-adventures_in_opencl-a5bb2a1/python/part2/part2.py&quot;, line 15, in __init__
+    self.clinit()
+  File &quot;/Users/aarslan/Documents/PYTHON_TOOLS/enjalot-adventures_in_opencl-a5bb2a1/python/part2/part2.py&quot;, line 78, in clinit
+    self.ctx = cl.Context(properties=get_gl_sharing_context_properties(),
+  File &quot;/Library/Frameworks/EPD64.framework/Versions/7.0/lib/python2.7/site-packages/pyopencl-2011.1.2-py2.7-macosx-10.5-x86_64.egg/pyopencl/tools.py&quot;, line 272, in get_gl_sharing_context_properties
+    (ctx_props.CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE, cl.get_apple_cgl_share_group()))
+AttributeError: type object &#039;context_properties&#039; has no attribute &#039;CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE&#039;</description>
+		<content:encoded><![CDATA[<p>Hi,<br />
+I&#8217;m having this problem on my macbook pro. It has a built in graphics unit and &#8216;GeForce GT 330M&#8217;:</p>
+<p>Timings:<br />
+fountain_np | average: 4.44102287292 | total: 4.44102287292 | count: 1</p>
+<p>Traceback (most recent call last):<br />
+  File &#8220;main.py&#8221;, line 135, in<br />
+    p2 = window()<br />
+  File &#8220;main.py&#8221;, line 58, in __init__<br />
+    self.cle = part2.Part2(num, dt)<br />
+  File &#8220;/Users/aarslan/Documents/PYTHON_TOOLS/enjalot-adventures_in_opencl-a5bb2a1/python/part2/part2.py&#8221;, line 15, in __init__<br />
+    self.clinit()<br />
+  File &#8220;/Users/aarslan/Documents/PYTHON_TOOLS/enjalot-adventures_in_opencl-a5bb2a1/python/part2/part2.py&#8221;, line 78, in clinit<br />
+    self.ctx = cl.Context(properties=get_gl_sharing_context_properties(),<br />
+  File &#8220;/Library/Frameworks/EPD64.framework/Versions/7.0/lib/python2.7/site-packages/pyopencl-2011.1.2-py2.7-macosx-10.5-x86_64.egg/pyopencl/tools.py&#8221;, line 272, in get_gl_sharing_context_properties<br />
+    (ctx_props.CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE, cl.get_apple_cgl_share_group()))<br />
+AttributeError: type object &#8216;context_properties&#8217; has no attribute &#8216;CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE&#8217;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Omar</title>
+		<link>http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/comment-page-1/#comment-1023</link>
+		<dc:creator>Omar</dc:creator>
+		<pubDate>Sat, 06 Aug 2011 15:31:13 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=493#comment-1023</guid>
+		<description>Thank you very much for the tutorial. It helped me further with learning the interaction between opengl and opencl. Here is my article: &lt;a href=&quot;http://omar.toomuchcookies.net/node/2011/08/visualizing-opencl-computations-within-opengl/&quot; rel=&quot;nofollow&quot;&gt;Visualizing OpenCL computations within OpenGL&lt;/a&gt;</description>
+		<content:encoded><![CDATA[<p>Thank you very much for the tutorial. It helped me further with learning the interaction between opengl and opencl. Here is my article: <a href="http://omar.toomuchcookies.net/node/2011/08/visualizing-opencl-computations-within-opengl/" rel="nofollow">Visualizing OpenCL computations within OpenGL</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Visualizing OpenCL computations within OpenGL &#124; Omar Abo-Namous</title>
+		<link>http://enja.org/2011/03/22/adventures-in-pyopencl-part-2-particles-with-pyopengl/comment-page-1/#comment-1022</link>
+		<dc:creator>Visualizing OpenCL computations within OpenGL &#124; Omar Abo-Namous</dc:creator>
+		<pubDate>Sat, 06 Aug 2011 14:18:09 +0000</pubDate>
+		<guid isPermaLink="false">http://enja.org/?p=493#comment-1022</guid>
+		<description>[...] them for the visualization without even bothering the main memory or the cpu for that matter. This article by Ian Johnson who is working on bringing OpenCL acceleration to blenders particle system - or [...]</description>
+		<content:encoded><![CDATA[<p>[...] them for the visualization without even bothering the main memory or the cpu for that matter. This article by Ian Johnson who is working on bringing OpenCL acceleration to blenders particle system &#8211; or [...]</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: basic
+Database Caching using disk: basic
+Object Caching 354/375 objects using disk: basic
+Content Delivery Network via Amazon Web Services: CloudFront: d3a9pqeyre6pa0.cloudfront.net
+
+Served from: enja.org @ 2012-05-13 17:55:44 -->
