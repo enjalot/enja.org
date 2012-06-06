@@ -1,3 +1,56 @@
+/* fonts
+    font-family: 'Questrial', sans-serif;
+    font-family: 'Chicle', cursive;
+    font-family: 'Limelight', cursive;
+    font-family: 'Graduate', cursive;
+    font-family: 'Bangers', cursive;
+*/
+
+#header {
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    position:fixed;
+    width: 100%;
+    height: 40px;
+    background-color: black;
+    z-index: 999;
+}
+
+
+
+#timeline_container {
+    position: absolute;
+    top: 520px;
+    display: block;
+    width: 100%;
+}
+
+#timeline {
+    /*margin-top: 520px;*/
+    /*margin-top: 200px; */
+    display:block;
+    width: 120px;
+    height: 4000px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: gray;
+    /*float: right;*/
+}
+
+#current {
+    position: absolute;
+    top: 20px;
+    display:block;
+    width: 100%;
+}
+
+#container {
+    /*margin-top: 520px;*/
+    position: absolute;
+    top: 320px;
+    z-index: 2;
+}
 
 #workfocus {
     display:block;
@@ -10,32 +63,101 @@
     position:fixed;
 }
 
+#freelance {
+    /* TODO: give gradient bg */
+    width: 32%;
+    position:relative;
+    float:left;
+    margin-top:40px;
+}
+
+#tributary {
+    width: 32%;
+    position:relative;
+    float:left;
+    margin-top:40px;
+}
+
+#d3 {
+    width: 32%;
+    position:relative;
+    float:left;
+    margin-top:40px;
+}
 
 #visually {
-    display:block;
-    height: 500px;
-}
-#tributary {
-    display:block;
-    height: 600px;
 }
 
 #chinese {
-    display:block;
-    height: 700px;
 }
 
 #dsc {
-    display:block;
-    height: 700px;
 }
 
 #gis {
-    display:block;
-    height: 700px;
+}
+
+#hci {
 }
 
 #micro {
-    display:block;
-    height: 700px;
 }
+
+
+.viz {
+    background-color: blue;
+}
+.chinese {
+    background-color: red;
+}
+.hci {
+    background-color: green;
+}
+.section {
+    /* background-color: gray; */
+    width: 600px;
+    margin-top: 20px;
+}
+
+.section_header {
+    /*font-family: 'Bangers', cursive;*/
+    font-family: 'Chicle', cursive;
+    font-size: 30px;
+    text-align: center;
+}
+.section_header a {
+}
+
+.section_content {
+    font-family: 'Questrial', sans-serif;
+    font-size: 20px;
+}
+.section_content a {
+    font-family: 'Limelight', cursive;
+    font-size: 24px;
+}
+
+.school {
+    font-family: 'Graduate', cursive;
+}
+
+/*
+@media screen and (max-width: 960px) {
+    .section {
+        width: 600px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .section {
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .section {
+        width: 300px;
+    }
+}
+*/
+

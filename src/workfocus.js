@@ -1,15 +1,20 @@
 
 
-var project_data = [
-    {"id": "micro", "start": 2001, "end": 2003},
-    {"id": "gis", "start": 2003, "end": 2008},
-    {"id": "hci", "start": 2007, "end": 2008},
-    {"id": "chinese", "start": 2005, "end": 2009},
-]
+
+//goes from 2001 to 2012
 var focus_data = [
-    {"v": 10, "g": 60, "c": 0, "m": 30},
-    {"v": 60, "g": 20, "c": 0, "m": 20},
-    {"v": 30, "g": 10, "c": 40, "m": 20}
+    {"v": 90, "c": 0, "h": 10}, //2001
+    {"v": 90, "c": 0, "h": 10}, //2002
+    {"v": 90, "c": 0, "h": 10}, //2003
+    {"v": 90, "c": 0, "h": 10}, //2004
+    {"v": 90, "c": 0, "h": 10}, //2005
+    {"v": 90, "c": 0, "h": 10}, //2006
+    {"v": 90, "c": 0, "h": 10}, //2007
+    {"v": 90, "c": 0, "h": 10}, //2008
+    {"v": 90, "c": 0, "h": 10}, //2009
+    {"v": 90, "c": 0, "h": 10}, //2010
+    {"v": 90, "c": 0, "h": 10}, //2011
+    {"v": 90, "c": 0, "h": 10}  //2012
 ];
 
 //try inverted ordinal scale?
@@ -18,15 +23,34 @@ var time_scale = d3.scale.linear()
     .domain(domain)
     .range(focus_data);
 
-var color = d3.scale.category20();
+//var color = d3.scale.category20();
+var colors = [
+    "#0000ff",
+    "#ff0000",
+    "#00ff00"
+];
+var color_map = {
+    "v": 0,
+    "c": 1,
+    "h": 2
+}
+var cl = colors.length;
+var color = function(d) {
+    return colors[color_map[d]%cl];
+};
 
 //the div we will work within
 var div = d3.select("#workfocus");
 var dw = parseInt(div.style("width"), 10)+20;
 var dh = parseInt(div.style("height"), 10);
 
+
+
 //TODO: reimplement this as a chart class (like pie layout)
 var layout = function(d) {
+    dw = parseInt(div.style("width"), 10)+20;
+    dh = parseInt(div.style("height"), 10);
+
     //turn the current data into a sideways stacked bar
     var i = 0;
     var datas = [];
@@ -51,7 +75,7 @@ var layout = function(d) {
 var init = function() {
     var datum = focus_data[0];
     div.selectAll("div.bar")
-        .data(layout(datum))
+        .data(layout(datum), function(d) { return d.key; })
         .enter()
         .append("div")
         .classed("bar", true);
@@ -59,14 +83,17 @@ var init = function() {
 }; 
 
 var update = function(t) {
-    //interpolate between the data points
 
+    //interpolate between the data points
     var old_datum = focus_data[0];
     var new_datum = focus_data[1];
     var datum = d3.interpolate(old_datum, new_datum)(t);
     
-    div.selectAll("div.bar")
-        .data(layout(datum))
+    div = d3.select("#workfocus");
+    var brs = div.selectAll("div.bar")
+        .data(layout(datum), function(d) { return d.key; })
+
+    brs
         .style("width", function(d,i) {
             return d.width;
         })
@@ -75,6 +102,7 @@ var update = function(t) {
         })
         .style("background-color", function(d,i) {
             return color(d.key);
+            //return color(i);
         })
         .style("height", dh);
 
@@ -86,6 +114,9 @@ var update = function(t) {
 init();
 update(0);
 
+$(window).resize(function() {
+    update(0);
+});
 
 
 
