@@ -6,6 +6,20 @@
     font-family: 'Bangers', cursive;
 */
 
+body {
+    background-image: url('../img/redox_01.png');
+    background-repeat: repeat;
+}
+
+a { 
+    color: black;
+}
+
+img {
+    float:left;
+    padding: 5px;
+}
+
 #header {
     top: 0px;
     left: 0px;
@@ -34,7 +48,7 @@
     height: 4000px;
     margin-left:auto;
     margin-right:auto;
-    background-color: gray;
+    /*background-color: gray;*/
     /*float: right;*/
 }
 
@@ -63,23 +77,23 @@
     position:fixed;
 }
 
-#freelance {
+#mainstem {
     /* TODO: give gradient bg */
-    width: 32%;
+    width: 31%;
     position:relative;
     float:left;
     margin-top:40px;
 }
 
 #tributary {
-    width: 32%;
+    width: 31%;
     position:relative;
     float:left;
     margin-top:40px;
 }
 
 #d3 {
-    width: 32%;
+    width: 31%;
     position:relative;
     float:left;
     margin-top:40px;
@@ -89,12 +103,16 @@
 }
 
 #chinese {
+    right: 0px;
+    margin-top: 200px;
 }
 
 #dsc {
+    right: 0px;
 }
 
 #gis {
+    margin-top: 800px;
 }
 
 #hci {
@@ -103,25 +121,49 @@
 #micro {
 }
 
+.current {
+    /*background-color: blue;*/
+    background-color: rgba(86, 131, 199, .2);
+    border-radius: 8px;
+    margin: 0px 2px 0px 2px;
+    padding: 10px 5px 10px 5px;
+    /*padding: 10px;*/
+    /*border: 1px solid #CDCDCD;*/
+}
 
 .viz {
-    background-color: blue;
+    /*background-color: blue;*/
+    background-color: rgba(86, 131, 199, .2);
+    border-radius: 8px;
+    margin: 0px 2px 0px 2px;
+    padding: 10px 15px 10px 15px;
+    /*padding: 10px;*/
+    /*border: 1px solid #CDCDCD;*/
 }
 .chinese {
-    background-color: red;
+    /*background-color: red;*/
+    background-color: rgba(199, 86, 131, .2);
+    border-radius: 8px;
+    margin: 0px 2px 0px 2px;
+    padding: 10px 15px 10px 15px;
 }
 .hci {
-    background-color: green;
+    /*background-color: green;*/
+    background-color: rgba(131, 199, 86, .2);
+    border-radius: 8px;
+    margin: 0px 2px 0px 2px;
+    padding: 10px 15px 10px 15px;
 }
 .section {
     /* background-color: gray; */
-    width: 600px;
+    width: 40%;
     margin-top: 20px;
 }
 
 .section_header {
     /*font-family: 'Bangers', cursive;*/
-    font-family: 'Chicle', cursive;
+    font-family: 'Questrial', sans-serif;
+    /*font-family: 'Chicle', cursive;*/
     font-size: 30px;
     text-align: center;
 }
@@ -130,11 +172,12 @@
 
 .section_content {
     font-family: 'Questrial', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
+    margin-top: 15px;
 }
 .section_content a {
     font-family: 'Limelight', cursive;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .school {
@@ -160,4 +203,5 @@
     }
 }
 */
+
 

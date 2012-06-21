@@ -25,9 +25,9 @@ var time_scale = d3.scale.linear()
 
 //var color = d3.scale.category20();
 var colors = [
-    "#0000ff",
-    "#ff0000",
-    "#00ff00"
+    "#5683C7",
+    "#C75683",
+    "#83C756"
 ];
 var color_map = {
     "v": 0,
@@ -104,7 +104,10 @@ var update = function(t) {
             return color(d.key);
             //return color(i);
         })
-        .style("height", dh);
+        .style("height", dh)
+        .attr("rx", 5)
+        .attr("ry", 5)
+        ;
 
 
 };
